@@ -1,0 +1,28 @@
+---
+- name: Install nginx repo
+  template: src=nginx.repo.j2 dest=/etc/yum.repos.d/nginx.repo owner=root group=root mode=0644
+
+- name: Install nginx
+  yum: name=nginx state=latest
+
+- name: Install nginx.conf
+  template: src={{ item }}.j2 dest=/etc/nginx/{{ item }} owner=root group=root mode=0644
+  with_items:
+   - nginx.conf
+   - dhparam.pem
+  notify:
+   - reload nginx
+
+- name: Install nginx conf.d files
+  template: src={{ item }}.j2 dest=/etc/nginx/conf.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+   - default.conf
+  notify:
+   - reload nginx
+
+- name: Ensure nginx is running and enabled to start at boot
+  service: name=nginx state=started enabled=yes
+
+- include: vars.yml
+  tags:
+    - nginx_vars

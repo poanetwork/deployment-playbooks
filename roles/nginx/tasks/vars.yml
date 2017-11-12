@@ -1,0 +1,57 @@
+---
+# Extend the source port range for outgoing TCP connections. Defaults: 32768 61000
+#
+- name: Set net.ipv4.ip_local_port_range to 10024 65023
+  sysctl: name=net.ipv4.ip_local_port_range value="10024 65023" state=present
+
+# Allow early reuse of a same source port for outgoing connections. Defaults: 0
+#
+- name: Set net.ipv4.tcp_tw_reuse to 1
+  sysctl: name=net.ipv4.tcp_tw_reuse value=1 state=present
+
+
+# Limit the per-socket default receive/send buffers to limit memory usage
+# when running with a lot of concurrent connections. Values are in bytes
+# and represent minimum, default and maximum. Defaults: 4096 87380 4194304
+#
+#- sysctl: name=net.ipv4.tcp_rmem value="4096 16060 262144" state=present
+#- sysctl: name=net.ipv4.tcp_wmem value="4096 16384 262144" state=present
+
+# Increase the TCP SYN backlog size. This is generally required to support very
+# high connection rates as well as to resist SYN flood attacks. Setting it too
+# high will delay SYN cookie usage though. Defaults: 1024
+#
+#- sysctl: name=net.ipv4.tcp_max_syn_backlog value="60000" state=present
+
+# Timeout in seconds for the TCP FIN_WAIT state. Lowering it speeds up release
+# of dead connections, though it will cause issues below 25-30 seconds. It is
+# preferable not to change it if possible. Default: 60
+#
+#- sysctl: name=net.ipv4.tcp_fin_timeout value="30" state=present
+
+# Limit the number of outgoing SYN-ACK retries. This value is a direct
+# amplification factor of SYN floods, so it is important to keep it reasonably
+# low. However, too low will prevent clients on lossy networks from connecting.
+# Using 3 as a default value gives good results (4 SYN-ACK total) and lowering
+# it to 1 under SYN flood attack can save a lot of bandwidth. Default: 5
+#
+#- sysctl: name=net.ipv4.tcp_synack_retries value="3" state=present
+
+# Set this to one to allow local processes to bind to an IP which is not yet
+# present on the system. This is typically what happens with a shared VRRP
+# address, where you want both master and backup to be started eventhough the
+# IP is not yet present. Always leave it to 1. Default: 0
+#
+#- sysctl: name=net.ipv4.ip_nonlocal_bind value="1" state=present
+
+# Serves as a higher bound for all of the system's SYN backlogs. Put it at
+# least as high as tcp_max_syn_backlog, otherwise clients may experience
+# difficulties to connect at high rates or under SYN attacks. Default: 128
+#
+#- sysctl: name=net.core.somaxconn value="60000" state=present
+
+# Number of unprocessed incoming packets that can be queued for later
+# processing. This has minimal effect. Default: 1000
+#- sysctl: name=net.core.netdev_max_backlog value="10000" state=present
+
+#- sysctl: name=net.netfilter.nf_conntrack_max value="1048576" state=present

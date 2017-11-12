@@ -1,0 +1,19 @@
+---
+- name: Add ssh keys for root
+  authorized_key: user=root key={{ item }} state=present exclusive=yes
+  with_items: "{{ ssh_root }}"
+
+- include: ssh.yml
+- include: packages.yml
+- include: vars.yml
+- include: ntp.yml
+- include: logrotate.yml
+- include: swap.yml
+
+#- selinux:
+#    state: disabled
+
+#- lineinfile: dest=/etc/ssh/sshd_config regexp="^#Port" line="Port 27091" state=present backrefs=yes
+
+#- name: Set timezone to UTC
+#  command:  timedatectl set-timezone UTC

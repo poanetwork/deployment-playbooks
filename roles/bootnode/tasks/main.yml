@@ -1,0 +1,41 @@
+---
+- name: Download spec.json
+  get_url: url={{ item }} dest={{ home }}/ mode=0644
+  with_items:
+    - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
+    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnodes.txt"
+    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnode/node.toml"
+
+- name: Change nat in node.toml
+  lineinfile: 
+    path: "{{ home }}/node.toml"
+    insertafter: '^\[network\]'
+    line: nat="extip:{{ ansible_host }}"
+    state: present
+
+- name: Change reserved_peers in node.toml
+  lineinfile: 
+    path: "{{ home }}/node.toml"
+    insertafter: '^\[network\]'
+    line: reserved_peers="/home/{{ home }}/bootnodes.txt"
+    state: present
+
+- name: Create directory parity/keys/OraclesPoA
+  file:
+    path: "/{{ home }}/parity/keys/OraclesPoA"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create directory parity/dapps
+  file:
+    path: "/{{ home }}/parity/dapps"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity/dapps/KeysGenerator
+- git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity/dapps/Voting
+- git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity/dapps/ValidatorsList

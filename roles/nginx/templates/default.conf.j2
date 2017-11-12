@@ -1,0 +1,231 @@
+# {{ ansible_managed }}
+proxy_cache_path /var/cache/nginx/cache levels=1:2 keys_zone=configs_cache:1m max_size=1g;
+
+log_format filter '$remote_addr - $remote_user [$time_local] '
+                  '"$temp" $status $request_length $body_bytes_sent '
+                  '"$http_referer" "$http_user_agent"';
+
+upstream app_admin {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:5029;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_moderator {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:5028;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_estimations {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:5027;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_manager {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:5026;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_support {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:5025;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_call {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:8000;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+upstream app_prediction {
+        {% for ip in nginx_pool %}
+        server {{ ip }}:8010;
+        {% endfor %}
+        keepalive 2000;
+    }
+
+server {
+    listen 80;
+    server_name www.owhealth.com api.owhealth.com owhealth.com;
+
+    root /home/website;
+
+    location ~ /.well-known {
+        allow all;
+        root /home/www;
+    }
+
+    location /nginx-stats {
+        stub_status on;
+        access_log off;
+        allow 127.0.0.1;
+        allow 10.19.195.68;
+        deny all;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+
+# Master backend server
+server {
+        listen 443 ssl;
+        server_name api.owhealth.com owhealth.com *.owhealth.com;
+
+        # Use certificate and key provided by Let's Encrypt:
+        ssl_certificate /etc/letsencrypt/live/api.owhealth.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/api.owhealth.com/privkey.pem;
+        ssl_session_timeout 20m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_prefer_server_ciphers on;
+        ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+        #ssl_ciphers "EECDH:+AES256:-3DES:RSA+AES:!NULL:!RC4";
+        ssl_dhparam /etc/nginx/dhparam.pem;
+
+        set $temp $request;
+
+        # Replace password in request with ****
+        if ($temp ~ (.*)password=[^&]*(.*)) {
+        set $temp $1password=****$2;
+        }
+        access_log off;
+
+        # Manage static files
+        location ~ /\.git {
+            deny all;
+        }
+
+        location = / {
+            return 301 https://flo.health/;
+        }
+
+        location = /flo_about.html {
+            return 301 https://flo.health/about-us/;
+        }
+
+        location / {
+            root /home/website/data/site;
+            try_files $uri $uri/ $uri/index.html =404;
+        }
+
+        location /content {
+            root /home/api;
+            try_files $uri $uri/ $uri/index.html =404;
+            access_log /home/logging/content.access.log filter;
+        }
+
+        location /call/v1/clientconfigs {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_call/v1/clientconfigs;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+
+                proxy_cache configs_cache;
+                proxy_cache_valid 10m;
+            }
+
+        location /call {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_call/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+                proxy_buffer_size 32k;
+                proxy_buffers 32 32k;
+                client_body_buffer_size 1m;
+        }
+
+       location /call/v1/estimations {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_prediction/v1/estimations;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+        }
+
+       location /call/v2/estimations {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_prediction/v2/estimations;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+        }
+
+        location /support {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_support/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+                allow 64.58.116.236;
+                deny all;
+        }
+
+        location /manager {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_manager/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+                allow 64.58.116.236;
+                deny all;
+        }
+
+        location /estimations {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_estimations/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+        }
+
+        location /moderator {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_moderator/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+        }
+
+        location /admin {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://app_admin/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+                allow 64.58.116.236;
+                deny all;
+        }
+
+}

@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+gpgkey=http://nginx.org/keys/nginx_signing.key
+enabled=1

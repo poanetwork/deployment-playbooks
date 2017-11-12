@@ -1,0 +1,9 @@
+---
+- name: uncomment compress in /etc/logrotate.conf
+  lineinfile:
+    dest: /etc/logrotate.conf
+    regexp: '#compress'
+    insertafter: '^# uncomment this if you want your log files compressed'
+    line: 'compress'
+    backrefs: yes
+

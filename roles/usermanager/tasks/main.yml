@@ -1,0 +1,8 @@
+---
+- user: name={{ item.name }} groups={{ item.addgroups | default('') }} append=yes
+  with_items: "{{ users }}"
+
+- include: nested_authorized_key.yml
+  with_items: "{{ users }}"
+  loop_control:
+    loop_var: outer_item

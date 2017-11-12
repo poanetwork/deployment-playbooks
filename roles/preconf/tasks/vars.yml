@@ -1,0 +1,6 @@
+---
+- sysctl: name=vm.swappiness value=0 state=present
+- sysctl: name=net.core.somaxconn value=1000 state=present
+
+- lineinfile: dest=/etc/security/limits.conf line="* soft nofile 100000" state=present
+- lineinfile: dest=/etc/security/limits.conf line="* hard nofile 100000" state=present

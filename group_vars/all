@@ -1,0 +1,13 @@
+---
+ssh_root:
+    - "{{ lookup('file', 'files/admins.pub') }}"
+
+snmp_syslocation: "USA"
+snmp_ipsubnet:    "172.16.0.0/16"
+
+nameservers:
+  - "8.8.8.8"
+  - "8.8.4.4"
+
+ntpservers:
+  - ""

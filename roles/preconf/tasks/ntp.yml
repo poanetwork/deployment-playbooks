@@ -1,0 +1,9 @@
+---
+- name: Install ntp package
+  apt: name={{ item }}
+  with_items:
+    - ntp
+    - ntpdate
+
+- name: Ensure ntp is running and enabled to start at boot
+  service: name=ntp state=started enabled=yes
