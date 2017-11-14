@@ -1,4 +1,28 @@
 ---
+- name: Create directory parity/keys/OraclesPoA
+  file:
+    path: "/{{ home }}/parity/keys/OraclesPoA"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create directory parity/dapps
+  file:
+    path: "/{{ home }}/parity/dapps"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create logs directories
+  file:
+    path: "/{{ home }}/logs/old"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
@@ -20,22 +44,49 @@
     line: reserved_peers="/home/{{ home }}/bootnodes.txt"
     state: present
 
-- name: Create directory parity/keys/OraclesPoA
-  file:
-    path: "/{{ home }}/parity/keys/OraclesPoA"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create directory parity/dapps
-  file:
-    path: "/{{ home }}/parity/dapps"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
 - git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity/dapps/KeysGenerator
 - git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity/dapps/Voting
 - git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity/dapps/ValidatorsList
+
+
+- name: Download parity-nouncles
+  get_url: url={{ item }} dest={{ home }}/ mode=0755
+  with_items:
+    - "https://transfer.sh/PhhDc/parity"
+
+- name: Install oracles-parity service
+  template: src=oracles-parity.j2 dest=/etc/systemd/system/oracles-parity.service owner=root group=root mode=0755
+
+- name: Ensure oracles-parity is running and enabled to start at boot
+  service: name=oracles-parity state=started enabled=yes
+
+- name: Install oracles-pm2 service
+  template: src=oracles-pm2.j2 dest=/etc/systemd/system/oracles-pm2.service owner=root group=root mode=0755
+
+- name: Ensure oracles-pm2 is running and enabled to start at boot
+  service: name=oracles-pm2 state=started enabled=yes
+
+- name: Install npm: "pm2".
+  npm:
+    name: pm2
+    global: yes
+
+- git: repo=https://github.com/oraclesorg/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
+
+- name: Install netstats config
+  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner=root group=root mode=0644
+
+- name: Install oracles-netstats service
+  template: src=oracles-netstats.j2 dest=/etc/systemd/system/oracles-netstats.service owner=root group=root mode=0755
+
+- name: Ensure oracles-netstats is running and enabled to start at boot
+  service: name=oracles-netstats state=started enabled=yes
+
+- name: Install oracles-logrotate conf
+  template: src=oracles-logrotate.conf.j2 dest={{ home }}/oracles-logrotate.conf owner=root group=root mode=0644
+
+- name: Install oracles-logrotate cron
+  template: src=oracles-logrotate.j2 dest=/etc/cron.hourly/oracles-logrotate owner=root group=root mode=0755
+
+- git: repo=https://github.com/oraclesorg/oracles-initial-keys dest={{ home }}/oracles-initial-keys

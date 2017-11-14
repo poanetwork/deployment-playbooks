@@ -1,0 +1,13 @@
+[Unit]
+Description=oracles pm2 service
+After=network.target
+[Service]
+Type=oneshot
+RemainAfterExit=true
+User={{ username }}
+Group={{ username }}
+Environment=MYVAR=myval
+WorkingDirectory=/home/{{ username }}
+ExecStart=/usr/bin/pm2 ping
+[Install]
+WantedBy=multi-user.target
