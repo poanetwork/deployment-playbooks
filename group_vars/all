@@ -11,3 +11,14 @@ nameservers:
 
 ntpservers:
   - ""
+
+access_key: "_INSERT KEY HERE_"
+secret_key: "_INSERT SECRET HERE_"
+
+awskeypair_name: "keypairname"
+instance_type: "t2.large"
+image: "ami-9d04e4e5"
+region: "us-west-2"
+instance_name: "bootnode"
+count_instances: "1"
+vpc_subnet_id: "subnet-ID-number"
