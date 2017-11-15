@@ -51,7 +51,7 @@
 
 
 - name: Download parity-nouncles
-  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity mode=0755 
+  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
 
 - name: Install oracles-parity service
   template: src=oracles-parity.j2 dest=/etc/systemd/system/oracles-parity.service owner=root group=root mode=0755
