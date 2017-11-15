@@ -6,4 +6,4 @@ Usage:
 setup ec2 instance: ansible-playbook ec2.yml
 setup bootnode or refresh config: ansible-playbook -i hosts site.yml
 
-All variables must be set in site.yml (vars section) and glabal_vars/all file.
+All variables must be set in site.yml (vars section) and group_vars/all file.
