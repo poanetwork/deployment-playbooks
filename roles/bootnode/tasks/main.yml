@@ -51,9 +51,7 @@
 
 
 - name: Download parity-nouncles
-  get_url: url={{ item }} dest={{ home }}/ mode=0755
-  with_items:
-    - "https://transfer.sh/PhhDc/parity"
+  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity mode=0755 
 
 - name: Install oracles-parity service
   template: src=oracles-parity.j2 dest=/etc/systemd/system/oracles-parity.service owner=root group=root mode=0755
@@ -67,10 +65,8 @@
 - name: Ensure oracles-pm2 is running and enabled to start at boot
   service: name=oracles-pm2 state=started enabled=yes
 
-- name: Install npm: "pm2".
-  npm:
-    name: pm2
-    global: yes
+- name: Install npm pm2
+  npm: name="pm2" global="yes"
 
 - git: repo=https://github.com/oraclesorg/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
 

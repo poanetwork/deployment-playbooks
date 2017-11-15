@@ -19,6 +19,7 @@
     username: "bootnode"
     users:
       - name: "bootnode"
+    home: "/home/bootnode"
     logsprefix: "/home/bootnode/logs"
     logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
@@ -28,16 +29,3 @@
     - bootnode
   tags:
     - bootnode
-
-- hosts: bootnode
-  vars:
-    username: "bootnode"
-    users:
-      - name: "bootnode"
-    home: "/home/bootnode"
-    logsprefix: "/home/bootnode/logs"
-    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
-  roles:
-  tags:
-    - boottest
-
