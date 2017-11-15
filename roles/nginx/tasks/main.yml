@@ -1,17 +1,16 @@
 ---
-- name: Install nginx repo
-  template: src=nginx.repo.j2 dest=/etc/yum.repos.d/nginx.repo owner=root group=root mode=0644
-
 - name: Install nginx
-  yum: name=nginx state=latest
+  apt: name=nginx state=latest
+  tags: nginx
 
-- name: Install nginx.conf
-  template: src={{ item }}.j2 dest=/etc/nginx/{{ item }} owner=root group=root mode=0644
-  with_items:
-   - nginx.conf
-   - dhparam.pem
+- file: path=/etc/nginx/ssl state=directory mode=0755
+  tags: nginx
+
+- name: Generate self-signed SSL certificate
+  shell: openssl req -new -x509 -nodes -subj "/CN={{ ansible_host }}" -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
   notify:
    - reload nginx
+  tags: nginx
 
 - name: Install nginx conf.d files
   template: src={{ item }}.j2 dest=/etc/nginx/conf.d/{{ item }} owner=root group=root mode=0644
@@ -19,10 +18,8 @@
    - default.conf
   notify:
    - reload nginx
+  tags: nginx
 
 - name: Ensure nginx is running and enabled to start at boot
   service: name=nginx state=started enabled=yes
-
-- include: vars.yml
-  tags:
-    - nginx_vars
+  tags: nginx
