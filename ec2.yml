@@ -1,4 +1,45 @@
 ---
+- name: Create security group
+  hosts: localhost
+  gather_facts: False
+  tasks: 
+  - name: Create Security group
+    ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: default-security
+      description: "Default security group"
+      region: "{{ region }}"
+      purge_rules_egress: true
+      purge_rules: true
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 443
+          to_port: 443
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 8545
+          to_port: 8545
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 30303
+          to_port: 30303
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 30303
+          to_port: 30303
+          cidr_ip: 0.0.0.0/0
+      rules_egress:
+        - proto: all
+          from_port: all
+          to_port: all
+          cidr_ip: 0.0.0.0/0
+
+
 - name: Create a sandbox instance
   hosts: localhost
   gather_facts: False
