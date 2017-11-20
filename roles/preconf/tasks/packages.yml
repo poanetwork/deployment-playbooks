@@ -23,4 +23,13 @@
     - git
     - cloud-utils
     - build-essential
+
+- name: Install updated PPA for toolchain
+  apt_repository: repo='{{ item }}'
+  with_items:
+    - ppa:ubuntu-toolchain-r/test
+
+- name: Install fixed package
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
     - libstdc++6

@@ -1,15 +1,15 @@
 ---
-- name: Create directory parity/keys/OraclesPoA
+- name: Create directory parity_data/keys/OraclesPoA
   file:
-    path: "{{ home }}/parity/keys/OraclesPoA"
+    path: "{{ home }}/parity_data/keys/OraclesPoA"
     state: directory
     mode: 0700
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- name: Create directory parity/dapps
+- name: Create directory parity_data/dapps
   file:
-    path: "{{ home }}/parity/dapps"
+    path: "{{ home }}/parity_data/dapps"
     state: directory
     mode: 0755
     owner: "{{ username }}"
@@ -45,9 +45,9 @@
     state: present
 
 
-- git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity/dapps/KeysGenerator
-- git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity/dapps/Voting
-- git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity/dapps/ValidatorsList
+- git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity_data/dapps/KeysGenerator
+- git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
+- git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity_data/dapps/ValidatorsList
 
 - name: Download parity-nouncles
   get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
