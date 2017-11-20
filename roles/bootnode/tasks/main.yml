@@ -1,7 +1,7 @@
 ---
 - name: Create directory parity/keys/OraclesPoA
   file:
-    path: "/{{ home }}/parity/keys/OraclesPoA"
+    path: "{{ home }}/parity/keys/OraclesPoA"
     state: directory
     mode: 0700
     owner: "{{ username }}"
@@ -9,7 +9,7 @@
 
 - name: Create directory parity/dapps
   file:
-    path: "/{{ home }}/parity/dapps"
+    path: "{{ home }}/parity/dapps"
     state: directory
     mode: 0755
     owner: "{{ username }}"
@@ -41,7 +41,7 @@
   lineinfile: 
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
-    line: reserved_peers="/home/{{ home }}/bootnodes.txt"
+    line: reserved_peers="{{ home }}/bootnodes.txt"
     state: present
 
 
