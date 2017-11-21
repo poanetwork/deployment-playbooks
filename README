@@ -2,8 +2,24 @@ Ansible playbook.
 
 Ansible version 2.3 or high.
 
-Usage: 
-setup ec2 instance: ansible-playbook ec2.yml
-setup bootnode or refresh config: ansible-playbook -i hosts site.yml
-
+Before start, you need get AWS access key, please read the instruction:  http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
 All variables must be set in site.yml (vars section) and group_vars/all file.
+
+Short FAQ:
+Q: Where find vpc_subnet_id? 
+A: You can use aws cli for get the variable (https://aws.amazon.com/cli/). run: aws ec2 describe-subnets and find "AvailabilityZone" with the related "SubnetId": "subnet-XXXXXX"
+
+Q: How add ssh key pair?
+A: For details, please see: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+
+Q: Any difference between admins.pub vs ssh_bootnode.pub? Where each one is used?
+A: File admins.pub constant keys what used to access use root and ubuntu (sudo user), ssh_bootnode.pub used for give unprivileged access to server. If it no need, can use one file.
+
+Q: When you run ec2.yml/site.yml how to verify that everything has completed as expected? Please provide verification steps.
+A: ec2.yml must pass all steps w/o errors, it says, all pass correct.
+
+Usage: 
+Setup ec2 instance: ansible-playbook ec2.yml
+
+Before setup bootnode or refresh config, need add host ip file hosts and run: ansible-playbook -i hosts site.yml
+
