@@ -1,5 +1,5 @@
 ---
-- user: name={{ item.name }} groups={{ item.addgroups | default('') }} append=yes
+- user: name={{ item.name }} groups={{ item.addgroups | default('') }} shell=/bin/bash append=yes
   with_items: "{{ users }}"
 
 - include: nested_authorized_key.yml
