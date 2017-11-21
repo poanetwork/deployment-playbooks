@@ -44,6 +44,13 @@
     line: reserved_peers="{{ home }}/bootnodes.txt"
     state: present
 
+- name: Add log file in node.toml
+  blockinfile: 
+    path: "{{ home }}/node.toml"
+    block: |
+      [misc]
+      log_file = "{{ home }}/logs/parity.log"
+
 
 - git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity_data/dapps/KeysGenerator
 - git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
