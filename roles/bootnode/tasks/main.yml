@@ -27,8 +27,8 @@
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
     - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
-    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnode/node.toml"
+    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
+    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnode/node.toml"
 
 - name: Change nat in node.toml
   lineinfile: 
