@@ -27,8 +27,8 @@
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
     - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnode/node.toml"
+    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnodes.txt"
+    - "https://raw.githubusercontent.com/oraclesorg/test-templates/dev-mainnet/TestTestNet/bootnode/node.toml"
 
 - name: Change nat in node.toml
   lineinfile: 
@@ -87,11 +87,13 @@
   shell: "cd /home/bootnode/eth-net-intelligence-api; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
+  tags: test
 
 - name: install npm oracles-initial-keys
   shell: "cd /home/bootnode/oracles-initial-keys; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
+  tags: test
 
 - name: Install oracles-netstats service
   template: src=oracles-netstats.j2 dest=/etc/systemd/system/oracles-netstats.service owner=root group=root mode=0755

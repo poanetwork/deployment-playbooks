@@ -7,14 +7,6 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- name: Create directory parity_data/dapps
-  file:
-    path: "{{ home }}/parity_data/dapps"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
 - name: Create logs directories
   file:
     path: "/{{ home }}/logs/old"
@@ -50,11 +42,14 @@
     block: |
       [misc]
       log_file = "{{ home }}/logs/parity.log"
-
-
-- git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity_data/dapps/KeysGenerator
-- git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
-- git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity_data/dapps/ValidatorsList
+      [account]
+      password = "{{ NODE_PWD }}"
+      unlock = "{{ MINING_ADDRESS }}"
+      [mining]
+      force_sealing = true
+      engine_signer = "{{ MINING_ADDRESS }}"
+      tx_gas_limit = "{{ TX_GAS_LIMIT }}"
+      reseal_on_txs = "none"
 
 - name: Download parity-nouncles
   get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
@@ -79,17 +74,10 @@
 - name: Install netstats config
   template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner=bootnode group=bootnode mode=0644
 
-- git: repo=https://github.com/oraclesorg/oracles-initial-keys dest={{ home }}/oracles-initial-keys
-
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
   shell: "cd /home/bootnode/eth-net-intelligence-api; /usr/bin/npm install"
-  become: true
-  become_user: "{{ username }}"
-
-- name: install npm oracles-initial-keys
-  shell: "cd /home/bootnode/oracles-initial-keys; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
@@ -105,3 +93,14 @@
 - name: Install oracles-logrotate cron
   template: src=oracles-logrotate.j2 dest=/etc/cron.hourly/oracles-logrotate owner=root group=root mode=0755
 
+- git: repo=https://github.com/oraclesorg/oracles-scripts.git dest={{ home }}/oracles-scripts
+
+- file: src="{{ home }}/node.toml" dest="{{ home }}/oracles-scripts/node.toml" owner="{{ username }}" group="{{ username }}" state=link
+
+- name: install npm scripts
+  shell: "cd {{ home }}/oracles-scripts/; /usr/bin/npm install"
+  become: true
+  become_user: "{{ username }}"
+
+- name: Install Payout task.
+  template: src=transferRewardToPayoutKey.j2 dest=/etc/cron.hourly/transferRewardToPayoutKey owner=root group=root mode=0755

@@ -1,5 +1,5 @@
 ---
-- name: Create security group
+- name: Create bootnode security group
   hosts: localhost
   gather_facts: False
   tasks: 
@@ -7,7 +7,7 @@
     ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: default-security
+      name: bootnode-security
       description: "Default security group"
       region: "{{ region }}"
 #      purge_rules_egress: true
@@ -38,13 +38,13 @@
           from_port: all
           to_port: all
           cidr_ip: 0.0.0.0/0
+  tags: bootnode
 
 
-- name: Create a sandbox instance
+- name: Create bootnode
   hosts: localhost
   gather_facts: False
   vars:
-    security_group: ['default-security']
     volumes:
       - device_name: /dev/sda1
         volume_size: 128
@@ -57,7 +57,7 @@
         key_name: "{{ awskeypair_name }}"
         instance_tags: 
           Name: "{{ instance_name }}"
-        group: "{{ security_group }}"
+        group: "{{ bootnode_security_group }}"
         instance_type: "{{ instance_type }}"
         image: "{{ image }}"
         count: "{{ count_instances }}"
@@ -73,6 +73,7 @@
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_ip }} port=22 delay=90 timeout=320 state=started
       with_items: "{{ ec2.instances }}"
+  tags: bootnode
 
 - name: Installing python
   hosts: all
