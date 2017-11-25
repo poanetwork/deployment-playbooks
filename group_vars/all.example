@@ -38,7 +38,7 @@ TX_GAS_LIMIT: "6700000"
 
 NODE_PWD: "node.pwd"
 
-parity_nouncles: "https://transfer.sh/PhhDc/parity"
+parity_nouncles: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.2/parity"
 
 
 #bootnode
