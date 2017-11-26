@@ -20,7 +20,7 @@
   with_items:
     - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
     - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnode/node.toml"
+    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/mining-node/node.toml"
 
 - name: Change nat in node.toml
   lineinfile: 
@@ -72,7 +72,7 @@
 - git: repo=https://github.com/oraclesorg/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
 
 - name: Install netstats config
-  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner=bootnode group=bootnode mode=0644
+  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner=mining group=mining mode=0644
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 

@@ -64,11 +64,11 @@
         ec2_secret_key: "{{ secret_key }}"
         key_name: "{{ awskeypair_name }}"
         instance_tags: 
-          Name: "{{ instance_name }}"
+          Name: "{{ netstat_instance_name }}"
         group: "{{ netstat_security_group }}"
-        instance_type: "{{ instance_type }}"
+        instance_type: "{{ netstat_instance_type }}"
         image: "{{ image }}"
-        count: "{{ count_instances }}"
+        count: "{{ netstat_count_instances }}"
         wait: yes
         region: "{{ region }}"
         vpc_subnet_id: "{{ vpc_subnet_id }}"
