@@ -46,6 +46,7 @@
 
 - hosts: netstat
   vars:
+    NETSTATS_SERVER: "localhost"
     username: "netstat"
     users:
       - name: "netstat"
