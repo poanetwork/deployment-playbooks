@@ -77,19 +77,19 @@
 - git: repo=https://github.com/oraclesorg/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
 
 - name: Install netstats config
-  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner=bootnode group=bootnode mode=0644
+  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner={{ username }} group={{ username }} mode=0644
 
 - git: repo=https://github.com/oraclesorg/oracles-initial-keys dest={{ home }}/oracles-initial-keys
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/bootnode/eth-net-intelligence-api; /usr/bin/npm install"
+  shell: "cd /home/{{ username }}/eth-net-intelligence-api; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm oracles-initial-keys
-  shell: "cd /home/bootnode/oracles-initial-keys; /usr/bin/npm install"
+  shell: "cd /home/{{ username }}/oracles-initial-keys; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
