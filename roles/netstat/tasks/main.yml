@@ -74,7 +74,6 @@
 - git: repo=https://github.com/oraclesorg/eth-netstats dest={{ home }}/eth-netstats
 
 - git: repo=https://github.com/oraclesorg/chain-explorer dest={{ home }}/chain-explorer
-#- git: repo=https://github.com/ethereum/solc-bin accept_hostkey=yes dest={{ home }}/chain-explorer/utils/solc-bin
 
 - name: Install chain_explorer app.json
   template: src=app_chain_explorer.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
@@ -100,7 +99,7 @@
   become_user: "{{ username }}"
 
 - name: Config ws_secret.json file
-  shell: "echo '["{{ NETSTATS_SECRET }}"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
+  shell: "echo '[\"{{ NETSTATS_SECRET }}\"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
 
 - name: install npm chain_explorer
   shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
