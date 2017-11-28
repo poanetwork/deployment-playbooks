@@ -43,8 +43,8 @@
       [misc]
       log_file = "{{ home }}/logs/parity.log"
       [account]
-      password = "[{{ NODE_PWD }}]"
-      unlock = "[{{ MINING_ADDRESS }}]"
+      password = ["{{ NODE_PWD }}"]
+      unlock = ["{{ MINING_ADDRESS }}"]
       [mining]
       force_sealing = true
       engine_signer = "{{ MINING_ADDRESS }}"
