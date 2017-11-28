@@ -100,7 +100,7 @@
   become_user: "{{ username }}"
 
 - name: Config ws_secret.json file
-  shell: "echo '{{ NETSTATS_SECRET }}' > /home/{{ username }}/eth-netstats/ws_secret.json"
+  shell: "echo '["{{ NETSTATS_SECRET }}"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
 
 - name: install npm chain_explorer
   shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
