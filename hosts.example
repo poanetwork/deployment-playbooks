@@ -8,16 +8,16 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-#setuphost ansible_port=22
-
 [bootnode]
 
 [owner]
 
 [netstats]
 
+[mining]
 
 [oracles:children]
 bootnode
 owner
 netstats
+mining

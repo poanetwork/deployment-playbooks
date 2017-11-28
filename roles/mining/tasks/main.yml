@@ -43,13 +43,19 @@
       [misc]
       log_file = "{{ home }}/logs/parity.log"
       [account]
-      password = "{{ NODE_PWD }}"
-      unlock = "{{ MINING_ADDRESS }}"
+      password = "[{{ NODE_PWD }}]"
+      unlock = "[{{ MINING_ADDRESS }}]"
       [mining]
       force_sealing = true
       engine_signer = "{{ MINING_ADDRESS }}"
       tx_gas_limit = "{{ TX_GAS_LIMIT }}"
       reseal_on_txs = "none"
+
+- name: Install {{ NODE_PWD }} file
+  template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
+
+- name: Install {{ MINING_KEYFILE }} file
+  shell: "echo {{ MINING_KEYFILE }} > {{ home }}/parity_data/keys/OraclesPoA/mining.key.{{ MINING_ADDRESS }}"
 
 - name: Download parity-nouncles
   get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
