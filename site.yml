@@ -37,12 +37,22 @@
     users:
       - name: "mining"
     home: "/home/mining"
-#    logsprefix: "/home/mining/logs"
-#    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
     - usermanager
-#    - logentries
     - nodejs
     - mining
   tags:
     - mining
+
+- hosts: netstat
+  vars:
+    username: "netstat"
+    users:
+      - name: "netstat"
+    home: "/home/netstat"
+  roles:
+    - usermanager
+    - nodejs
+    - netstat
+  tags:
+    - netstat
