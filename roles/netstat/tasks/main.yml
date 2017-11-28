@@ -20,7 +20,7 @@
   with_items:
     - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
     - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/mining-node/node.toml"
+    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/netstats-server/node.toml"
 
 
 - name: Change nat in node.toml
