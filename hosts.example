@@ -12,12 +12,12 @@
 
 [owner]
 
-[netstats]
+[netstat]
 
 [mining]
 
 [oracles:children]
 bootnode
 owner
-netstats
+netstat
 mining
