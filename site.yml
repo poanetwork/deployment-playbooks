@@ -57,3 +57,16 @@
     - netstat
   tags:
     - netstat
+
+- hosts: owner
+  vars:
+    username: "owner"
+    users:
+      - name: "owner"
+    home: "/home/owner"
+  roles:
+    - usermanager
+    - nodejs
+    - owner
+  tags:
+    - owner
