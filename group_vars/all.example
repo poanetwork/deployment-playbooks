@@ -34,6 +34,8 @@ SCRIPTS_BRANCH: "sokol"
 DAPPS_BRANCH: "master"
 IKEYS_BRANCH: "master"
 
+OWNER_ADDRESS: "_INSERT_"
+
 TX_GAS_LIMIT: "6700000"
 
 NODE_PWD: "node.pwd"
