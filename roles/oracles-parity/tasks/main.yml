@@ -1,0 +1,29 @@
+---
+- name: Create directory parity_data/keys/OraclesPoA
+  file:
+    path: "{{ home }}/parity_data/keys/OraclesPoA"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create logs directories
+  file:
+    path: "/{{ home }}/logs/old"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Download parity-nouncles
+  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
+  notify:
+    - restart oracles-parity
+
+- name: Install oracles-parity service
+  template: src=oracles-parity.j2 dest=/etc/systemd/system/oracles-parity.service owner=root group=root mode=0755
+  notify:
+    - restart oracles-parity
+
+- name: Ensure oracles-parity is running and enabled to start at boot
+  service: name=oracles-parity state=started enabled=yes

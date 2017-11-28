@@ -56,52 +56,11 @@
 - git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
 - git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity_data/dapps/ValidatorsList
 
-- name: Download parity-nouncles
-  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
-
-- name: Install oracles-parity service
-  template: src=oracles-parity.j2 dest=/etc/systemd/system/oracles-parity.service owner=root group=root mode=0755
-
-- name: Ensure oracles-parity is running and enabled to start at boot
-  service: name=oracles-parity state=started enabled=yes
-
-- name: Install oracles-pm2 service
-  template: src=oracles-pm2.j2 dest=/etc/systemd/system/oracles-pm2.service owner=root group=root mode=0755
-
-- name: Install npm pm2
-  npm: name="pm2" global="yes"
-
-- name: Ensure oracles-pm2 is running and enabled to start at boot
-  service: name=oracles-pm2 state=started enabled=yes
-
-- git: repo=https://github.com/oraclesorg/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
-
-- name: Install netstats config
-  template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner={{ username }} group={{ username }} mode=0644
-
 - git: repo=https://github.com/oraclesorg/oracles-initial-keys dest={{ home }}/oracles-initial-keys
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
-
-- name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-net-intelligence-api; /usr/bin/npm install"
-  become: true
-  become_user: "{{ username }}"
 
 - name: install npm oracles-initial-keys
   shell: "cd /home/{{ username }}/oracles-initial-keys; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
-
-- name: Install oracles-netstats service
-  template: src=oracles-netstats.j2 dest=/etc/systemd/system/oracles-netstats.service owner=root group=root mode=0755
-
-- name: Ensure oracles-netstats is running and enabled to start at boot
-  service: name=oracles-netstats state=started enabled=yes
-
-- name: Install oracles-logrotate conf
-  template: src=oracles-logrotate.conf.j2 dest={{ home }}/oracles-logrotate.conf owner=root group=root mode=0644
-
-- name: Install oracles-logrotate cron
-  template: src=oracles-logrotate.j2 dest=/etc/cron.hourly/oracles-logrotate owner=root group=root mode=0755
-

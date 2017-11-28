@@ -70,3 +70,20 @@
     - owner
   tags:
     - owner
+
+- hosts: owner
+  vars:
+    username: "owner"
+    users:
+      - name: "owner"
+    home: "/home/owner"
+  roles:
+    - usermanager
+    - nodejs
+    - oracles-logrotate
+    - oracles-parity
+    - oracles-pm2
+    - oracles-netstats
+    - owner
+  tags:
+    - ownertest

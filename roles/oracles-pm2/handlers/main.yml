@@ -1,0 +1,3 @@
+---
+- name: restart oracles-pm2
+  service: name=oracles-pm2 state=restarted

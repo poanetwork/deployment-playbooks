@@ -1,0 +1,3 @@
+---
+- name: restart oracles-netstats
+  service: name=oracles-netstats state=restarted

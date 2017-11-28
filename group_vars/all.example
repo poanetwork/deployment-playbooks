@@ -63,3 +63,9 @@ mining_instance_type: "t2.large"
 mining_instance_name: "mining"
 mining_count_instances: "1"
 mining_security_group: "mining-security"
+
+#owner
+owner_instance_type: "t2.large"
+owner_instance_name: "owner"
+owner_count_instances: "1"
+owner_security_group: "owner-security"
