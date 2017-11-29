@@ -7,26 +7,23 @@
     - preconf
   tags: preconf
 
-#- hosts: all
-#  user: root
-#  roles:
-#    - iptables
-#  tags: iptables
-
-
 - hosts: bootnode
   vars:
     username: "bootnode"
     users:
       - name: "bootnode"
     home: "/home/bootnode"
-#    logsprefix: "/home/bootnode/logs"
+#    logsprefix: "/home/{{ username }}/logs"
 #    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
     - usermanager
 #    - logentries
     - nodejs
     - bootnode
+    - oracles-logrotate
+    - oracles-parity
+    - oracles-pm2
+    - oracles-netstats
     - nginx
   tags:
     - bootnode
@@ -40,6 +37,10 @@
   roles:
     - usermanager
     - nodejs
+    - oracles-logrotate
+    - oracles-parity
+    - oracles-pm2
+    - oracles-netstats
     - mining
   tags:
     - mining
@@ -54,22 +55,13 @@
   roles:
     - usermanager
     - nodejs
+    - oracles-logrotate
+    - oracles-parity
+    - oracles-pm2
+    - oracles-netstats
     - netstat
   tags:
     - netstat
-
-- hosts: owner
-  vars:
-    username: "owner"
-    users:
-      - name: "owner"
-    home: "/home/owner"
-  roles:
-    - usermanager
-    - nodejs
-    - owner
-  tags:
-    - owner
 
 - hosts: owner
   vars:
@@ -86,4 +78,4 @@
     - oracles-netstats
     - owner
   tags:
-    - ownertest
+    - owner
