@@ -18,9 +18,9 @@
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
-    - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/owner/node.toml"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-scripts/sokol/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/owner/node.toml"
 
 - name: Change nat in node.toml
   lineinfile: 
@@ -57,11 +57,21 @@
 - name: Config OWNER_KEYFILE file
   shell: "echo '{{ OWNER_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/{{ username }}.key"
 
-- git: repo=https://github.com/oraclesorg/oracles-initial-keys dest={{ home }}/oracles-initial-keys version={{ IKEYS_BRANCH }}
+- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-owner dest={{ home }}/oracles-scripts-owner version={{ SCRIPTS_OWNER_BRANCH }}
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/oracles-initial-keys; /usr/bin/npm install"
+  shell: "cd {{ home }}/oracles-scripts-owner; /usr/bin/npm install"
+  become: true
+  become_user: "{{ username }}"
+
+- name: install npm generateInitialKey
+  shell: "cd {{ home }}/oracles-scripts-owner/generateInitialKey; /usr/bin/npm install"
+  become: true
+  become_user: "{{ username }}"
+
+- name: install npm joinContracts
+  shell: "cd {{ home }}/oracles-scripts-owner/joinContracts; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"

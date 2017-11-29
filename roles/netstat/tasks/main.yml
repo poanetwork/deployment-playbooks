@@ -18,9 +18,9 @@
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
-    - "https://raw.githubusercontent.com/oraclesorg/oracles-scripts/sokol/spec.json"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/oraclesorg/deployment-azure/dev-mainnet/nodes/netstats-server/node.toml"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-scripts/sokol/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/netstats-server/node.toml"
 
 
 - name: Change nat in node.toml
@@ -44,11 +44,7 @@
       [misc]
       log_file = "{{ home }}/logs/parity.log"
 
-- git: repo=https://github.com/oraclesorg/oracles-dapps-keys-generation.git dest={{ home }}/parity_data/dapps/KeysGenerator
-- git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
-- git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity_data/dapps/ValidatorsList
-
-- git: repo=https://github.com/oraclesorg/eth-netstats dest={{ home }}/eth-netstats
+- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats dest={{ home }}/eth-netstats
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 

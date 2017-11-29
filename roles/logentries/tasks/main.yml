@@ -20,12 +20,16 @@
 
 - name: connect logentries account
   shell: le reinit --user-key={{ logentries_user_key }}
+  notify:
+    - restart logentries
 
 - name: deactivate pull-server-side-config
   lineinfile:
     dest: /etc/le/config
     regexp: "pull-server-side-config = "
     line: "pull-server-side-config = False"
+  notify:
+    - restart logentries
 
 - name: create config folder
   file:
@@ -34,7 +38,7 @@
     mode: 0755
 
 - name: deploy config logentries
-  template: src=logentries.j2 dest=/etc/le/conf.d/dev-mainnet.conf
+  template: src=logentries.j2 dest=/etc/le/conf.d/{{ TEMPLATES_BRANCH }}.conf
   notify:
     - restart logentries
 
