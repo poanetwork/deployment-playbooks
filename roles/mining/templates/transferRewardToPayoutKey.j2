@@ -2,6 +2,6 @@
 cd "{{ home }}/oracles-scripts/scripts/"
 echo "Starting at $(date)" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out"
 echo "Starting at $(date)" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
-/usr/bin/node {{ home }}/oracles-scripts-validator/scripts/transferRewardToPayoutKey.js >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out" 2>> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
+/usr/bin/node {{ home }}/oracles-scripts-validator/transferRewardToPayoutKey/transferRewardToPayoutKey.js >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out" 2>> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
 echo "" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out"
 echo "" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"

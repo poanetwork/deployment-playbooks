@@ -58,9 +58,6 @@
     - usermanager
     - nodejs
     - oracles-logrotate
-    - oracles-parity
-    - oracles-pm2
-    - oracles-netstats
     - netstat
   tags:
     - netstat
@@ -77,8 +74,8 @@
     - usermanager
     - nodejs
     - oracles-logrotate
+    - oracles-parity
     - oracles-pm2
-    - oracles-netstats
     - explorer
   tags:
     - explorer
