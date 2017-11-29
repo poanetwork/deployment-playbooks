@@ -59,6 +59,7 @@
     - nodejs
     - oracles-logrotate
     - netstat
+    - nginx
   tags:
     - netstat
 
@@ -77,6 +78,7 @@
     - oracles-parity
     - oracles-pm2
     - explorer
+    - nginx
   tags:
     - explorer
 
