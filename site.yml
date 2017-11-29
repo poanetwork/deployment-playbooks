@@ -9,6 +9,7 @@
 
 - hosts: bootnode
   vars:
+    PROXY_PORT: "8545"
     username: "bootnode"
     users:
       - name: "bootnode"
@@ -47,6 +48,7 @@
 
 - hosts: netstat
   vars:
+    PROXY_PORT: "3000"
     NETSTATS_SERVER: "localhost"
     username: "netstat"
     users:

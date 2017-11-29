@@ -9,7 +9,7 @@ server {
   server_name _;
 
   location / {
-    proxy_set_header Host localhost:8545;
+    proxy_set_header Host localhost:{{ PROXY_PORT }};
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header Content-Type application/json;
     add_header Access-Control-Allow-Origin "*";
@@ -24,7 +24,7 @@ server {
       add_header Content-Length 0;
       return 204;
     }
-    proxy_pass http://localhost:8545;
+    proxy_pass http://localhost:{{ PROXY_PORT }};
   }
 
 }
