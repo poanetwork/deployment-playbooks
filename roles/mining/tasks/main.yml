@@ -57,9 +57,9 @@
 - name: Config MINING_KEYFILE file
   shell: "echo '{{ MINING_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/mining.key.{{ MINING_ADDRESS }}"
 
-- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
-
 - git: repo=https://github.com/oraclesorg/oracles-scripts.git dest={{ home }}/oracles-scripts
+
+- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 
 - file: src="{{ home }}/node.toml" dest="{{ home }}/oracles-scripts/node.toml" owner="{{ username }}" group="{{ username }}" state=link
 
