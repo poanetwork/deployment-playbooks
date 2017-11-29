@@ -7,14 +7,6 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- name: Create directory parity_data/dapps
-  file:
-    path: "{{ home }}/parity_data/dapps"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
 - name: Create logs directories
   file:
     path: "/{{ home }}/logs/old"
@@ -51,4 +43,4 @@
       [misc]
       log_file = "{{ home }}/logs/parity.log"
 
-- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
+#- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes

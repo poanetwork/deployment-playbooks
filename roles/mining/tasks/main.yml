@@ -59,9 +59,9 @@
 
 - git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-validator dest={{ home }}/oracles-scripts-validator version={{ SCRIPTS_VALIDATOR_BRANCH }}
 
-- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
-
 - file: src="{{ home }}/node.toml" dest="{{ home }}/oracles-scripts-validator/node.toml" owner="{{ username }}" group="{{ username }}" state=link
+
+- file: path={{ home }}/oracles-scripts-validator owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm transferRewardToPayoutKey
   shell: "cd {{ home }}/oracles-scripts-validator/transferRewardToPayoutKey; /usr/bin/npm install"

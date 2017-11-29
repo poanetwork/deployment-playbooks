@@ -59,7 +59,7 @@
 
 - git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-owner dest={{ home }}/oracles-scripts-owner version={{ SCRIPTS_OWNER_BRANCH }}
 
-- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
+- file: path={{ home }}/oracles-scripts-owner owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
   shell: "cd {{ home }}/oracles-scripts-owner; /usr/bin/npm install"

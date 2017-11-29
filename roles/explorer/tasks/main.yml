@@ -51,7 +51,7 @@
   notify:
     - restart oracles-chain-explorer
 
-- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
+- file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm chain_explorer
   shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
