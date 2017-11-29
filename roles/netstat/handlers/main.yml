@@ -1,6 +1,3 @@
 ---
-- name: restart oracles-chain-explorer
-  service: name=oracles-chain-explorer state=restarted
-
 - name: restart oracles-dashboard
   service: name=oracles-dashboard state=restarted

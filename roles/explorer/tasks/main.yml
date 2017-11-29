@@ -48,34 +48,31 @@
 - git: repo=https://github.com/oraclesorg/oracles-dapps-voting.git dest={{ home }}/parity_data/dapps/Voting
 - git: repo=https://github.com/oraclesorg/oracles-dapps-validators.git dest={{ home }}/parity_data/dapps/ValidatorsList
 
-- git: repo=https://github.com/oraclesorg/eth-netstats dest={{ home }}/eth-netstats
+- git: repo=https://github.com/oraclesorg/chain-explorer dest={{ home }}/chain-explorer
+
+- name: Install chain_explorer app.json
+  template: src=app.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
+  notify:
+    - restart oracles-chain-explorer
 
 - file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
 
-- name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install"
+- name: install npm chain_explorer
+  shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
   notify:
-    - restart oracles-dashboard
+    - restart oracles-chain-explorer
 
-- name: install npm grunt-cli
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install -g grunt-cli"
-
-- name: run grunt process
-  shell: "cd /home/{{ username }}/eth-netstats; grunt"
-  become: true
-  become_user: "{{ username }}"
-
-- name: Config ws_secret.json file
-  shell: "echo '[\"{{ NETSTATS_SECRET }}\"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
+- name: Install chain_explorer config.js
+  template: src=config.js.j2 dest={{ home }}/chain-explorer/config.js owner={{ username }} group={{ username }} mode=0644
   notify:
-    - restart oracles-dashboard
+    - restart oracles-chain-explorer
 
-- name: Install oracles-dashboard service
-  template: src=oracles-dashboard.j2 dest=/etc/systemd/system/oracles-dashboard.service owner=root group=root mode=0755
+- name: Install oracles-chain-explorer service
+  template: src=oracles-chain-explorer.j2 dest=/etc/systemd/system/oracles-chain-explorer.service owner=root group=root mode=0755
   notify:
-    - restart oracles-dashboard
+    - restart oracles-chain-explorer
 
-- name: Ensure oracles-dashboard is running and enabled to start at boot
-  service: name=oracles-dashboard state=started enabled=yes
+- name: Ensure oracles-chain-explorer is running and enabled to start at boot
+  service: name=oracles-chain-explorer state=started enabled=yes

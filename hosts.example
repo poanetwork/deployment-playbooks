@@ -16,8 +16,11 @@
 
 [mining]
 
+[explorer]
+
 [oracles:children]
 bootnode
 owner
 netstat
 mining
+explorer

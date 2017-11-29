@@ -65,6 +65,24 @@
   tags:
     - netstat
 
+- hosts: explorer
+  vars:
+    PROXY_PORT: "4000"
+    explorerS_SERVER: "localhost"
+    username: "explorer"
+    users:
+      - name: "explorer"
+    home: "/home/explorer"
+  roles:
+    - usermanager
+    - nodejs
+    - oracles-logrotate
+    - oracles-pm2
+    - oracles-netstats
+    - explorer
+  tags:
+    - explorer
+
 - hosts: owner
   vars:
     username: "owner"

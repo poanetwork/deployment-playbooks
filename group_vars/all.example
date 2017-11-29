@@ -69,3 +69,9 @@ owner_instance_type: "t2.large"
 owner_instance_name: "owner"
 owner_count_instances: "1"
 owner_security_group: "owner-security"
+
+#explorer
+explorer_instance_type: "t2.large"
+explorer_instance_name: "explorer"
+explorer_count_instances: "1"
+explorer_security_group: "explorer-security"
