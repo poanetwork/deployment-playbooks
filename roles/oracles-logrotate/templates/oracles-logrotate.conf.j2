@@ -8,6 +8,29 @@
     dateformat %Y-%m-%d-%s
     olddir old
 }
+
+/home/{{ username }}/logs/*.err {
+    rotate 10
+    size 200M
+    missingok
+    compress
+    copytruncate
+    dateext
+    dateformat %Y-%m-%d-%s
+    olddir old
+}
+
+/home/{{ username }}/logs/*.out {
+    rotate 10
+    size 200M
+    missingok
+    compress
+    copytruncate
+    dateext
+    dateformat %Y-%m-%d-%s
+    olddir old
+}
+
 /home/{{ username }}/.pm2/pm2.log {
     su {{ username }} {{ username }}
     rotate 10
