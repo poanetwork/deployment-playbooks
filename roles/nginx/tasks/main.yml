@@ -12,6 +12,13 @@
    - reload nginx
   tags: nginx
 
+- name: Install nginx.conf
+  template: src={{ item }}.j2 dest=/etc/nginx/ssl/{{ item }} owner=root group=root mode=0644
+  with_items:
+   - dhparam.pem
+  notify:
+   - reload nginx
+
 - name: Install nginx conf.d files
   template: src={{ item }}.j2 dest=/etc/nginx/conf.d/{{ item }} owner=root group=root mode=0644
   with_items:
