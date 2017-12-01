@@ -15,8 +15,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- name: Download parity-nouncles
-  get_url: url="{{ parity_nouncles }}" dest={{ home }}/parity-nouncles mode=0755 
+- name: Download parity-bin
+  get_url: url="{{ PARITY_BIN_LOC }}" dest={{ home }}/parity mode=0755
   notify:
     - restart oracles-parity
 

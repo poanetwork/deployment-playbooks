@@ -5,7 +5,7 @@ After=network.target
 User={{ username }}
 Group={{ username }}
 WorkingDirectory=/home/{{ username }}
-ExecStart=/home/{{ username }}/parity-nouncles --config=node.toml
+ExecStart=/home/{{ username }}/parity --config=node.toml
 Restart=always
 [Install]
 WantedBy=multi-user.target
