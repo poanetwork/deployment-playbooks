@@ -1,7 +1,7 @@
 ---
 - name: Ensure apt-transport-https is installed.
   apt: name=apt-transport-https state=present
-  
+
 - name: add nodejs repository key
   apt_key:
     keyserver: keyserver.ubuntu.com
@@ -10,10 +10,10 @@
 
 - name: Add nodejs repository
   apt_repository:
-    repo: 'deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main'
+    repo: 'deb {{ NODE_SOURCE_DEB }} {{ansible_distribution_release}} main'
     state: present
 
-- name: Install nodejs packages 
+- name: Install nodejs packages
   apt: name={{ item }} state=present update_cache=yes
   with_items:
     - nodejs
