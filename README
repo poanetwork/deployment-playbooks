@@ -3,10 +3,13 @@ Ansible playbook.
 Ansible version 2.3 or high.
 
 Before start, you need get AWS access key, please read the instruction:  http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
+
+Please create file group_vars/all, copy-paste content from all.network (parameters shared by all roles) and add parameters from a specific role file group_vars/*.example
+
 All variables must be set in site.yml (vars section) and group_vars/all file.
 
 Short FAQ:
-Q: Where do I find vpc_subnet_id? 
+Q: Where do I find vpc_subnet_id?
 A: You can use aws cli to get the variable (https://aws.amazon.com/cli/). Run: aws ec2 describe-subnets and find "AvailabilityZone". with the related "SubnetId": "subnet-XXXXXX"
 
 Q: How to add ssh key pair?
@@ -26,7 +29,7 @@ A: We recommend type m5.large, but you are free to decide. Please see all instan
 
 
 
-Usage: 
+Usage:
 bootnode instance setup: ansible-playbook bootnode.yml
 mining instance setup: ansible-playbook mining.yml
 netstat instance setup: ansible-playbook netstat.yml
