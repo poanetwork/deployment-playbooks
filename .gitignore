@@ -1,5 +1,6 @@
 files/*.pub
 
+group_vars/all
 group_vars/bootnode
 group_vars/explorer
 group_vars/mining
