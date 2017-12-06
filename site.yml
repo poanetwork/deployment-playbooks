@@ -49,7 +49,7 @@
 - hosts: netstat
   vars:
     PROXY_PORT: "3000"
-    NETSTATS_SERVER: "localhost"
+    NETSTATS_SERVER: "http://localhost:3000"
     username: "netstat"
     users:
       - name: "netstat"
