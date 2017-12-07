@@ -6,7 +6,8 @@
 - include: ssh.yml
 - include: packages.yml
 - include: vars.yml
-- include: ntp.yml
+#- include: ntp.yml
+- include: chrony.yml
 - include: logrotate.yml
 - include: swap.yml
 
