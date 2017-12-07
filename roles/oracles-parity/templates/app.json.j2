@@ -15,10 +15,10 @@
             "NODE_ENV"         : "production",
             "RPC_HOST"         : "localhost",
             "RPC_PORT"         : "8545",
-            "LISTENING_PORT"   : "30300",
+            "LISTENING_PORT"   : "30303",
             "INSTANCE_NAME"    : "{{ NODE_FULLNAME }}",
             "CONTACT_DETAILS"  : "{{ NODE_ADMIN_EMAIL }}",
-            "WS_SERVER"        : "http://{{ NETSTATS_SERVER }}:3000",
+            "WS_SERVER"        : "{{ NETSTATS_SERVER }}",
             "WS_SECRET"        : "{{ NETSTATS_SECRET }}",
             "VERBOSITY"        : 2
         }

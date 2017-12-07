@@ -20,7 +20,7 @@ region: "us-west-2"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.2/parity"
+PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.3/parity"
 
 SCRIPTS_OWNER_BRANCH: "master"
 SCRIPTS_VALIDATOR_BRANCH: "master"
@@ -29,7 +29,7 @@ TEMPLATES_BRANCH: "dev-mainnet"
 GENESIS_BRANCH: "master"
 
 OWNER_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
-NETSTATS_SERVER: "34.215.172.88"
+NETSTATS_SERVER: "https://red-netstats.poa.network"
 TX_GAS_LIMIT: "6700000"
 
 #bootnode
