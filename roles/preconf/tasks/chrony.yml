@@ -7,10 +7,8 @@
 - name: Select Amazon time server
   lineinfile:
     dest: /etc/chrony/chrony.conf
-#    regexp: ''
     insertafter: '^pool'
     line: 'server 169.254.169.123 prefer iburst'
-#    backrefs: yes
     state: present
   notify:
     - restart chrony
