@@ -20,25 +20,25 @@
   with_items:
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/netstats-server/node.toml"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/explorer/node.toml"
 
 
 - name: Change nat in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: nat="extip:{{ ansible_host }}"
     state: present
 
 - name: Change reserved_peers in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: reserved_peers="{{ home }}/bootnodes.txt"
     state: present
 
 - name: Add log file in node.toml
-  blockinfile: 
+  blockinfile:
     path: "{{ home }}/node.toml"
     block: |
       [misc]
