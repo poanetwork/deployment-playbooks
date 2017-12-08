@@ -6,3 +6,5 @@ group_vars/explorer
 group_vars/mining
 group_vars/netstat
 group_vars/owner
+
+hosts
