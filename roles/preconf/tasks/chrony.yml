@@ -1,10 +1,4 @@
 ---
-- name: Remove ntpd package
-  yum: name={{ item }} state=absent
-  with_items:
-    - ntp
-    - ntpdate
-
 - name: Install chrony package
   apt: name={{ item }}
   with_items:
