@@ -65,7 +65,7 @@
 
 - hosts: explorer
   vars:
-    PROXY_PORT: "4000"
+    PROXY_PORT: "3000"
     explorerS_SERVER: "localhost"
     username: "explorer"
     users:
