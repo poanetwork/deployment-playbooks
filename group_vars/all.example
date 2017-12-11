@@ -76,3 +76,7 @@ explorer_instance_type: "t2.large"
 explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 explorer_security_group: "explorer-security"
+
+#network access to validator
+allow_ssh: true
+allow_p2p: true

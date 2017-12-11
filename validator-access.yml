@@ -1,0 +1,72 @@
+---
+- name: Create test security group
+  hosts: localhost
+  gather_facts: False
+  tasks:
+  - name: Clear Security group
+    ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: validator-security
+      description: "Default security group"
+      region: "{{ region }}"
+      state: absent
+
+- name: Create test security group
+  hosts: localhost
+  gather_facts: False
+  tasks:
+  - name: Allow outbound traffic
+    ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: validator-security
+      description: "oracles security group"
+      region: "{{ region }}"
+      purge_rules_egress: false
+      purge_rules: false
+      rules_egress:
+        - proto: all
+          from_port: all
+          to_port: all
+          cidr_ip: 0.0.0.0/0
+
+  - name: Add ssh access
+    ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: validator-security
+      description: "Default security group"
+      region: "{{ region }}"
+      purge_rules_egress: false
+      purge_rules: false
+      rules:
+        - proto: tcp
+          from_port: "{{ item }}"
+          to_port: "{{ item }}"
+          cidr_ip: 0.0.0.0/0
+    with_items: 
+      - "22"
+    when: allow_ssh == true
+
+  - name: Add p2p access
+    ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: validator-security
+      description: "Default security group"
+      region: "{{ region }}"
+      purge_rules_egress: false
+      purge_rules: false
+      rules:
+        - proto: tcp
+          from_port: "{{ item }}"
+          to_port: "{{ item }}"
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: "{{ item }}"
+          to_port: "{{ item }}"
+          cidr_ip: 0.0.0.0/0
+    with_items: 
+      - "30303"
+    when: allow_p2p == true
