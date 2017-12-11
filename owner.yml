@@ -1,5 +1,5 @@
 ---
-- name: Create owner security group
+- name: Create moc security group
   hosts: localhost
   gather_facts: False
   tasks:
@@ -7,7 +7,7 @@
     ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: owner-security
+      name: moc-security
       description: "Default security group"
       region: "{{ region }}"
 #      purge_rules_egress: true
@@ -30,10 +30,10 @@
           from_port: all
           to_port: all
           cidr_ip: 0.0.0.0/0
-  tags: owner
+  tags: moc
 
 
-- name: Create owner
+- name: Create moc
   hosts: localhost
   gather_facts: False
   vars:
@@ -48,11 +48,11 @@
         ec2_secret_key: "{{ secret_key }}"
         key_name: "{{ awskeypair_name }}"
         instance_tags:
-          Name: "{{ owner_instance_name }}"
-        group: "{{ owner_security_group }}"
-        instance_type: "{{ owner_instance_type }}"
+          Name: "{{ moc_instance_name }}"
+        group: "{{ moc_security_group }}"
+        instance_type: "{{ moc_instance_type }}"
         image: "{{ image }}"
-        count: "{{ owner_count_instances }}"
+        count: "{{ moc_count_instances }}"
         wait: yes
         region: "{{ region }}"
         vpc_subnet_id: "{{ vpc_subnet_id }}"
@@ -65,7 +65,7 @@
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_ip }} port=22 delay=90 timeout=320 state=started
       with_items: "{{ ec2.instances }}"
-  tags: owner
+  tags: moc
 
 - name: Installing python
   hosts: all

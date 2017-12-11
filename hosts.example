@@ -10,17 +10,17 @@
 
 [bootnode]
 
-[owner]
+[moc]
 
 [netstat]
 
-[mining]
+[validator]
 
 [explorer]
 
 [oracles:children]
 bootnode
-owner
+moc
 netstat
-mining
+validator
 explorer

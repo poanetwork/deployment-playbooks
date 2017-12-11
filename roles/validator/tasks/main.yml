@@ -55,7 +55,7 @@
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
 - name: Config MINING_KEYFILE file
-  shell: "echo '{{ MINING_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/mining.key.{{ MINING_ADDRESS }}"
+  shell: "echo '{{ MINING_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/validator.key.{{ MINING_ADDRESS }}"
 
 - git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-validator dest={{ home }}/oracles-scripts-validator version={{ SCRIPTS_VALIDATOR_BRANCH }}
 

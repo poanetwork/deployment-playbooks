@@ -29,12 +29,12 @@
   tags:
     - bootnode
 
-- hosts: mining
+- hosts: validator
   vars:
-    username: "mining"
+    username: "validator"
     users:
-      - name: "mining"
-    home: "/home/mining"
+      - name: "validator"
+    home: "/home/validator"
   roles:
     - usermanager
     - nodejs
@@ -42,9 +42,9 @@
     - oracles-parity
     - oracles-pm2
     - oracles-netstats
-    - mining
+    - validator
   tags:
-    - mining
+    - validator
 
 - hosts: netstat
   vars:
@@ -82,12 +82,12 @@
   tags:
     - explorer
 
-- hosts: owner
+- hosts: moc
   vars:
-    username: "owner"
+    username: "moc"
     users:
-      - name: "owner"
-    home: "/home/owner"
+      - name: "moc"
+    home: "/home/moc"
   roles:
     - usermanager
     - nodejs
@@ -95,6 +95,6 @@
     - oracles-parity
     - oracles-pm2
     - oracles-netstats
-    - owner
+    - moc
   tags:
-    - owner
+    - moc

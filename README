@@ -31,9 +31,9 @@ A: We recommend type m5.large, but you are free to decide. Please see all instan
 
 Usage:
 bootnode instance setup: ansible-playbook bootnode.yml
-mining instance setup: ansible-playbook mining.yml
+validator instance setup: ansible-playbook validator.yml
 netstat instance setup: ansible-playbook netstat.yml
-owner instance setup: ansible-playbook owner.yml
+moc instance setup: ansible-playbook moc.yml
 explorer instance setup: ansible-playbook explorer.yml
 
 Before setting up instance or refreshing config, add server ip in file hosts and run: ansible-playbook -i hosts site.yml

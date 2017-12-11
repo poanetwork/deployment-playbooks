@@ -44,20 +44,20 @@
       log_file = "{{ home }}/logs/parity.log"
       [account]
       password = ["{{ NODE_PWD }}"]
-      unlock = ["{{ OWNER_ADDRESS }}"]
+      unlock = ["{{ MOC_ADDRESS }}"]
       [mining]
       force_sealing = true
-      engine_signer = "{{ OWNER_ADDRESS }}"
+      engine_signer = "{{ MOC_ADDRESS }}"
       tx_gas_limit = "{{ TX_GAS_LIMIT }}"
       reseal_on_txs = "none"
 
 - name: Install {{ NODE_PWD }} file
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
-- name: Config OWNER_KEYFILE file
-  shell: "echo '{{ OWNER_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/{{ username }}.key"
+- name: Config MOC_KEYFILE file
+  shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-owner dest={{ home }}/oracles-scripts-owner version={{ SCRIPTS_OWNER_BRANCH }}
+- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-owner dest={{ home }}/oracles-scripts-owner version={{ SCRIPTS_MOC_BRANCH }}
 
 - file: path={{ home }}/oracles-scripts-owner owner={{ username }} group={{ username }} recurse=yes
 

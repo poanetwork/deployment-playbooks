@@ -34,11 +34,11 @@ MAIN_REPO_FETCH: "oraclesorg"
 TEMPLATES_BRANCH: "dev-mainnet"
 GENESIS_BRANCH: "master"
 
-OWNER_ADDRESS: "_INSERT_"
-OWNER_KEYPASS: "_INSERT_"
-OWNER_KEYFILE: "_INSERT_"
+MOC_ADDRESS: "_INSERT_"
+MOC_KEYPASS: "_INSERT_"
+MOC_KEYFILE: "_INSERT_"
 
-SCRIPTS_OWNER_BRANCH: "master"
+SCRIPTS_MOC_BRANCH: "master"
 SCRIPTS_VALIDATOR_BRANCH: "master"
 
 TX_GAS_LIMIT: "6700000"
@@ -59,17 +59,17 @@ netstat_instance_name: "netstat"
 netstat_count_instances: "1"
 netstat_security_group: "netstat-security"
 
-#mining
-mining_instance_type: "t2.large"
-mining_instance_name: "mining"
-mining_count_instances: "1"
-mining_security_group: "mining-security"
+#validator
+validator_instance_type: "t2.large"
+validator_instance_name: "validator"
+validator_count_instances: "1"
+validator_security_group: "validator-security"
 
-#owner
-owner_instance_type: "t2.large"
-owner_instance_name: "owner"
-owner_count_instances: "1"
-owner_security_group: "owner-security"
+#moc
+moc_instance_type: "t2.large"
+moc_instance_name: "moc"
+moc_count_instances: "1"
+moc_security_group: "moc-security"
 
 #explorer
 explorer_instance_type: "t2.large"
