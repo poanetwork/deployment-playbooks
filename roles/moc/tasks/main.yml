@@ -23,28 +23,28 @@
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/owner/node.toml"
 
 - name: Change nat in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: nat="extip:{{ ansible_host }}"
     state: present
 
 - name: Change reserved_peers in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: reserved_peers="{{ home }}/bootnodes.txt"
     state: present
 
 - name: Add log file in node.toml
-  blockinfile: 
+  blockinfile:
     path: "{{ home }}/node.toml"
     block: |
       [misc]
       log_file = "{{ home }}/logs/parity.log"
       [account]
       password = ["{{ NODE_PWD }}"]
-      unlock = ["{{ MOC_ADDRESS }}"]
+      #unlock = ["{{ MOC_ADDRESS }}"]
       [mining]
       force_sealing = true
       engine_signer = "{{ MOC_ADDRESS }}"
@@ -71,7 +71,7 @@
   become: true
   become_user: "{{ username }}"
 
-- name: install npm joinContracts
-  shell: "cd {{ home }}/oracles-scripts-owner/joinContracts; /usr/bin/npm install"
+- name: install npm distributeTokens
+  shell: "cd {{ home }}/oracles-scripts-owner/distributeTokens; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
