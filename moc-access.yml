@@ -8,7 +8,7 @@
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
       name: moc-security
-      description: "oracles security group"
+      description: "Default security group"
       region: "{{ region }}"
       purge_rules: true
 
@@ -21,7 +21,7 @@
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
       name: moc-security
-      description: "oracles security group"
+      description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
@@ -36,7 +36,7 @@
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
       name: moc-security
-      description: "oracles security group"
+      description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
@@ -54,7 +54,7 @@
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
       name: moc-security
-      description: "oracles security group"
+      description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
