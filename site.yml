@@ -28,6 +28,9 @@
     - nginx
   tags:
     - bootnode
+- include: bootnode-access.yml
+  tags:
+    - bootnode
 
 - hosts: validator
   vars:
@@ -45,6 +48,9 @@
     - validator
   tags:
     - validator
+- include: validator-access.yml
+  tags:
+    - validator
 
 - hosts: netstat
   vars:
@@ -60,6 +66,9 @@
     - oracles-logrotate
     - netstat
     - nginx
+  tags:
+    - netstat
+- include: netstat-access.yml
   tags:
     - netstat
 
@@ -81,6 +90,9 @@
     - nginx
   tags:
     - explorer
+- include: explorer-access.yml
+  tags:
+    - explorer
 
 - hosts: moc
   vars:
@@ -96,5 +108,8 @@
     - oracles-pm2
     - oracles-netstats
     - moc
+  tags:
+    - moc
+- include: moc-access.yml
   tags:
     - moc
