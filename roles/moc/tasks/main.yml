@@ -57,21 +57,21 @@
 - name: Config MOC_KEYFILE file
   shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-owner dest={{ home }}/poa-scripts-owner version={{ SCRIPTS_MOC_BRANCH }}
+- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc dest={{ home }}/poa-scripts-moc version={{ SCRIPTS_MOC_BRANCH }}
 
-- file: path={{ home }}/poa-scripts-owner owner={{ username }} group={{ username }} recurse=yes
+- file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/poa-scripts-owner; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-moc; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm generateInitialKey
-  shell: "cd {{ home }}/poa-scripts-owner/generateInitialKey; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-moc/generateInitialKey; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm distributeTokens
-  shell: "cd {{ home }}/poa-scripts-owner/distributeTokens; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-moc/distributeTokens; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
