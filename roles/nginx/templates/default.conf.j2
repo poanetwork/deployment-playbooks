@@ -19,8 +19,8 @@ server {
     proxy_set_header Host localhost:{{ PROXY_PORT }};
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header Content-Type application/json;
-    add_header Access-Control-Allow-Origin "*";
-    add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept";
+    #add_header Access-Control-Allow-Origin "*";
+    #add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept";
 
     if ($request_method = 'OPTIONS') {
       add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept";
