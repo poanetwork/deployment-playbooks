@@ -21,10 +21,10 @@
 #    - logentries
     - nodejs
     - bootnode
-    - oracles-logrotate
-    - oracles-parity
-    - oracles-pm2
-    - oracles-netstats
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
+    - poa-netstats
     - nginx
   tags:
     - bootnode
@@ -41,10 +41,10 @@
   roles:
     - usermanager
     - nodejs
-    - oracles-logrotate
-    - oracles-parity
-    - oracles-pm2
-    - oracles-netstats
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
+    - poa-netstats
     - validator
   tags:
     - validator
@@ -63,7 +63,7 @@
   roles:
     - usermanager
     - nodejs
-    - oracles-logrotate
+    - poa-logrotate
     - netstat
     - nginx
   tags:
@@ -83,9 +83,9 @@
   roles:
     - usermanager
     - nodejs
-    - oracles-logrotate
-    - oracles-parity
-    - oracles-pm2
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
     - explorer
     - nginx
   tags:
@@ -103,10 +103,10 @@
   roles:
     - usermanager
     - nodejs
-    - oracles-logrotate
-    - oracles-parity
-    - oracles-pm2
-    - oracles-netstats
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
+    - poa-netstats
     - moc
   tags:
     - moc

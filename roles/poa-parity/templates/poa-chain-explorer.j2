@@ -1,0 +1,13 @@
+[Unit]
+Description=poa chain explorer service
+After=poa-pm2.service
+[Service]
+Type=oneshot
+RemainAfterExit=true
+User={{ username }}
+Group={{ username }}
+Environment=MYVAR=myval
+WorkingDirectory=/home/{{ username }}/chain-explorer
+ExecStart=/usr/bin/pm2 startOrRestart app.json
+[Install]
+WantedBy=multi-user.target

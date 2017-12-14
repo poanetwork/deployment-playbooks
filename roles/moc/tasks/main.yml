@@ -1,7 +1,7 @@
 ---
-- name: Create directory parity_data/keys/OraclesPoA
+- name: Create directory parity_data/keys/NetworkName
   file:
-    path: "{{ home }}/parity_data/keys/OraclesPoA"
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
     state: directory
     mode: 0700
     owner: "{{ username }}"
@@ -18,7 +18,7 @@
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/owner/node.toml"
 
@@ -48,30 +48,30 @@
       [mining]
       force_sealing = true
       engine_signer = "{{ MOC_ADDRESS }}"
-      tx_gas_limit = "{{ TX_GAS_LIMIT }}"
+      gas_floor_target = "{{ BLK_GAS_LIMIT }}"
       reseal_on_txs = "none"
 
 - name: Install {{ NODE_PWD }} file
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
 - name: Config MOC_KEYFILE file
-  shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/OraclesPoA/{{ username }}.key"
+  shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/oracles-scripts-owner dest={{ home }}/oracles-scripts-owner version={{ SCRIPTS_MOC_BRANCH }}
+- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-owner dest={{ home }}/poa-scripts-owner version={{ SCRIPTS_MOC_BRANCH }}
 
-- file: path={{ home }}/oracles-scripts-owner owner={{ username }} group={{ username }} recurse=yes
+- file: path={{ home }}/poa-scripts-owner owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/oracles-scripts-owner; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-owner; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm generateInitialKey
-  shell: "cd {{ home }}/oracles-scripts-owner/generateInitialKey; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-owner/generateInitialKey; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm distributeTokens
-  shell: "cd {{ home }}/oracles-scripts-owner/distributeTokens; /usr/bin/npm install"
+  shell: "cd {{ home }}/poa-scripts-owner/distributeTokens; /usr/bin/npm install"
   become: true
   become_user: "{{ username }}"

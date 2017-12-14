@@ -16,7 +16,7 @@
   become: true
   become_user: "{{ username }}"
   notify:
-    - restart oracles-dashboard
+    - restart poa-dashboard
 
 - name: install npm grunt-cli
   shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install -g grunt-cli"
@@ -29,12 +29,12 @@
 - name: Config ws_secret.json file
   shell: "echo '[\"{{ NETSTATS_SECRET }}\"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
   notify:
-    - restart oracles-dashboard
+    - restart poa-dashboard
 
-- name: Install oracles-dashboard service
-  template: src=oracles-dashboard.j2 dest=/etc/systemd/system/oracles-dashboard.service owner=root group=root mode=0755
+- name: Install poa-dashboard service
+  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner=root group=root mode=0755
   notify:
-    - restart oracles-dashboard
+    - restart poa-dashboard
 
-- name: Ensure oracles-dashboard is running and enabled to start at boot
-  service: name=oracles-dashboard state=started enabled=yes
+- name: Ensure poa-dashboard is running and enabled to start at boot
+  service: name=poa-dashboard state=started enabled=yes

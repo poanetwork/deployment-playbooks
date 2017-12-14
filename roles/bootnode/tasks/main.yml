@@ -1,7 +1,7 @@
 ---
-- name: Create directory parity_data/keys/OraclesPoA
+- name: Create directory parity_data/keys/NetworkName
   file:
-    path: "{{ home }}/parity_data/keys/OraclesPoA"
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
     state: directory
     mode: 0700
     owner: "{{ username }}"
@@ -18,26 +18,26 @@
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnode/node.toml"
 
 - name: Change nat in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: nat="extip:{{ ansible_host }}"
     state: present
 
 - name: Change reserved_peers in node.toml
-  lineinfile: 
+  lineinfile:
     path: "{{ home }}/node.toml"
     insertafter: '^\[network\]'
     line: reserved_peers="{{ home }}/bootnodes.txt"
     state: present
 
 - name: Add log file in node.toml
-  blockinfile: 
+  blockinfile:
     path: "{{ home }}/node.toml"
     block: |
       [misc]
