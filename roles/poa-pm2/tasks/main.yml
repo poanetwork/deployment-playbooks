@@ -1,0 +1,29 @@
+---
+- name: Create directory parity_data/keys/NetworkName
+  file:
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create logs directories
+  file:
+    path: "/{{ home }}/logs/old"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install poa-pm2 service
+  template: src=poa-pm2.j2 dest=/etc/systemd/system/poa-pm2.service owner=root group=root mode=0755
+  notify:
+    - restart poa-pm2
+
+- name: Install npm pm2
+  npm: name="pm2" global="yes"
+  notify:
+    - restart poa-pm2
+
+- name: Ensure poa-pm2 is running and enabled to start at boot
+  service: name=poa-pm2 state=started enabled=yes

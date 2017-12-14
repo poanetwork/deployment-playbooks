@@ -1,3 +1,3 @@
 ---
-- name: restart oracles-chain-explorer
-  service: name=oracles-chain-explorer state=restarted
+- name: restart poa-chain-explorer
+  service: name=poa-chain-explorer state=restarted

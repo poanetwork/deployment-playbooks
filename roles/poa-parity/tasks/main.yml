@@ -1,0 +1,29 @@
+---
+- name: Create directory parity_data/keys/NetworkName
+  file:
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create logs directories
+  file:
+    path: "/{{ home }}/logs/old"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Download parity-bin
+  get_url: url="{{ PARITY_BIN_LOC }}" dest={{ home }}/parity mode=0755
+  notify:
+    - restart poa-parity
+
+- name: Install poa-parity service
+  template: src=poa-parity.j2 dest=/etc/systemd/system/poa-parity.service owner=root group=root mode=0755
+  notify:
+    - restart poa-parity
+
+- name: Ensure poa-parity is running and enabled to start at boot
+  service: name=poa-parity state=started enabled=yes

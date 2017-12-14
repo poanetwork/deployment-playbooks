@@ -18,7 +18,7 @@
 
 [explorer]
 
-[oracles:children]
+[poa:children]
 bootnode
 moc
 netstat

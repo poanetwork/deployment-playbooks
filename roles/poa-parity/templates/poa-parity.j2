@@ -1,0 +1,11 @@
+[Unit]
+Description=poa parity service
+After=network.target
+[Service]
+User={{ username }}
+Group={{ username }}
+WorkingDirectory=/home/{{ username }}
+ExecStart=/home/{{ username }}/parity --config=node.toml
+Restart=always
+[Install]
+WantedBy=multi-user.target

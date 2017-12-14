@@ -1,3 +1,0 @@
----
-- name: restart oracles-parity
-  service: name=oracles-parity state=restarted

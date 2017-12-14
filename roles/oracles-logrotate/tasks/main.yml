@@ -1,6 +1,0 @@
----
-- name: Install oracles-logrotate conf
-  template: src=oracles-logrotate.conf.j2 dest={{ home }}/oracles-logrotate.conf owner=root group=root mode=0644
-
-- name: Install oracles-logrotate cron
-  template: src=oracles-logrotate.j2 dest=/etc/cron.hourly/oracles-logrotate owner=root group=root mode=0755

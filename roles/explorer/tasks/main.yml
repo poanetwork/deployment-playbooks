@@ -1,7 +1,7 @@
 ---
-- name: Create directory parity_data/keys/OraclesPoA
+- name: Create directory parity_data/keys/NetworkName
   file:
-    path: "{{ home }}/parity_data/keys/OraclesPoA"
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
     state: directory
     mode: 0700
     owner: "{{ username }}"
@@ -18,7 +18,7 @@
 - name: Download spec.json
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/oracles-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/bootnodes.txt"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/explorer/node.toml"
 
@@ -49,7 +49,7 @@
 - name: Install chain_explorer app.json
   template: src=app.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
   notify:
-    - restart oracles-chain-explorer
+    - restart poa-chain-explorer
 
 - file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
@@ -58,17 +58,17 @@
   become: true
   become_user: "{{ username }}"
   notify:
-    - restart oracles-chain-explorer
+    - restart poa-chain-explorer
 
 - name: Install chain_explorer config.js
   template: src=config.js.j2 dest={{ home }}/chain-explorer/config.js owner={{ username }} group={{ username }} mode=0644
   notify:
-    - restart oracles-chain-explorer
+    - restart poa-chain-explorer
 
-- name: Install oracles-chain-explorer service
-  template: src=oracles-chain-explorer.j2 dest=/etc/systemd/system/oracles-chain-explorer.service owner=root group=root mode=0755
+- name: Install poa-chain-explorer service
+  template: src=poa-chain-explorer.j2 dest=/etc/systemd/system/poa-chain-explorer.service owner=root group=root mode=0755
   notify:
-    - restart oracles-chain-explorer
+    - restart poa-chain-explorer
 
-- name: Ensure oracles-chain-explorer is running and enabled to start at boot
-  service: name=oracles-chain-explorer state=started enabled=yes
+- name: Ensure poa-chain-explorer is running and enabled to start at boot
+  service: name=poa-chain-explorer state=started enabled=yes

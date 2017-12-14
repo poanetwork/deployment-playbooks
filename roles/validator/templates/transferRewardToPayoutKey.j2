@@ -1,7 +1,7 @@
 #!/bin/bash
-cd "{{ home }}/oracles-scripts-validator/transferRewardToPayoutKey/"
+cd "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey/"
 echo "Starting at $(date)" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out"
 echo "Starting at $(date)" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
-/usr/bin/node {{ home }}/oracles-scripts-validator/transferRewardToPayoutKey/transferRewardToPayoutKey.js >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out" 2>> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
+/usr/bin/node {{ home }}/poa-scripts-validator/transferRewardToPayoutKey/transferRewardToPayoutKey.js >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out" 2>> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
 echo "" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.out"
 echo "" >> "/home/{{ username }}/logs/transferRewardToPayoutKey.err"
