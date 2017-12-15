@@ -15,22 +15,22 @@ ntpservers:
   - "server 2.us.pool.ntp.org"
   - "server 3.us.pool.ntp.org"
 
-image: "ami-9d04e4e5"
-region: "us-west-2"
+image: "ami-3dec9947"
+region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.4/parity"
 
-SCRIPTS_MOC_BRANCH: "mainnet"
-SCRIPTS_VALIDATOR_BRANCH: "mainnet"
+SCRIPTS_MOC_BRANCH: "sokol"
+SCRIPTS_VALIDATOR_BRANCH: "sokol"
 MAIN_REPO_FETCH: "oraclesorg"
-TEMPLATES_BRANCH: "dev-mainnet"
-GENESIS_BRANCH: "master"
-GENESIS_NETWORK_NAME: "PoA"
+TEMPLATES_BRANCH: "sokol"
+GENESIS_BRANCH: "sokol"
+GENESIS_NETWORK_NAME: "Sokol"
 
-MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
-BLK_GAS_LIMIT: "6700000"
+MOC_ADDRESS: "0xe8ddc5c7a2d2f0d7a9798459c0104fdf5e987aca"
+BLK_GAS_LIMIT: "8000000"
 
 #bootnode
 bootnode_instance_type: "t2.large"
