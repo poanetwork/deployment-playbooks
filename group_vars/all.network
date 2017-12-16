@@ -22,14 +22,14 @@ NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.4/parity"
 
-SCRIPTS_MOC_BRANCH: "sokol"
-SCRIPTS_VALIDATOR_BRANCH: "sokol"
+SCRIPTS_MOC_BRANCH: "core"
+SCRIPTS_VALIDATOR_BRANCH: "core"
 MAIN_REPO_FETCH: "oraclesorg"
-TEMPLATES_BRANCH: "sokol"
-GENESIS_BRANCH: "sokol"
-GENESIS_NETWORK_NAME: "Sokol"
+TEMPLATES_BRANCH: "core"
+GENESIS_BRANCH: "core"
+GENESIS_NETWORK_NAME: "Core"
 
-MOC_ADDRESS: "0xe8ddc5c7a2d2f0d7a9798459c0104fdf5e987aca"
+MOC_ADDRESS: "0xcf260ea317555637c55f70e55dba8d5ad8414cb0"
 BLK_GAS_LIMIT: "8000000"
 
 #bootnode
