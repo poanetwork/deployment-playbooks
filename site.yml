@@ -26,9 +26,7 @@
     - poa-pm2
     - poa-netstats
     - nginx
-  tags:
-    - bootnode
-- include: bootnode-access.yml
+    - bootnode-access
   tags:
     - bootnode
 
@@ -46,9 +44,7 @@
     - poa-pm2
     - poa-netstats
     - validator
-  tags:
-    - validator
-- include: validator-access.yml
+    - validator-access
   tags:
     - validator
 
@@ -66,9 +62,7 @@
     - poa-logrotate
     - netstat
     - nginx
-  tags:
-    - netstat
-- include: netstat-access.yml
+    - netstat-access
   tags:
     - netstat
 
@@ -88,9 +82,7 @@
     - poa-pm2
     - explorer
     - nginx
-  tags:
-    - explorer
-- include: explorer-access.yml
+    - explorer-access
   tags:
     - explorer
 
@@ -108,8 +100,6 @@
     - poa-pm2
     - poa-netstats
     - moc
-  tags:
-    - moc
-- include: moc-access.yml
+    - moc-access
   tags:
     - moc

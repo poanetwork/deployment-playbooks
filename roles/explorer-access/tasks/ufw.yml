@@ -22,7 +22,7 @@
     - { rule: 'allow', port: '22', proto: 'tcp' }
   notify:
     - restart ufw
-  when: allow_bootnode_ssh == true
+  when: allow_explorer_ssh == true
 
 - name: Add ufw https access
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
@@ -31,14 +31,6 @@
   notify:
     - restart ufw
 
-- name: Add ufw rpc access
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  with_items:
-    - { rule: 'allow', port: '8545', proto: 'tcp' }
-  notify:
-    - restart ufw
-  when: allow_bootnode_rpc == true
-
 - name: Add ufw p2p access
   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
   with_items:
@@ -46,7 +38,15 @@
     - { rule: 'allow', port: '30303', proto: 'udp' }
   notify:
     - restart ufw
-  when: allow_bootnode_p2p == true
+  when: allow_explorer_p2p == true
+
+- name: Add ufw http-3000 access
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'allow', port: '3000', proto: 'tcp' }
+  notify:
+    - restart ufw
+  when: allow_explorer_http == true
 
 - name: Enable ufw logging
   ufw: logging=off
