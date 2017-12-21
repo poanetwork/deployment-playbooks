@@ -1,26 +1,20 @@
 ---
-- name: Remove netstat security group
-  hosts: localhost
-  gather_facts: False
-  tasks:
-  - name: Clear Security group
-    ec2_group:
+- name: Create explorer security group
+  delegate_to: localhost
+  ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: netstat-security
+      name: explorer-security
       description: "Default security group"
       region: "{{ region }}"
       purge_rules: true
 
-- name: Create netstat security group
-  hosts: localhost
-  gather_facts: False
-  tasks:
-  - name: Allow outbound traffic
-    ec2_group:
+- name: Allow outbound traffic
+  delegate_to: localhost
+  ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: netstat-security
+      name: explorer-security
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -31,11 +25,12 @@
           to_port: all
           cidr_ip: 0.0.0.0/0
 
-  - name: Add ssh access
-    ec2_group:
+- name: Add ssh access
+  delegate_to: localhost
+  ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: netstat-security
+      name: explorer-security
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -45,15 +40,16 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-    with_items: 
-      - "22"
-    when: allow_netstat_ssh == true
+  with_items: 
+    - "22"
+  when: allow_explorer_ssh == true
 
-  - name: Add https access
-    ec2_group:
+- name: Add https access
+  delegate_to: localhost
+  ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: netstat-security
+      name: explorer-security
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -64,11 +60,12 @@
           to_port: 443
           cidr_ip: 0.0.0.0/0
 
-  - name: Add http-3000 access
-    ec2_group:
+- name: Add p2p access
+  delegate_to: localhost
+  ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: netstat-security
+      name: explorer-security
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -78,6 +75,29 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-    with_items: 
-      - "3000"
-    when: allow_netstat_http == true
+        - proto: udp
+          from_port: "{{ item }}"
+          to_port: "{{ item }}"
+          cidr_ip: 0.0.0.0/0
+  with_items: 
+    - "30303"
+  when: allow_explorer_p2p == true
+
+- name: Add http-3000 access
+  delegate_to: localhost
+  ec2_group:
+      ec2_access_key: "{{ access_key }}"
+      ec2_secret_key: "{{ secret_key }}"
+      name: explorer-security
+      description: "Default security group"
+      region: "{{ region }}"
+      purge_rules_egress: false
+      purge_rules: false
+      rules:
+        - proto: tcp
+          from_port: "{{ item }}"
+          to_port: "{{ item }}"
+          cidr_ip: 0.0.0.0/0
+  with_items: 
+    - "3000"
+  when: allow_explorer_http == true

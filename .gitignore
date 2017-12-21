@@ -1,5 +1,5 @@
 files/*.pub
-
+*.retry
 group_vars/all
 group_vars/bootnode
 group_vars/explorer
