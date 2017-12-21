@@ -84,3 +84,22 @@
   tasks:
     - name: restart machine after setup
       shell: shutdown -r 1
+
+- name: Create bootnode elastic ip
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: associate elastic ip for bootnode
+      ec2_eip:
+        ec2_access_key: "{{ access_key }}"
+        ec2_secret_key: "{{ secret_key }}"
+        region: "{{ region }}"
+        reuse_existing_ip_allowed: yes
+        state: present
+        in_vpc: yes
+        device_id: "{{ ec2.instance_ids[0] }}"
+      register: instance_elastic_ip
+      when: associate_bootnode_elastic_ip == true
+
+    - debug: var=instance_elastic_ip.public_ip
+      when: associate_bootnode_elastic_ip == true
