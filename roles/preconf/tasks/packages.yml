@@ -1,4 +1,7 @@
 ---
+- name: Update system
+  apt: upgrade=dist state=latest update_cache=yes
+
 - name: Install packages
   apt: name={{ item }} state=latest
   with_items:

@@ -38,5 +38,7 @@ explorer instance setup: ansible-playbook explorer.yml
 
 Before setting up instance or refreshing config, add server ip in file hosts and run: ansible-playbook -i hosts site.yml
 
-NOTE:
-If you want to close external access to validator, please set variables allow_ssh and allow_p2p to false in group_vars/all and run ansible-playbook validator-access.yml
+NOTE: If you want to close external access to validator, please set variables allow_ssh and allow_p2p to false in group_vars/all and run ansible-playbook validator-access.yml
+
+WARNING!!!: don't disable ssh access to non AWS server, you can't restore access to server by ssh, bacause for make changes in firewall, need ssh access. If you need close access to the host, you can open access from your ip / networks.
+
