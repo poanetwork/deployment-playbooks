@@ -1,5 +1,5 @@
-access_key: "_INSERT KEY HERE_"
-secret_key: "_INSERT SECRET HERE_"
+access_key: "INSERT KEY HERE"
+secret_key: "INSERT SECRET HERE"
 awskeypair_name: "keypairname"
 
 vpc_subnet_id: "subnet-ID-number"
