@@ -30,7 +30,7 @@ MINING_KEYFILE: "INSERT HERE"
 MINING_ADDRESS: "INSERT HERE"
 MINING_KEYPASS: "INSERT HERE"
 
-MAIN_REPO_FETCH: "oraclesorg"
+MAIN_REPO_FETCH: "poanetwork"
 TEMPLATES_BRANCH: "dev-mainnet"
 GENESIS_BRANCH: "master"
 GENESIS_NETWORK_NAME: "PoANetwork"
@@ -46,7 +46,7 @@ BLK_GAS_LIMIT: "6700000"
 NODE_PWD: "node.pwd"
 
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.4/parity"
+PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download/1.8.4/parity"
 
 #bootnode
 bootnode_instance_type: "t2.large"
