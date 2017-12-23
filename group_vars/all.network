@@ -20,11 +20,11 @@ region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://github.com/oraclesorg/binary-releases/releases/download/1.8.4/parity"
+PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download/1.8.4/parity"
 
 SCRIPTS_MOC_BRANCH: "core"
 SCRIPTS_VALIDATOR_BRANCH: "core"
-MAIN_REPO_FETCH: "oraclesorg"
+MAIN_REPO_FETCH: "poanetwork"
 TEMPLATES_BRANCH: "core"
 GENESIS_BRANCH: "core"
 GENESIS_NETWORK_NAME: "Core"
