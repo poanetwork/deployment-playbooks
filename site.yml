@@ -9,6 +9,7 @@
 
 - hosts: bootnode
   vars:
+    nginx_headers: "on"
     PROXY_PORT: "8545"
     username: "bootnode"
     users:
@@ -50,6 +51,7 @@
 
 - hosts: netstat
   vars:
+    nginx_headers: "off"
     PROXY_PORT: "3000"
     NETSTATS_SERVER: "http://localhost:3000"
     username: "netstat"
@@ -68,6 +70,7 @@
 
 - hosts: explorer
   vars:
+    nginx_headers: "off"
     PROXY_PORT: "3000"
     explorerS_SERVER: "localhost"
     username: "explorer"
