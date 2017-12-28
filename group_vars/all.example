@@ -1,3 +1,10 @@
+### This file is used as a reference only and contains all possible options for all roles.
+### Values set in this file are used for illustration only.
+###
+### To connect to an actual network, please follow instructions provided to you
+### on how to generate a valid `group_vars/all` file for the network.
+###
+
 ---
 ssh_root:
     - "{{ lookup('file', 'files/admins.pub') }}"
