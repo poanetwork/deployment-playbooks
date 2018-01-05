@@ -46,6 +46,7 @@
       password = ["{{ NODE_PWD }}"]
       unlock = ["{{ MINING_ADDRESS }}"]
       [mining]
+      usd_per_tx = "0"
       force_sealing = true
       engine_signer = "{{ MINING_ADDRESS }}"
       gas_floor_target = "{{ BLK_GAS_LIMIT }}"
