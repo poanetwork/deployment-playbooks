@@ -1,0 +1,16 @@
+[parity]
+chain = "spec.json"
+base_path = "parity_data"
+
+[network]
+reserved_peers="{{ home }}/bootnodes.txt"
+nat="extip:{{ ansible_host }}"
+port = 30303
+
+[rpc]
+#apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
+apis = ["web3","eth","net"]
+threads = 4
+
+[misc]
+log_file = "{{ home }}/logs/parity.log"
