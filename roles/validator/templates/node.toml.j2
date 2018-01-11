@@ -1,0 +1,25 @@
+[parity]
+chain = "spec.json"
+base_path = "parity_data"
+
+[network]
+reserved_peers="{{ home }}/bootnodes.txt"
+nat="extip:{{ ansible_host }}"
+port = 30303
+
+[rpc]
+apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
+
+[account]
+password = ["{{ NODE_PWD }}"]
+unlock = ["{{ MINING_ADDRESS }}"]
+
+[mining]
+usd_per_tx = "0"
+force_sealing = true
+engine_signer = "{{ MINING_ADDRESS }}"
+gas_floor_target = "{{ BLK_GAS_LIMIT }}"
+reseal_on_txs = "none"
+
+[misc]
+log_file = "{{ home }}/logs/parity.log"

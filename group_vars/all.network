@@ -25,7 +25,6 @@ PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download
 SCRIPTS_MOC_BRANCH: "mainnet"
 SCRIPTS_VALIDATOR_BRANCH: "mainnet"
 MAIN_REPO_FETCH: "poanetwork"
-TEMPLATES_BRANCH: "dev-mainnet"
 GENESIS_BRANCH: "master"
 GENESIS_NETWORK_NAME: "PoA"
 
