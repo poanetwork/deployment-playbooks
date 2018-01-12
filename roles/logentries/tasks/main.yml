@@ -11,7 +11,7 @@
     id: A5270289C43C79AD
     state: present
 
-- name: Install logentries packages 
+- name: Install logentries packages
   apt: name={{ item }} state=present update_cache=yes
   with_items:
     - logentries
@@ -38,7 +38,7 @@
     mode: 0755
 
 - name: deploy config logentries
-  template: src=logentries.j2 dest=/etc/le/conf.d/{{ TEMPLATES_BRANCH }}.conf
+  template: src=logentries.j2 dest=/etc/le/conf.d/{{ GENESIS_BRANCH }}.conf
   notify:
     - restart logentries
 

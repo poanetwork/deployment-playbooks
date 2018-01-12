@@ -5,6 +5,9 @@ After=network.target
 User={{ username }}
 Group={{ username }}
 WorkingDirectory=/home/{{ username }}
+{% if validator_archive|default("off") == "on" or bootnode_archive|default("off") == "on" or moc_archive|default("off") == "on" %}
+Environment=RUST_BACKTRACE=1
+{% endif %}
 ExecStart=/home/{{ username }}/parity --config=node.toml
 Restart=always
 [Install]
