@@ -1,0 +1,43 @@
+[parity]
+chain = "spec.json"
+base_path = "parity_data"
+{% if bootnode_archive|default("off") == "on" %}
+auto_update = "all"
+{% endif %}
+
+[network]
+reserved_peers="{{ home }}/bootnodes.txt"
+nat="extip:{{ ansible_host }}"
+port = 30303
+{% if bootnode_archive|default("off") == "on" %}
+snapshot_peers = 500
+discovery = false
+allow_ips = "public"
+{% endif %}
+
+[rpc]
+#apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
+apis = ["web3","eth","net"]
+threads = 4
+
+{% if bootnode_archive|default("off") == "on" %}
+[ui]
+disable = true
+
+[dapps]
+disable = true
+
+[snapshots]
+disable_periodic = false
+
+[footprint]
+pruning = "archive"
+pruning_history = 1200
+fat_db = "on"
+cache_size_db = 12000
+min_peers = 5
+max_peers = 10
+{% endif %}
+
+[misc]
+log_file = "{{ home }}/logs/parity.log"
