@@ -15,6 +15,11 @@ discovery = false
 allow_ips = "public"
 {% endif %}
 
+[rpc]
+#apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
+apis = ["web3","eth","net"]
+threads = 4
+
 {% if bootnode_archive|default("off") == "on" %}
 [ui]
 disable = true
@@ -33,11 +38,6 @@ cache_size_db = 12000
 min_peers = 5
 max_peers = 10
 {% endif %}
-
-[rpc]
-#apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
-apis = ["web3","eth","net"]
-threads = 4
 
 [misc]
 log_file = "{{ home }}/logs/parity.log"
