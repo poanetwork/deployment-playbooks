@@ -59,6 +59,7 @@ bootnode_instance_type: "t2.large"
 bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
 bootnode_security_group: "bootnode-security"
+bootnode_archive: "off"
 
 #netstat
 netstat_instance_type: "t2.large"
@@ -71,12 +72,14 @@ validator_instance_type: "t2.large"
 validator_instance_name: "validator"
 validator_count_instances: "1"
 validator_security_group: "validator-security"
+validator_archive: "off"
 
 #moc
 moc_instance_type: "t2.large"
 moc_instance_name: "moc"
 moc_count_instances: "1"
 moc_security_group: "moc-security"
+moc_archive: "off"
 
 #explorer
 explorer_instance_type: "t2.large"
