@@ -20,29 +20,11 @@
   with_items:
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/deployment-azure/{{ TEMPLATES_BRANCH }}/nodes/explorer/node.toml"
 
-
-- name: Change nat in node.toml
-  lineinfile:
-    path: "{{ home }}/node.toml"
-    insertafter: '^\[network\]'
-    line: nat="extip:{{ ansible_host }}"
-    state: present
-
-- name: Change reserved_peers in node.toml
-  lineinfile:
-    path: "{{ home }}/node.toml"
-    insertafter: '^\[network\]'
-    line: reserved_peers="{{ home }}/bootnodes.txt"
-    state: present
-
-- name: Add log file in node.toml
-  blockinfile:
-    path: "{{ home }}/node.toml"
-    block: |
-      [misc]
-      log_file = "{{ home }}/logs/parity.log"
+- name: Create node.toml
+  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
+  with_items:
+   - node.toml
 
 - git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer dest={{ home }}/chain-explorer
 
