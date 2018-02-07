@@ -26,6 +26,7 @@
     - poa-parity
     - poa-pm2
     - poa-netstats
+    - { role: poa-orchestrator, when: "(bootnode_orchestrator or 'off') == 'on'" }
     - nginx
     - bootnode-access
   tags:
