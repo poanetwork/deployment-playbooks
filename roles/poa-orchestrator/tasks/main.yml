@@ -1,0 +1,16 @@
+---
+- name: Download parity-orchestrator-bin
+  get_url: url="{{ ORCHESTRATOR_BIN_LOC }}" dest={{ home }}/parity-orchestrator mode=0755 checksum="md5:{{ ORCHESTRATOR_BIN_MD5 }}"
+  notify:
+    - restart poa-orchestrator
+
+- name: Create parity-orchestrator.toml
+  template: src=parity-orchestrator.toml.j2 dest={{ home }}/parity-orchestrator.toml owner=root group=root mode=0644
+
+- name: Install poa-orchestrator service
+  template: src=poa-orchestrator.j2 dest=/etc/systemd/system/poa-orchestrator.service owner=root group=root mode=0755
+  notify:
+    - restart poa-orchestrator
+
+- name: Ensure poa-orchestrator is running and enabled to start at boot
+  service: name=poa-orchestrator state=started enabled=yes

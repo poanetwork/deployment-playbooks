@@ -17,12 +17,15 @@ ntpservers:
   - "server 2.us.pool.ntp.org"
   - "server 3.us.pool.ntp.org"
 
-image: "ami-3dec9947"
+image: "ami-0b383171"
 region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download/1.8.4/parity"
+PARITY_BIN_MD5: "4d9095c72798aaa7875eb5b76ed42cef"
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_MD5: ""
 
 SCRIPTS_MOC_BRANCH: "sokol"
 SCRIPTS_VALIDATOR_BRANCH: "sokol"
@@ -39,6 +42,7 @@ bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
 bootnode_security_group: "bootnode-security"
 bootnode_archive: "off"
+bootnode_orchestrator: "off"
 
 #netstat
 netstat_instance_type: "t2.large"
