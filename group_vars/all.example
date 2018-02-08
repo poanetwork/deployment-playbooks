@@ -53,7 +53,9 @@ NODE_PWD: "node.pwd"
 
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download/1.8.4/parity"
+PARITY_BIN_MD5: "4d9095c72798aaa7875eb5b76ed42cef"
 ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_MD5: ""
 
 #bootnode
 bootnode_instance_type: "t2.large"
