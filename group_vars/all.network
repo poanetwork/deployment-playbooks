@@ -18,7 +18,7 @@ ntpservers:
   - "server 3.us.pool.ntp.org"
 
 image: "ami-0b383171"
-region: "us-west-2"
+region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"

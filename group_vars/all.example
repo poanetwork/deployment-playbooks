@@ -24,7 +24,7 @@ secret_key: "INSERT SECRET HERE"
 
 awskeypair_name: "keypairname"
 image: "ami-0b383171"
-region: "us-west-2"
+region: "us-east-1"
 vpc_subnet_id: "subnet-ID-number"
 
 NODE_FULLNAME: "INSERT NODENAME"
