@@ -1,0 +1,10 @@
+[Unit]
+Description=poa parity orchestrator service
+After=poa-parity.service
+[Service]
+User={{ username }}
+Group={{ username }}
+WorkingDirectory=/home/{{ username }}
+ExecStart=/home/{{ username }}/parity-orchestrator --config=parity-orchestrator.toml
+[Install]
+WantedBy=multi-user.target
