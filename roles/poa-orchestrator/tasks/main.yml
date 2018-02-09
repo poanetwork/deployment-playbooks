@@ -1,6 +1,6 @@
 ---
 - name: Download parity-orchestrator-bin
-  get_url: url="{{ ORCHESTRATOR_BIN_LOC }}" dest={{ home }}/parity-orchestrator mode=0755 checksum="md5:{{ ORCHESTRATOR_BIN_MD5 }}"
+  get_url: url="{{ ORCHESTRATOR_BIN_LOC }}" dest={{ home }}/parity-orchestrator mode=0755 checksum="sha256:{{ ORCHESTRATOR_BIN_SHA256 }}"
   notify:
     - restart poa-orchestrator
 

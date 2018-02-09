@@ -16,7 +16,7 @@
     group: "{{ username }}"
 
 - name: Download parity-bin
-  get_url: url="{{ PARITY_BIN_LOC }}" dest={{ home }}/parity mode=0755 checksum="md5:{{ PARITY_BIN_MD5 }}"
+  get_url: url="{{ PARITY_BIN_LOC }}" dest={{ home }}/parity mode=0755 checksum="sha256:{{ PARITY_BIN_SHA256 }}"
   notify:
     - restart poa-parity
 
