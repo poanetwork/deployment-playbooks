@@ -8,7 +8,7 @@ WorkingDirectory=/home/{{ username }}
 {% if validator_archive|default("off") == "on" or bootnode_archive|default("off") == "on" or moc_archive|default("off") == "on" %}
 Environment=RUST_BACKTRACE=1
 {% endif %}
-ExecStart=/home/{{ username }}/parity --config=node.toml
+ExecStart=/home/{{ username }}/parity --config=node.toml {{ '--whisper' if bootnode_orchestrator|default("off") == "on" else '' }}
 Restart=always
 [Install]
 WantedBy=multi-user.target
