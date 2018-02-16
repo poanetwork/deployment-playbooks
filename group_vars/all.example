@@ -23,8 +23,8 @@ access_key: "INSERT KEY HERE"
 secret_key: "INSERT SECRET HERE"
 
 awskeypair_name: "keypairname"
-image: "ami-9d04e4e5"
-region: "us-west-2"
+image: "ami-0b383171"
+region: "us-east-1"
 vpc_subnet_id: "subnet-ID-number"
 
 NODE_FULLNAME: "INSERT NODENAME"
@@ -53,6 +53,9 @@ NODE_PWD: "node.pwd"
 
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://github.com/poanetwork/binary-releases/releases/download/1.8.4/parity"
+PARITY_BIN_SHA256: "a7794b04f056cb93cd6ad27be3f7a07ceeb2f340ddf4635306b020b6bfc3c2ae"
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_SHA256: ""
 
 #bootnode
 bootnode_instance_type: "t2.large"
@@ -60,6 +63,7 @@ bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
 bootnode_security_group: "bootnode-security"
 bootnode_archive: "off"
+bootnode_orchestrator: "off"
 
 #netstat
 netstat_instance_type: "t2.large"
