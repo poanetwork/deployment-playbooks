@@ -4,7 +4,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules: true
@@ -14,7 +14,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -30,7 +30,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -49,7 +49,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -65,7 +65,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
@@ -85,7 +85,7 @@
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: bootnode-security
+      name: "{{ bootnode_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
       purge_rules_egress: false
