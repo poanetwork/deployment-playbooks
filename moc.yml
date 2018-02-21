@@ -7,9 +7,11 @@
     ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
-      name: moc-security
+      name: "{{ moc_security_group }}"
       description: "Default security group"
       region: "{{ region }}"
+      purge_rules_egress: false
+      purge_rules: false
       rules:
         - proto: tcp
           from_port: 22
