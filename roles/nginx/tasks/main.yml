@@ -1,6 +1,6 @@
 ---
 - name: Install nginx
-  apt: name=nginx state=latest
+  apt: name=nginx state=present
   tags: nginx
 
 - file: path=/etc/nginx/ssl state=directory mode=0755
