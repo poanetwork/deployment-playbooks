@@ -15,7 +15,11 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
+- name: Clone poanetworks/eth-net-intelligence-api repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/eth-net-intelligence-api"
+    dest: "{{ home }}/eth-net-intelligence-api"
+    version: "9773b5b"
 
 - name: Install netstats config
   template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner={{ username }} group={{ username }} mode=0644

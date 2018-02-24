@@ -26,7 +26,10 @@
   with_items:
    - node.toml
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer dest={{ home }}/chain-explorer
+- git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer"
+    dest: "{{ home }}/chain-explorer"
+    version: "acee07c"
 
 - name: Install chain_explorer app.json
   template: src=app.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
