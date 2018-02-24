@@ -6,10 +6,14 @@
 - name: create file for swap
   shell: /usr/bin/fallocate -l 1G /swapfile
   when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
 
 - name: format swap file
   shell: /sbin/mkswap /swapfile
   when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
 
 - name: set permission to swap file
   file: path=/swapfile owner=root group=root mode=0600
@@ -17,6 +21,8 @@
 - name: add swap file to system
   shell: /sbin/swapon /swapfile
   when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
 
 - name: write changes to fstab
   mount: name=none src=/swapfile fstype=swap opts=sw passno=0 dump=0 state=present
