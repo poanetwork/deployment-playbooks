@@ -12,14 +12,17 @@
 - file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/eth-netstats"
   become: true
   become_user: "{{ username }}"
   notify:
     - restart poa-dashboard
 
 - name: install npm grunt-cli
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install -g grunt-cli"
+  npm:
+    name: grunt-cli
+    global: yes
 
 - name: run grunt process
   shell: "cd /home/{{ username }}/eth-netstats; grunt"

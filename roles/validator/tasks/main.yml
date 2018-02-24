@@ -41,7 +41,8 @@
 - file: path={{ home }}/poa-scripts-validator owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm transferRewardToPayoutKey
-  shell: "cd {{ home }}/poa-scripts-validator/transferRewardToPayoutKey; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
   become: true
   become_user: "{{ username }}"
   notify:

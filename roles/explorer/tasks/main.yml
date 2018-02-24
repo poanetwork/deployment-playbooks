@@ -36,7 +36,8 @@
 - file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm chain_explorer
-  shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/chain-explorer"
   become: true
   become_user: "{{ username }}"
   notify:

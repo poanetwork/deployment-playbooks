@@ -39,16 +39,19 @@
 - file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/poa-scripts-moc; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm generateInitialKey
-  shell: "cd {{ home }}/poa-scripts-moc/generateInitialKey; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/generateInitialKey"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm distributeTokens
-  shell: "cd {{ home }}/poa-scripts-moc/distributeTokens; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/distributeTokens"
   become: true
   become_user: "{{ username }}"

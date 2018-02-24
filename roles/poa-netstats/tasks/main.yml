@@ -25,7 +25,8 @@
 - file: path={{ home }}/eth-net-intelligence-api owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-net-intelligence-api; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/eth-net-intelligence-api"
   become: true
   become_user: "{{ username }}"
   notify:
