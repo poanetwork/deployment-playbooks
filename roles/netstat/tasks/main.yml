@@ -13,7 +13,8 @@
     dest: "{{ home }}/eth-netstats"
     version: "cb431d6"
 
-- file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
+- name: Set owner and group on eth-netstats files 
+  file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
   npm:

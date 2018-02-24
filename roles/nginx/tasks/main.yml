@@ -3,7 +3,8 @@
   apt: name=nginx state=present
   tags: nginx
 
-- file: path=/etc/nginx/ssl state=directory mode=0755
+- name: Create directory for nginx SSL certificates
+  file: path=/etc/nginx/ssl state=directory mode=0755
   tags: nginx
 
 - name: Check certificate file

@@ -26,7 +26,8 @@
   with_items:
    - node.toml
 
-- git:
+- name: Clone poanetworks/chain-explorer repo from GitHub
+  git:
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer"
     dest: "{{ home }}/chain-explorer"
     version: "acee07c"
@@ -36,7 +37,8 @@
   notify:
     - restart poa-chain-explorer
 
-- file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
+- name: Set group and owner on the chain-explorer directory
+  file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm chain_explorer
   npm:

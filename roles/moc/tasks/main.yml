@@ -34,9 +34,14 @@
     content: "{{ MOC_KEYFILE }}"
     dest: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc dest={{ home }}/poa-scripts-moc version={{ SCRIPTS_MOC_BRANCH }}
+- name: Clone poanetworks/poa-scripts-moc repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
+    dest: "{{ home }}/poa-scripts-moc"
+    version: "{{ SCRIPTS_MOC_BRANCH }}"
 
-- file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
+- name: Change owner and group of poa-scripts-moc file
+  file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
   npm:

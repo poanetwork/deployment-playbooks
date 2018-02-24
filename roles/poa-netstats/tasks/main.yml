@@ -26,7 +26,8 @@
   notify:
     - restart poa-netstats
 
-- file: path={{ home }}/eth-net-intelligence-api owner={{ username }} group={{ username }} recurse=yes
+- name: Change owner and group of eth-net-intelligence-api files
+  file: path={{ home }}/eth-net-intelligence-api owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
   npm:
