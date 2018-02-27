@@ -1,5 +1,7 @@
 ---
 - hosts: bootnode
+  user: ubuntu
+  become: True
   vars:
     nginx_headers: "on"
     PROXY_PORT: "8545"
@@ -8,6 +10,7 @@
       - name: "bootnode"
     home: "/home/bootnode"
   roles:
+    - preconf
     - usermanager
     - nodejs
     - bootnode

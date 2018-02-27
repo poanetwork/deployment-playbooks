@@ -1,11 +1,14 @@
 ---
 - hosts: validator
+  user: ubuntu
+  become: True
   vars:
     username: "validator"
     users:
       - name: "validator"
     home: "/home/validator"
   roles:
+    - preconf
     - usermanager
     - nodejs
     - poa-logrotate

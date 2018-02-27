@@ -1,11 +1,14 @@
 ---
 - hosts: moc
+  user: ubuntu
+  become: True
   vars:
     username: "moc"
     users:
       - name: "moc"
     home: "/home/moc"
   roles:
+    - preconf
     - usermanager
     - nodejs
     - poa-logrotate

@@ -1,5 +1,7 @@
 ---
 - hosts: netstat
+  user: ubuntu
+  become: True
   vars:
     nginx_headers: "off"
     PROXY_PORT: "3000"
@@ -9,6 +11,7 @@
       - name: "netstat"
     home: "/home/netstat"
   roles:
+    - preconf
     - usermanager
     - nodejs
     - poa-logrotate
