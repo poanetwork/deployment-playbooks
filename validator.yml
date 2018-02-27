@@ -1,0 +1,18 @@
+---
+- hosts: validator
+  vars:
+    username: "validator"
+    users:
+      - name: "validator"
+    home: "/home/validator"
+  roles:
+    - usermanager
+    - nodejs
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
+    - poa-netstats
+    - validator
+    - validator-access
+  tags:
+    - validator

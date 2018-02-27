@@ -1,0 +1,21 @@
+---
+- hosts: explorer
+  vars:
+    nginx_headers: "off"
+    PROXY_PORT: "3000"
+    explorerS_SERVER: "localhost"
+    username: "explorer"
+    users:
+      - name: "explorer"
+    home: "/home/explorer"
+  roles:
+    - usermanager
+    - nodejs
+    - poa-logrotate
+    - poa-parity
+    - poa-pm2
+    - explorer
+    - nginx
+    - explorer-access
+  tags:
+    - explorer
