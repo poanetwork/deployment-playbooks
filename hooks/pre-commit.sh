@@ -16,7 +16,7 @@ RESULT=$?
 
 if [[ $RESULT == 0 ]]; then
 	echo "Running Ansible linter"
-	ansible-lint *.yml
+	ansible-lint site.yml
 	RESULT=$?
 fi
 
