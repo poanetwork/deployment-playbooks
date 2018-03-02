@@ -40,7 +40,7 @@
     path: /etc/nginx/ssl/server.crt
     provider: selfsigned
     privatekey_path: /etc/nginx/ssl/server.key
-    csr_path: /etc/ssl/csr/ansible.com.csr
+    csr_path: /etc/nginx/ssl/server.csr
   notify:
    - reload nginx
   when: not cert_file_check.stat.exists
