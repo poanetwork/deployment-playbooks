@@ -1,9 +1,6 @@
 ---
-- name: Update system
-  apt: upgrade=dist state=present update_cache=yes
-
 - name: Install packages
-  apt: name={{ item }} state=present
+  apt: name={{ item }} state=present update_cache=yes
   with_items:
     - bc
     - haveged
