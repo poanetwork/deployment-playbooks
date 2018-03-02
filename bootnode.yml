@@ -2,7 +2,7 @@
 - name: Create bootnode security group
   hosts: localhost
   gather_facts: False
-  tasks: 
+  tasks:
   - name: Create Security group
     ec2_group:
       ec2_access_key: "{{ access_key }}"
@@ -39,7 +39,7 @@
         ec2_access_key: "{{ access_key }}"
         ec2_secret_key: "{{ secret_key }}"
         key_name: "{{ awskeypair_name }}"
-        instance_tags: 
+        instance_tags:
           Name: "{{ bootnode_instance_name }}"
         group: "{{ bootnode_security_group }}"
         instance_type: "{{ bootnode_instance_type }}"

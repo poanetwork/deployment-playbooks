@@ -40,7 +40,7 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-  with_items: 
+  with_items:
     - "22"
   when: allow_bootnode_ssh == true
 
@@ -75,7 +75,7 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-  with_items: 
+  with_items:
     - "8545"
   when: allow_bootnode_rpc == true
 
@@ -99,6 +99,6 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-  with_items: 
+  with_items:
     - "30303"
   when: allow_bootnode_p2p == true

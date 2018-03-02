@@ -40,7 +40,7 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-  with_items: 
+  with_items:
     - "22"
   when: allow_netstat_ssh == true
 
@@ -75,6 +75,6 @@
           from_port: "{{ item }}"
           to_port: "{{ item }}"
           cidr_ip: 0.0.0.0/0
-  with_items: 
+  with_items:
     - "3000"
   when: allow_netstat_http == true
