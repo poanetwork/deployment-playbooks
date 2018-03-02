@@ -3,6 +3,16 @@
   apt: name=nginx state=present
   tags: nginx
 
+- name: Install Pip
+  apt:
+    name: "python3-pip"
+    state: present
+
+- name: Ensure python OpenSSL dependencies are installed.
+  pip:
+    name: pyOpenSSL
+    state: present
+
 - name: Create directory for nginx SSL certificates
   file: path=/etc/nginx/ssl state=directory mode=0755
   tags: nginx
