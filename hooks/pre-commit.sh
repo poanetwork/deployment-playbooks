@@ -11,7 +11,7 @@ STASH_NAME="pre-commit-$(date +%s)"
 git stash save -q --keep-index $STASH_NAME
 
 echo "Checking the playbook syntax"
-ansible-playbook -i hosts site.yml --syntax-check
+ansible-playbook -i none site.yml --syntax-check
 RESULT=$?
 
 if [[ $RESULT == 0 ]]; then
