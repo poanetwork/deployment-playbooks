@@ -8,3 +8,6 @@ group_vars/netstat
 group_vars/moc
 
 hosts
+
+.vagrant/*
+ubuntu-xenial-16.04-cloudimg-console.log
