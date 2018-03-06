@@ -8,6 +8,7 @@
   tags: preconf
 
 - hosts: bootnode
+  become: True
   vars:
     nginx_headers: "on"
     PROXY_PORT: "8545"
@@ -33,6 +34,7 @@
     - bootnode
 
 - hosts: validator
+  become: True
   vars:
     username: "validator"
     users:
@@ -51,6 +53,7 @@
     - validator
 
 - hosts: netstat
+  become: True
   vars:
     nginx_headers: "off"
     PROXY_PORT: "3000"
@@ -70,6 +73,7 @@
     - netstat
 
 - hosts: explorer
+  become: True
   vars:
     nginx_headers: "off"
     PROXY_PORT: "3000"
@@ -91,6 +95,7 @@
     - explorer
 
 - hosts: moc
+  become: True
   vars:
     username: "moc"
     users:

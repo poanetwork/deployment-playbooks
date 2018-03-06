@@ -1,8 +1,9 @@
 ---
-- user: name={{ item.name }} groups={{ item.addgroups | default('') }} shell=/bin/bash append=yes
+- name: Create users
+  user: name={{ item.name }} groups={{ item.addgroups | default('') }} shell=/bin/bash append=yes
   with_items: "{{ users }}"
 
-- include: nested_authorized_key.yml
+- include_tasks: nested_authorized_key.yml
   with_items: "{{ users }}"
   loop_control:
     loop_var: outer_item

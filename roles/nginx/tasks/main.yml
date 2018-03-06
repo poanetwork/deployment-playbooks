@@ -1,9 +1,20 @@
 ---
 - name: Install nginx
-  apt: name=nginx state=latest
+  apt: name=nginx state=present
   tags: nginx
 
-- file: path=/etc/nginx/ssl state=directory mode=0755
+- name: Install Pip
+  apt:
+    name: "python3-pip"
+    state: present
+
+- name: Ensure python OpenSSL dependencies are installed.
+  pip:
+    name: pyOpenSSL
+    state: present
+
+- name: Create directory for nginx SSL certificates
+  file: path=/etc/nginx/ssl state=directory mode=0755
   tags: nginx
 
 - name: Check certificate file
@@ -11,11 +22,27 @@
     path: /etc/nginx/ssl/server.crt
   register: cert_file_check
 
+- name: Generate SSL private key
+  openssl_privatekey:
+    path: /etc/nginx/ssl/server.key
+    size: 4096
+  when: not cert_file_check.stat.exists
+
+- name: Generate SSL certificate request
+  openssl_csr:
+    path: /etc/nginx/ssl/server.csr
+    privatekey_path: /etc/nginx/ssl/server.key
+    common_name: "{{ ansible_host }}"
+  when: not cert_file_check.stat.exists
+
 - name: Generate self-signed SSL certificate
-  shell: openssl req -new -x509 -nodes -subj "/CN={{ ansible_host }}" -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+  openssl_certificate:
+    path: /etc/nginx/ssl/server.crt
+    provider: selfsigned
+    privatekey_path: /etc/nginx/ssl/server.key
+    csr_path: /etc/nginx/ssl/server.csr
   notify:
    - reload nginx
-  tags: nginx
   when: not cert_file_check.stat.exists
 
 - name: Install nginx.conf

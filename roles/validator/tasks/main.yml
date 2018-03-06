@@ -30,16 +30,30 @@
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
 - name: Config MINING_KEYFILE file
-  shell: "echo '{{ MINING_KEYFILE }}' > {{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/validator.key.{{ MINING_ADDRESS }}"
+  copy:
+    content: "{{ MINING_KEYFILE }}"
+    dest: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/validator.key.{{ MINING_ADDRESS }}"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-validator dest={{ home }}/poa-scripts-validator version={{ SCRIPTS_VALIDATOR_BRANCH }}
+- name: Clone poanetworks/poa-scripts-validator repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-validator"
+    dest: "{{ home }}/poa-scripts-validator"
+    version: "{{ SCRIPTS_VALIDATOR_BRANCH }}"
 
-- file: src="{{ home }}/node.toml" dest="{{ home }}/poa-scripts-validator/node.toml" owner="{{ username }}" group="{{ username }}" state=link
+- name: Link node.toml file
+  file:
+    src: "{{ home }}/node.toml"
+    dest: "{{ home }}/poa-scripts-validator/node.toml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: link
 
-- file: path={{ home }}/poa-scripts-validator owner={{ username }} group={{ username }} recurse=yes
+- name: Set up owner and group on poa-scripts-validator files
+  file: path={{ home }}/poa-scripts-validator owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm transferRewardToPayoutKey
-  shell: "cd {{ home }}/poa-scripts-validator/transferRewardToPayoutKey; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
   become: true
   become_user: "{{ username }}"
   notify:

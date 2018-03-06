@@ -30,23 +30,33 @@
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
 - name: Config MOC_KEYFILE file
-  shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
+  copy:
+    content: "{{ MOC_KEYFILE }}"
+    dest: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc dest={{ home }}/poa-scripts-moc version={{ SCRIPTS_MOC_BRANCH }}
+- name: Clone poanetworks/poa-scripts-moc repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
+    dest: "{{ home }}/poa-scripts-moc"
+    version: "{{ SCRIPTS_MOC_BRANCH }}"
 
-- file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
+- name: Change owner and group of poa-scripts-moc file
+  file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/poa-scripts-moc; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm generateInitialKey
-  shell: "cd {{ home }}/poa-scripts-moc/generateInitialKey; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/generateInitialKey"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm distributeTokens
-  shell: "cd {{ home }}/poa-scripts-moc/distributeTokens; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/distributeTokens"
   become: true
   become_user: "{{ username }}"

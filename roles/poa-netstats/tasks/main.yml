@@ -15,17 +15,23 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-net-intelligence-api dest={{ home }}/eth-net-intelligence-api
+- name: Clone poanetworks/eth-net-intelligence-api repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/eth-net-intelligence-api"
+    dest: "{{ home }}/eth-net-intelligence-api"
+    version: "{{ api_version }}"
 
 - name: Install netstats config
   template: src=app.json.j2 dest={{ home }}/eth-net-intelligence-api/app.json owner={{ username }} group={{ username }} mode=0644
   notify:
     - restart poa-netstats
 
-- file: path={{ home }}/eth-net-intelligence-api owner={{ username }} group={{ username }} recurse=yes
+- name: Change owner and group of eth-net-intelligence-api files
+  file: path={{ home }}/eth-net-intelligence-api owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-net-intelligence-api; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/eth-net-intelligence-api"
   become: true
   become_user: "{{ username }}"
   notify:

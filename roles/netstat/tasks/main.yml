@@ -7,27 +7,39 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats dest={{ home }}/eth-netstats
+- name: Clone poanetworks/eth-netstats repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats"
+    dest: "{{ home }}/eth-netstats"
+    version: "{{ netstat_version }}"
 
-- file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
+- name: Set owner and group on eth-netstats files
+  file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/eth-netstats"
   become: true
   become_user: "{{ username }}"
   notify:
     - restart poa-dashboard
 
 - name: install npm grunt-cli
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install -g grunt-cli"
+  npm:
+    name: grunt-cli
+    global: yes
 
 - name: run grunt process
   shell: "cd /home/{{ username }}/eth-netstats; grunt"
   become: true
   become_user: "{{ username }}"
+  args:
+    creates: "/home/{{ username }}/dist"
 
 - name: Config ws_secret.json file
-  shell: "echo '[\"{{ NETSTATS_SECRET }}\"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
+  copy:
+    content: '["{{ NETSTATS_SECRET }}"]'
+    dest: "/home/{{ username }}/eth-netstats/ws_secret.json"
   notify:
     - restart poa-dashboard
 

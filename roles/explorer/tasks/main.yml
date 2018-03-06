@@ -26,17 +26,23 @@
   with_items:
    - node.toml
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer dest={{ home }}/chain-explorer
+- name: Clone poanetworks/chain-explorer repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer"
+    dest: "{{ home }}/chain-explorer"
+    version: "{{ explorer_version }}"
 
 - name: Install chain_explorer app.json
   template: src=app.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
   notify:
     - restart poa-chain-explorer
 
-- file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
+- name: Set group and owner on the chain-explorer directory
+  file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm chain_explorer
-  shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
+  npm:
+    path: "/home/{{ username }}/chain-explorer"
   become: true
   become_user: "{{ username }}"
   notify:

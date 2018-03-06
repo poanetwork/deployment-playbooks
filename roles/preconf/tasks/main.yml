@@ -3,18 +3,9 @@
   authorized_key: user=root key={{ item }} state=present exclusive=yes
   with_items: "{{ ssh_root }}"
 
-- include: ssh.yml
-- include: packages.yml
-- include: vars.yml
-#- include: ntp.yml
-- include: chrony.yml
-- include: logrotate.yml
-- include: swap.yml
-
-#- selinux:
-#    state: disabled
-
-#- lineinfile: dest=/etc/ssh/sshd_config regexp="^#Port" line="Port 27091" state=present backrefs=yes
-
-#- name: Set timezone to UTC
-#  command:  timedatectl set-timezone UTC
+- import_tasks: ssh.yml
+- import_tasks: packages.yml
+- import_tasks: vars.yml
+- import_tasks: chrony.yml
+- import_tasks: logrotate.yml
+- import_tasks: swap.yml
