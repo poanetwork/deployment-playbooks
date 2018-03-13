@@ -28,6 +28,10 @@ Vagrant.configure("2") do |config|
           "bootnode" => ["bootnode"]
         }
       end
+
+      node.vm.provision :shell do |shell|
+        shell.path = "./tests/#{machine}.sh"
+      end
     end
   end
 
