@@ -2,21 +2,39 @@
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.hostname = "validator"
 
-  config.vm.define "vm-01"
+  servers = [ "validator", "explorer", "moc", "bootnode", "netstat" ]
+  # platform = "ubuntu/xenial64"
+  if ENV["poa_platform"] == "ubuntu"
+    platform = "ubuntu/xenial64"
+  elsif ENV["poa_platform"] == "centos"
+    platform = "centos/7"
+  else
+    platform = "ubuntu/xenial64"
+  end
+
+  servers.each do |machine|
+    config.vm.define machine do |node|
+      node.vm.box = platform
+      node.vm.hostname = machine
+
+      node.vm.provision :ansible do |ansible|
+        ansible.playbook = "site.yml"
+        ansible.groups = {
+          "validator" => ["validator"],
+          "explorer" => ["explorer"],
+          "netstat" => ["netstat"],
+          "moc" => ["moc"],
+          "bootnode" => ["bootnode"]
+        }
+      end
+    end
+  end
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 1024
     vb.cpus = 1
-    vb.name = "validator"
+    vb.linked_clone = true
   end
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "site.yml"
-    ansible.groups = {
-      "validator" => ["vm-01"]
-    }
-  end
 end
