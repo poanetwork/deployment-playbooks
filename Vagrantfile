@@ -4,7 +4,7 @@ ENV["LC_ALL"] = "en_US.UTF-8"
 Vagrant.configure("2") do |config|
 
   servers = [ "validator", "explorer", "moc", "bootnode", "netstat" ]
-  # platform = "ubuntu/xenial64"
+
   if ENV["poa_platform"] == "ubuntu"
     platform = "ubuntu/xenial64"
   elsif ENV["poa_platform"] == "centos"
