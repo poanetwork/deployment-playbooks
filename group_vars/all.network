@@ -4,19 +4,6 @@ ansible_python_interpreter: /usr/bin/python3
 ssh_root:
     - "{{ lookup('file', 'files/admins.pub') }}"
 
-snmp_syslocation: "USA"
-snmp_ipsubnet:    "172.16.0.0/16"
-
-nameservers:
-  - "8.8.8.8"
-  - "8.8.4.4"
-
-ntpservers:
-  - "server 0.us.pool.ntp.org"
-  - "server 1.us.pool.ntp.org"
-  - "server 2.us.pool.ntp.org"
-  - "server 3.us.pool.ntp.org"
-
 image: "ami-0b383171"
 region: "us-east-1"
 
