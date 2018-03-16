@@ -1,36 +1,21 @@
 ---
 - name: Install nginx
-  apt: name=nginx state=present
+  package: name=nginx state=present
   tags: nginx
 
-- name: Install Pip
-  apt:
+- name: Install Pip (Ubuntu)
+  package:
     name: "python3-pip"
     state: present
-
-- name: Ensure OpenSSL dependencies are installed (Ubuntu)
-  package:
-     name: "{{ item }}"
-     state: present
-  with_items: 
-    - build-essential
-    - libssl-dev
-    - libffi-dev
-    - python-dev
   when: ansible_os_family == "Debian"
- 
-- name: Ensure OpenSSL dependencies are installed (CentOS)
-  package:
-     name: "{{ item }}"
-     state: present
-  with_items: 
-    - gcc
-    - libffi-devel
-    - openssl-devel
-    - python-devel
-  when: ansible_os_family == "RedHat"
 
-- name: Install OpenSSL module
+- name: Install Pip (CentOS)
+  package:
+    name: "python-pip"
+    state: present
+  when: ansible_os_family == "RedHat"
+  
+- name: Ensure python OpenSSL dependencies are installed.
   pip:
     name: pyOpenSSL
     state: present
