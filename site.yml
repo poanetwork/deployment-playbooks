@@ -1,12 +1,4 @@
 ---
-- hosts: all
-  user: ubuntu
-  become: True
-#  user: root
-  roles:
-    - preconf
-  tags: preconf
-
 - hosts: bootnode
   become: True
   vars:
