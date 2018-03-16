@@ -1,0 +1,17 @@
+---
+- name: Install chrony package
+  yum: name=chrony
+
+- name: Select Amazon time server
+  lineinfile:
+    dest: /etc/chrony.conf
+    insertafter: '^pool'
+    line: 'server 169.254.169.123 prefer iburst'
+    state: present
+
+- name: Restart chronyd service
+  service:
+    name: chronyd
+    enabled: yes
+    state: restarted
+    
