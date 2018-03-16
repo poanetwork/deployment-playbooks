@@ -71,14 +71,7 @@
       - name: "explorer"
     home: "/home/explorer"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
     - explorer
-    - nginx
-    - explorer-access
   tags:
     - explorer
 
