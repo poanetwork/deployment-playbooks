@@ -51,12 +51,7 @@
       - name: "netstat"
     home: "/home/netstat"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
     - netstat
-    - nginx
-    - netstat-access
   tags:
     - netstat
 
