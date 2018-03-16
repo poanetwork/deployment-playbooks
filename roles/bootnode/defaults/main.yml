@@ -1,0 +1,7 @@
+---
+username: "bootnode"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+nginx_headers: "on"
+PROXY_PORT: "8545"
