@@ -9,3 +9,6 @@ PROXY_PORT: "8545"
 allow_bootnode_ssh: true
 allow_bootnode_p2p: true
 allow_bootnode_rpc: false
+
+bootnode_archive: "off"
+bootnode_orchestrator: "off"
