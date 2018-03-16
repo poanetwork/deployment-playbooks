@@ -83,13 +83,6 @@
       - name: "moc"
     home: "/home/moc"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
-    - poa-netstats
     - moc
-    - moc-access
   tags:
     - moc
