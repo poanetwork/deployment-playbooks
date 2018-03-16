@@ -1,12 +1,4 @@
 ---
-- hosts: all
-  user: ubuntu
-  become: True
-#  user: root
-  roles:
-    - preconf
-  tags: preconf
-
 - hosts: bootnode
   become: True
   vars:
@@ -16,20 +8,8 @@
     users:
       - name: "bootnode"
     home: "/home/bootnode"
-#    logsprefix: "/home/{{ username }}/logs"
-#    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
-    - usermanager
-#    - logentries
-    - nodejs
     - bootnode
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
-    - poa-netstats
-    - { role: poa-orchestrator, when: "(bootnode_orchestrator or 'off') == 'on'" }
-    - nginx
-    - bootnode-access
   tags:
     - bootnode
 
@@ -41,14 +21,7 @@
       - name: "validator"
     home: "/home/validator"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
-    - poa-netstats
     - validator
-    - validator-access
   tags:
     - validator
 
@@ -63,12 +36,7 @@
       - name: "netstat"
     home: "/home/netstat"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
     - netstat
-    - nginx
-    - netstat-access
   tags:
     - netstat
 
@@ -83,14 +51,7 @@
       - name: "explorer"
     home: "/home/explorer"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
     - explorer
-    - nginx
-    - explorer-access
   tags:
     - explorer
 
@@ -102,13 +63,6 @@
       - name: "moc"
     home: "/home/moc"
   roles:
-    - usermanager
-    - nodejs
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
-    - poa-netstats
     - moc
-    - moc-access
   tags:
     - moc
