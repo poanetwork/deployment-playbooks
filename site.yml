@@ -16,20 +16,8 @@
     users:
       - name: "bootnode"
     home: "/home/bootnode"
-#    logsprefix: "/home/{{ username }}/logs"
-#    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
-    - usermanager
-#    - logentries
-    - nodejs
     - bootnode
-    - poa-logrotate
-    - poa-parity
-    - poa-pm2
-    - poa-netstats
-    - { role: poa-orchestrator, when: "(bootnode_orchestrator or 'off') == 'on'" }
-    - nginx
-    - bootnode-access
   tags:
     - bootnode
 
