@@ -45,14 +45,6 @@
 
 - hosts: netstat
   become: True
-  vars:
-    nginx_headers: "off"
-    PROXY_PORT: "3000"
-    NETSTATS_SERVER: "http://localhost:3000"
-    username: "netstat"
-    users:
-      - name: "netstat"
-    home: "/home/netstat"
   roles:
     - usermanager
     - nodejs
