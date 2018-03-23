@@ -1,0 +1,8 @@
+---
+username: "moc"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+allow_moc_ssh: true
+allow_moc_p2p: true

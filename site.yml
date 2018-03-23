@@ -9,15 +9,6 @@
 
 - hosts: bootnode
   become: True
-  vars:
-    nginx_headers: "on"
-    PROXY_PORT: "8545"
-    username: "bootnode"
-    users:
-      - name: "bootnode"
-    home: "/home/bootnode"
-#    logsprefix: "/home/{{ username }}/logs"
-#    logentries_user_key: "0665901a-e843-41c5-82c1-2cc4b39f0b21"
   roles:
     - usermanager
 #    - logentries
@@ -54,14 +45,6 @@
 
 - hosts: netstat
   become: True
-  vars:
-    nginx_headers: "off"
-    PROXY_PORT: "3000"
-    NETSTATS_SERVER: "http://localhost:3000"
-    username: "netstat"
-    users:
-      - name: "netstat"
-    home: "/home/netstat"
   roles:
     - usermanager
     - nodejs
@@ -74,14 +57,6 @@
 
 - hosts: explorer
   become: True
-  vars:
-    nginx_headers: "off"
-    PROXY_PORT: "3000"
-    explorerS_SERVER: "localhost"
-    username: "explorer"
-    users:
-      - name: "explorer"
-    home: "/home/explorer"
   roles:
     - usermanager
     - nodejs
@@ -96,11 +71,6 @@
 
 - hosts: moc
   become: True
-  vars:
-    username: "moc"
-    users:
-      - name: "moc"
-    home: "/home/moc"
   roles:
     - usermanager
     - nodejs
