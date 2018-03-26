@@ -21,13 +21,13 @@ apis = ["web3","eth","net" {{ ', "parity", "parity_set", "shh"' if bootnode_orch
 processing_threads = 4
 cors=["all"]
 
-{% if bootnode_archive|default("off") == "on" %}
 [ui]
 disable = true
 
 [dapps]
 disable = true
 
+{% if bootnode_archive|default("off") == "on" %}
 [snapshots]
 disable_periodic = false
 
