@@ -52,8 +52,8 @@ BLK_GAS_LIMIT: "6700000"
 NODE_PWD: "node.pwd"
 
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.9.2/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "3604a030388cd2c22ebe687787413522106c697610426e09b3c5da4fe70bbd33"
+PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.10.0/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "3871bae2760050316c9c1131750a2dc3fd11e1b79cd5f7a1e09015264d4c5ea0"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
