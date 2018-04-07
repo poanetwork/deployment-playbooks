@@ -40,5 +40,9 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
     vb.linked_clone = true
   end
+  
+  config.vm.provider "docker" do |d|
+    d.image = "ubuntu:16.04"
+  end
 
 end
