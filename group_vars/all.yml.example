@@ -9,14 +9,6 @@
 ssh_root:
     - "{{ lookup('file', 'files/admins.pub') }}"
 
-access_key: "INSERT KEY HERE"
-secret_key: "INSERT SECRET HERE"
-
-awskeypair_name: "keypairname"
-image: "ami-0b383171"
-region: "us-east-1"
-vpc_subnet_id: "subnet-ID-number"
-
 NODE_FULLNAME: "INSERT NODENAME"
 NODE_ADMIN_EMAIL: "INSERT@EMAIL"
 
