@@ -1,0 +1,6 @@
+validator_instance_type: "t2.large"
+validator_instance_name: "validator"
+validator_count_instances: "1"
+
+validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
+associate_validator_elastic_ip: false

@@ -1,0 +1,5 @@
+netstat_instance_type: "t2.large"
+netstat_instance_name: "netstat"
+netstat_count_instances: "1"
+
+netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-security"

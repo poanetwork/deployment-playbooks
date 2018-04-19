@@ -1,0 +1,9 @@
+explorer_instance_type: "t2.large" 
+explorer_instance_name: "explorer"
+explorer_count_instances: "1"
+
+explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
+
+allow_explorer_ssh: true
+allow_explorer_p2p: true
+allow_explorer_http: true

@@ -1,0 +1,5 @@
+moc_instance_type: "t2.large"
+moc_instance_name: "moc"
+moc_count_instances: "1"
+
+moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"

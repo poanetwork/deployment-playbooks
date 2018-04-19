@@ -1,0 +1,7 @@
+- name: Create directory parity_data/keys/NetworkName
+  file:
+    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
+    state: directory
+    mode: 0700
+    owner: "{{ username }}"
+    group: "{{ username }}"

@@ -1,11 +1,4 @@
 ---
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: Clone poanetworks/eth-netstats repo from GitHub
   git:
@@ -50,3 +43,7 @@
 
 - name: Ensure poa-dashboard is running and enabled to start at boot
   service: name=poa-dashboard state=started enabled=yes
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: not ansible_bios_version | search("amazon")

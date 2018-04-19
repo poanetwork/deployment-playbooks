@@ -1,25 +1,4 @@
 ---
-- name: Create directory parity_data/keys/NetworkName
-  file:
-    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Download spec.json
-  get_url: url={{ item }} dest={{ home }}/ mode=0644
-  with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
 
 - name: Create node.toml
   template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
@@ -60,3 +39,7 @@
     path: "{{ home }}/poa-scripts-moc/distributeTokens"
   become: true
   become_user: "{{ username }}"
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: not ansible_bios_version | search("amazon")

@@ -1,12 +1,5 @@
-username: "explorer"
-users:
-  - name: "{{ username }}"
-home: "/home/{{ username }}"
+-----
 
 allow_explorer_ssh: true
 allow_explorer_p2p: true
 allow_explorer_http: true
-
-nginx_headers: "off"
-PROXY_PORT: "3000"
-explorerS_SERVER: "localhost"

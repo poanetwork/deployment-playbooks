@@ -3,3 +3,12 @@ secret_key: "INSERT SECRET HERE"
 awskeypair_name: "keypairname"
 
 vpc_subnet_id: "subnet-ID-number"
+
+username: "explorer"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+nginx_headers: "off"
+PROXY_PORT: "3000"
+explorerS_SERVER: "localhost"

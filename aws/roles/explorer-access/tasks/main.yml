@@ -1,0 +1,4 @@
+---
+- name: Setup EC2 firewall
+  import_tasks: ec2.yml
+  when: ansible_bios_version | search("amazon")

@@ -1,0 +1,11 @@
+bootnode_instance_type: "t2.large"
+bootnode_instance_name: "bootnode"
+bootnode_count_instances: "1"
+
+bootnode_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-bootnode-security"
+
+associate_bootnode_elastic_ip: false
+
+allow_bootnode_ssh: true
+allow_bootnode_p2p: true
+allow_bootnode_rpc: false

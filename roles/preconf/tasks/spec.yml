@@ -1,0 +1,5 @@
+- name: Download spec.json
+  get_url: url={{ item }} dest={{ home }}/ mode=0644
+  with_items:
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
