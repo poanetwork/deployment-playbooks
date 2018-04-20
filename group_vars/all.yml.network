@@ -1,4 +1,5 @@
 ---
+user: ubuntu
 ansible_python_interpreter: /usr/bin/python3
 
 ssh_root:

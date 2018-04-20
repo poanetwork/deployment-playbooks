@@ -6,6 +6,7 @@
 ###
 
 ---
+user: ubuntu ### can be changed to centos or other if needed
 ssh_root:
     - "{{ lookup('file', 'files/admins.pub') }}"
 
