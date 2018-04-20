@@ -7,7 +7,7 @@
   apt:
     name: "python3-pip"
     state: present
-	
+
 - name: Ensure OpenSSL dependencies are installed (Ubuntu)
   package:
      name: {{ item }}

@@ -21,7 +21,7 @@
 
 - name: install npm chain_explorer
   npm:
-    path: "/home/{{ username }}/chain-explorer"
+    path: "{{ home }}//chain-explorer"
   become: true
   become_user: "{{ username }}"
   notify:

@@ -1,7 +1,7 @@
 - name: Bootnode deployment
   import_playbook: bootnode.yml
   tags: bootnode
-	
+
 - name: Explorer deployment
   import_playbook: explorer.yml
   tags: explorer
