@@ -1,7 +1,7 @@
 ---
 - name: Add logentries repository
   apt_repository:
-    repo: 'deb http://rep.logentries.com/ {{ansible_distribution_release}} main'
+    repo: 'deb http://rep.logentries.com/ {{ ansible_distribution_release }} main'
     state: present
     filename: logentries
 
