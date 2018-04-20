@@ -1,0 +1,4 @@
+---
+epel_key_url: "https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL"
+node_source_deb: "https://deb.nodesource.com/node_8.x"
+node_key_id: "68576280"

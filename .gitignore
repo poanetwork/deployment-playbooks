@@ -6,6 +6,8 @@ group_vars/explorer
 group_vars/validator
 group_vars/netstat
 group_vars/moc
+group_vars/ubuntu
+group_vars/centos
 
 hosts
 

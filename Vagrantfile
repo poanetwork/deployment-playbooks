@@ -5,9 +5,11 @@ Vagrant.configure("2") do |config|
 
   servers = [ "validator", "explorer", "moc", "bootnode", "netstat" ]
 
-  if ENV["poa_platform"] == "ubuntu"
+  platform_os = ENV["poa_platform"] || "ubuntu"
+  
+  if platform_os == "ubuntu"
     platform = "ubuntu/xenial64"
-  elsif ENV["poa_platform"] == "centos"
+  elsif platform_os == "centos"
     platform = "centos/7"
   else
     platform = "ubuntu/xenial64"
@@ -25,8 +27,9 @@ Vagrant.configure("2") do |config|
           "explorer" => ["explorer"],
           "netstat" => ["netstat"],
           "moc" => ["moc"],
-          "bootnode" => ["bootnode"]
+          "bootnode" => ["bootnode"],
         }
+        ansible.groups[platform_os] = [ "validator", "explorer", "netstat", "moc", "bootnode" ]
       end
 
       node.vm.provision :shell do |shell|

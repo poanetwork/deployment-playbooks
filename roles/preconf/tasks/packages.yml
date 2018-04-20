@@ -1,26 +1,6 @@
 ---
-- name: Install packages
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-    - bc
-    - haveged
-    - rsync
-    - iotop
-    - dstat
-    - sysstat
-    - htop
-    - lbzip2
-    - pigz
-    - unzip
-    - zip
-    - mtr
-    - tcpdump
-    - openssh-client
-    - sudo
-    - mc
-    - net-tools
-    - screen
-    - git
-    - cloud-utils
-    - build-essential
-    - nload
+- import_tasks: packages-ubuntu.yml
+  when: ansible_os_family == "Debian"
+
+- import_tasks: packages-centos.yml
+  when: ansible_os_family == "RedHat"
