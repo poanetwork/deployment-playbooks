@@ -1,4 +1,6 @@
 ---
 
+user: ubuntu
+
 allow_netstat_ssh: true
 allow_netstat_http: true

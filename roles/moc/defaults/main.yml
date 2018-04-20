@@ -1,4 +1,6 @@
 ---
 
+user: ubuntu
+
 allow_moc_ssh: true
 allow_moc_p2p: true

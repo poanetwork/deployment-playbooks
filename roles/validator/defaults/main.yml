@@ -1,5 +1,7 @@
 ---
 
+user: ubuntu
+
 allow_validator_ssh: true
 allow_validator_p2p: true
 

@@ -1,5 +1,7 @@
 -----
 
+user: ubuntu
+
 allow_explorer_ssh: true
 allow_explorer_p2p: true
 allow_explorer_http: true

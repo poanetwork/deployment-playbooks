@@ -11,7 +11,7 @@
 
 - name: install npm netstats
   npm:
-    path: "/home/{{ username }}/eth-netstats"
+    path: "{{ home }}/eth-netstats"
   become: true
   become_user: "{{ username }}"
   notify:
@@ -23,16 +23,16 @@
     global: yes
 
 - name: run grunt process
-  shell: "cd /home/{{ username }}/eth-netstats; grunt"
+  shell: "cd {{ home }}/eth-netstats; grunt"
   become: true
   become_user: "{{ username }}"
   args:
-    creates: "/home/{{ username }}/dist"
+    creates: "{{ home }}/dist"
 
 - name: Config ws_secret.json file
   copy:
     content: '["{{ NETSTATS_SECRET }}"]'
-    dest: "/home/{{ username }}/eth-netstats/ws_secret.json"
+    dest: "{{ home }}/eth-netstats/ws_secret.json"
   notify:
     - restart poa-dashboard
 
