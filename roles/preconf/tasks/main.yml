@@ -11,6 +11,6 @@
 - import_tasks: swap.yml
 - import_tasks: logs.yml
 - import_tasks: keys.yml
-  when: ‘netstat’ not in ansible_hostname
+  when: "'netstat' not in ansible_hostname"
 - import_tasks: spec.yml
-  when: ‘netstat’ not in ansible_hostname
+  when: "'netstat' not in ansible_hostname"
