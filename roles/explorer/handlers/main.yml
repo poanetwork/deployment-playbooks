@@ -2,5 +2,5 @@
 - name: restart poa-chain-explorer
   service: name=poa-chain-explorer state=restarted
   
-  - name: restart ufw
+- name: restart ufw
   service: name=ufw state=restarted

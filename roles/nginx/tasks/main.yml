@@ -10,7 +10,7 @@
 
 - name: Ensure OpenSSL dependencies are installed (Ubuntu)
   package:
-     name: {{ item }}
+     name: "{{ item }}"
      state: present
   with_items: 
     - build-essential
@@ -21,7 +21,7 @@
  
 - name: Ensure OpenSSL dependencies are installed (CentOS)
   package:
-     name: {{ item }}
+     name: "{{ item }}"
      state: present
   with_items: 
     - gcc
