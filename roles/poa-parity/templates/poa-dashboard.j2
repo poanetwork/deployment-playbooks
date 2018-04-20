@@ -4,7 +4,6 @@ After=network.target
 [Service]
 User={{ username }}
 Group={{ username }}
-Environment=MYVAR=myval
 WorkingDirectory=/home/{{ username }}/eth-netstats
 Restart=always
 ExecStart=/usr/bin/npm start
