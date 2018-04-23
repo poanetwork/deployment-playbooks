@@ -61,7 +61,7 @@ ORCHESTRATOR_BIN_SHA256: ""
 bootnode_instance_type: "t2.large"
 bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
-bootnode_security_group: "bootnode-security"
+bootnode_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-bootnode-security"
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
 
@@ -69,27 +69,27 @@ bootnode_orchestrator: "off"
 netstat_instance_type: "t2.large"
 netstat_instance_name: "netstat"
 netstat_count_instances: "1"
-netstat_security_group: "netstat-security"
+netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-security"
 
 #validator
 validator_instance_type: "t2.large"
 validator_instance_name: "validator"
 validator_count_instances: "1"
-validator_security_group: "validator-security"
+validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
 validator_archive: "off"
 
 #moc
 moc_instance_type: "t2.large"
 moc_instance_name: "moc"
 moc_count_instances: "1"
-moc_security_group: "moc-security"
+moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
 moc_archive: "off"
 
 #explorer
 explorer_instance_type: "t2.large"
 explorer_instance_name: "explorer"
 explorer_count_instances: "1"
-explorer_security_group: "explorer-security"
+explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
 
 #restrict network access to instances
 allow_bootnode_ssh: true
