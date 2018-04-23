@@ -1,5 +1,7 @@
 ---
 
+user: ubuntu
+
 username: "poa"
 users:
   - name: "{{ username }}"
