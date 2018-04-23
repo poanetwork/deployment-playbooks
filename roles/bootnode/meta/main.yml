@@ -1,7 +1,6 @@
 dependencies:
   - { role: preconf }
   - { role: usermanager }
-# - { role: logentries }
   - { role: nodejs }
   - { role: poa-logrotate }
   - { role: poa-parity }
