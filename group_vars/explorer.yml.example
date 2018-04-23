@@ -5,4 +5,3 @@ home: "/home/{{ username }}"
 
 nginx_headers: "off"
 PROXY_PORT: "3000"
-explorerS_SERVER: "localhost"
