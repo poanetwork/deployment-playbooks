@@ -4,3 +4,28 @@ user: ubuntu
 
 allow_moc_ssh: true
 allow_moc_p2p: true
+
+NODE_FULLNAME: "moc"
+NODE_ADMIN_EMAIL: ""
+NODE_PWD: "node.pwd" # don't change this one
+
+NETSTATS_SERVER: ""
+NETSTATS_SECRET: ""
+
+MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
+MOC_KEYPASS: ""
+MOC_KEYFILE: ""
+
+SCRIPTS_MOC_BRANCH: "mainnet"
+GENESIS_NETWORK_NAME: "PoA"
+MAIN_REPO_FETCH: "poanetwork"
+
+BLK_GAS_LIMIT: "6700000"
+
+username: "moc"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+moc_archive: "off"
+

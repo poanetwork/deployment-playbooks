@@ -1,0 +1,13 @@
+---
+
+username: "poa"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+GENESIS_NETWORK_NAME: "PoA"
+MAIN_REPO_FETCH: "poanetwork"
+GENESIS_BRANCH: "master"
+
+ssh_root:
+    - "{{ lookup('file', 'files/admins.pub') }}"

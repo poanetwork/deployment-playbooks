@@ -1,0 +1,4 @@
+username: "bootnode"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
