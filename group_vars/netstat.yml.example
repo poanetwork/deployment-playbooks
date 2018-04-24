@@ -8,6 +8,7 @@ users:
   - name: "{{ username }}"
 home: "/home/{{ username }}"
 
+configure_extended_tcp_settings: false
 nginx_headers: "off"
 PROXY_PORT: "3000"
 NETSTATS_SERVER: "http://localhost:3000"

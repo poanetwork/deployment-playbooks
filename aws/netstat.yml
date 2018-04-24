@@ -71,20 +71,6 @@
     - name: Install python
       raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal)
 
-- name: Configure instance(s)
-  hosts: launched
-  user: ubuntu
-  become: True
-  vars:
-     ansible_ssh_port: 22
-  gather_facts: True
-  roles:
-    - preconf
-  tags: preconf
-  tasks:
-    - name: restart machine after setup
-      shell: shutdown -r 1
-
 - name: EC2 access setup
   hosts: netstat
   become: True

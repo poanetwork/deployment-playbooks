@@ -85,3 +85,8 @@
 - name: Ensure nginx is running and enabled to start at boot
   service: name=nginx state=started enabled=yes
   tags: nginx
+  
+- name: executing vars.yml
+  import_playbook: vars.yml
+  when: configure_extended_tcp_settings == true
+  

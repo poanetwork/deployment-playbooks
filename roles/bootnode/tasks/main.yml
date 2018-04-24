@@ -8,5 +8,9 @@
 - name: Setup ufw firewall
   import_tasks: ufw.yml
   when: not ansible_bios_version | search("amazon")
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true
 
 #- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes
