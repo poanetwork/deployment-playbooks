@@ -87,6 +87,6 @@
   tags: nginx
   
 - name: executing vars.yml
-  import_playbook: vars.yml
+  import_tasks: vars.yml
   when: configure_extended_tcp_settings == true
   

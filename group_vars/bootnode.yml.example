@@ -15,3 +15,5 @@ configure_extended_tcp_settings: false
 
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
+
+reboot_after_completion: false

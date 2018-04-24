@@ -12,3 +12,5 @@ configure_extended_tcp_settings: false
 nginx_headers: "off"
 PROXY_PORT: "3000"
 NETSTATS_SERVER: "http://localhost:3000"
+
+reboot_after_completion: false
