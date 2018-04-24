@@ -6,3 +6,4 @@ dependencies:
   - { role: poa-parity }
   - { role: poa-pm2 }
   - { role: poa-netstats }
+  - { role: debug-tools, when: "install_debug_tools == 'yes'" }

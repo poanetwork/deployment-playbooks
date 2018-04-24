@@ -13,3 +13,5 @@ PROXY_PORT: "8545"
 
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
+
+install_debug_tools: "yes"

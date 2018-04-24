@@ -9,3 +9,4 @@ dependencies:
   - { role: poa-netstats }
   - { role: poa-orchestrator, when: "(bootnode_orchestrator or 'off') == 'on'" }
   - { role: nginx }
+  - { role: debug-tools, when: "install_debug_tools == 'yes'" }

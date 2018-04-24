@@ -1,0 +1,23 @@
+---
+### Install debug packages
+
+- name: Install packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - bc
+    - cloud-utils
+    - dstat
+    - htop
+    - iotop
+    - lbzip2
+    - mc
+    - mtr
+    - net-tools
+    - nload
+    - pigz
+    - rsync
+    - screen
+    - sysstat
+    - tcpdump
+    - unzip
+    - zip
