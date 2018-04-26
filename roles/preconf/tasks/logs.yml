@@ -1,3 +1,4 @@
+---
 - name: Create logs directories
   file:
     path: "/{{ home }}/logs/old"

@@ -1,3 +1,4 @@
+---
 - name: Create directory parity_data/keys/NetworkName
   file:
     path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"

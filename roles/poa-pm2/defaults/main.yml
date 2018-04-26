@@ -1,6 +1,6 @@
 ---
 
-username: "bootnode"
+username: "poa"
 users:
   - name: "{{ username }}"
 home: "/home/{{ username }}"

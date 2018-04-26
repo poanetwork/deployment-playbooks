@@ -5,3 +5,58 @@ awskeypair_name: "keypairname"
 image: "ami-0b383171"
 region: "us-east-1"
 vpc_subnet_id: "subnet-ID-number"
+
+MAIN_REPO_FETCH: "poanetwork"
+GENESIS_BRANCH: "master"
+
+###Bootnode
+
+bootnode_instance_type: "t2.large"
+bootnode_instance_name: "bootnode"
+bootnode_count_instances: "1"
+
+bootnode_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-bootnode-security"
+
+associate_bootnode_elastic_ip: false
+
+allow_bootnode_ssh: true
+allow_bootnode_p2p: true
+allow_bootnode_rpc: false
+
+###Explorer
+
+explorer_instance_type: "t2.large" 
+explorer_instance_name: "explorer"
+explorer_count_instances: "1"
+
+explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
+
+allow_explorer_ssh: true
+allow_explorer_p2p: true
+allow_explorer_http: true
+
+
+###Moc
+
+moc_instance_type: "t2.large"
+moc_instance_name: "moc"
+moc_count_instances: "1"
+
+moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
+
+###Netstat
+
+netstat_instance_type: "t2.large"
+netstat_instance_name: "netstat"
+netstat_count_instances: "1"
+
+netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-security"
+
+###Validator
+
+validator_instance_type: "t2.large"
+validator_instance_name: "validator"
+validator_count_instances: "1"
+
+validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
+associate_validator_elastic_ip: false
