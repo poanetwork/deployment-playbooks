@@ -1,7 +1,7 @@
 ---
 
 - name: Create node.toml
-  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
+  template: src={{ item }}.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
   with_items:
    - node.toml
    
