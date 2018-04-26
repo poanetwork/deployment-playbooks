@@ -60,7 +60,6 @@
   tags: explorer
 
 - name: Installing python
-  hosts: all
   hosts: launched
   gather_facts: False
   user: ubuntu
