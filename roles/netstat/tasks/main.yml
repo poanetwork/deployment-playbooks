@@ -1,11 +1,4 @@
 ---
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: Clone poanetworks/eth-netstats repo from GitHub
   git:
@@ -18,7 +11,7 @@
 
 - name: install npm netstats
   npm:
-    path: "/home/{{ username }}/eth-netstats"
+    path: "{{ home }}/eth-netstats"
   become: true
   become_user: "{{ username }}"
   notify:
@@ -30,23 +23,31 @@
     global: yes
 
 - name: run grunt process
-  shell: "cd /home/{{ username }}/eth-netstats; grunt"
+  shell: "cd {{ home }}/eth-netstats; grunt"
   become: true
   become_user: "{{ username }}"
   args:
-    creates: "/home/{{ username }}/dist"
+    creates: "{{ home }}/dist"
 
 - name: Config ws_secret.json file
   copy:
     content: '["{{ NETSTATS_SECRET }}"]'
-    dest: "/home/{{ username }}/eth-netstats/ws_secret.json"
+    dest: "{{ home }}/eth-netstats/ws_secret.json"
   notify:
     - restart poa-dashboard
 
 - name: Install poa-dashboard service
-  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner=root group=root mode=0755
+  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner={{ username }} group={{ username }} mode=0755
   notify:
     - restart poa-dashboard
 
 - name: Ensure poa-dashboard is running and enabled to start at boot
   service: name=poa-dashboard state=started enabled=yes
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: not ansible_bios_version | search("amazon")
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true

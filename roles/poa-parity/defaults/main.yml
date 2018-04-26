@@ -1,0 +1,21 @@
+---
+
+GENESIS_NETWORK_NAME: "PoA"
+PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.9.2/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "3604a030388cd2c22ebe687787413522106c697610426e09b3c5da4fe70bbd33"
+
+NODE_FULLNAME: "default"
+NODE_ADMIN_EMAIL: "default@example.com"
+NETSTATS_SERVER: ""
+NETSTATS_SECRET: ""
+MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
+ 
+validator_archive: "off"
+bootnode_archive: "off"
+moc_archive: "off"
+bootnode_orchestrator: "off"
+
+username: "poa"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"

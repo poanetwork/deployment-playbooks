@@ -1,5 +1,0 @@
-access_key: "INSERT KEY HERE"
-secret_key: "INSERT SECRET HERE"
-awskeypair_name: "keypairname"
-
-vpc_subnet_id: "subnet-ID-number"

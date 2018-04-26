@@ -31,7 +31,7 @@
 
 - name: install npm netstats
   npm:
-    path: "/home/{{ username }}/eth-net-intelligence-api"
+    path: "{{ home }}/eth-net-intelligence-api"
   become: true
   become_user: "{{ username }}"
   notify:

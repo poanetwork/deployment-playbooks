@@ -7,6 +7,12 @@ group_vars/validator
 group_vars/netstat
 group_vars/moc
 
+roles/bootnode/vars/main.yml
+roles/explorer/vars/main.yml
+roles/validator/vars/main.yml
+roles/netstat/vars/main.yml
+roles/moc/vars/main.yml
+
 hosts
 
 .vagrant/*

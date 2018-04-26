@@ -1,0 +1,26 @@
+---
+ansible_user: ubuntu
+
+ansible_python_interpreter: /usr/bin/python3
+
+ssh_root:
+    - "{{ lookup('file', 'files/admins.pub') }}"
+
+image: "ami-0b383171"
+region: "us-east-1"
+
+NODE_PWD: "node.pwd" # don't change this one
+NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
+PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.9.2/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "3604a030388cd2c22ebe687787413522106c697610426e09b3c5da4fe70bbd33"
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_SHA256: ""
+
+SCRIPTS_MOC_BRANCH: "mainnet"
+SCRIPTS_VALIDATOR_BRANCH: "mainnet"
+MAIN_REPO_FETCH: "poanetwork"
+GENESIS_BRANCH: "master"
+GENESIS_NETWORK_NAME: "PoA"
+
+MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
+BLK_GAS_LIMIT: "6700000"

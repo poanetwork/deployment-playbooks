@@ -2,6 +2,10 @@
 - name: Create users
   user: name={{ item.name }} groups={{ item.addgroups | default('') }} shell=/bin/bash append=yes
   with_items: "{{ users }}"
+ 
+#Temporary directive created to workaround #24862 ansible issue  
+- name: Setup permission
+  file: path={{ home }} group={{ username }} owner={{ username }} recurse=yes state=directory
 
 - include_tasks: nested_authorized_key.yml
   with_items: "{{ users }}"

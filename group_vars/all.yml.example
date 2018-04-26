@@ -1,0 +1,175 @@
+### This file is used as a reference only and contains all possible options for all roles.
+### Values set in this file are used for illustration only.
+###
+### To connect to an actual network, please follow instructions provided to you
+### on how to generate a valid `group_vars/` files for the network.
+###
+
+---
+
+###The following variables are network-wide. They should be kept at all.yml file.
+
+#Block gas limit
+BLK_GAS_LIMIT: "6700000"
+
+#github branch that store genesis file (aka genesis.json, spec.json, chain.json, ...)
+GENESIS_BRANCH: "master"
+
+#NetworkName as specified in genesis file
+GENESIS_NETWORK_NAME: "PoANetwork"
+
+#github account from which all repositories will be downloaded
+MAIN_REPO_FETCH: "poanetwork"
+
+#Hex-encoded address, including 0x prefix. For moc role it is used as mining key, for other nodes is used in other scripts.
+MOC_ADDRESS: "INSERT HERE"
+
+#name of the file to store password. Should not be changed
+NODE_PWD: "node.pwd"
+
+#url of the nodejs deb package to use, most importantly - version number
+NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
+
+#url and sha256 checksum of the parity-orchestrator binary file
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_SHA256: ""
+
+#url and sha256 checksum of the parity binary file
+PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.9.2/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "3604a030388cd2c22ebe687787413522106c697610426e09b3c5da4fe70bbd33"
+
+#branch of poa-scripts-moc and poa-scripts-validator to use
+SCRIPTS_MOC_BRANCH: "master"
+SCRIPTS_VALIDATOR_BRANCH: "master"
+
+
+
+###The following variables are node-specific. They should be kept in group_vars/<node>.yml set of files. Alternatively they can be specifed at <role>/vars/main.yml file.
+
+##These variables are used in each role and usually propagated to the dependent roles. By default they are different for each role and it's highly recommended not to use single for multiple roles, escpecially when they are installed on the same machine. 
+
+#Which user will be used to connect to VMs
+ansible_user: ubuntu
+
+#User's name and directory, which will be used to execute role from. 
+#username: "<role>"
+#users:
+#  - name: "{{ username }}"
+#home: "/home/{{ username }}"
+
+#Node's descriptive name
+#NODE_FULLNAME: "INSERT NODENAME"
+
+#Node owner's email
+#NODE_ADMIN_EMAIL: "INSERT@EMAIL"
+
+#If this variable is set to "True" all the VMs will be rebooted after setup.
+reboot_after_completion: false
+
+
+##Bootnode-related variables.
+
+#Specifies whether or not to keep port 22 opened to allow ssh access
+allow_bootnode_ssh: true
+#Specifies whether or not to keep port 30303 opened to allow peer discovery
+allow_bootnode_p2p: true
+#Specifies whether or not to keep port 8545 opened to allow rpc on this port
+allow_bootnode_rpc: false
+
+#Specifies whether or not this node should be created with additional parameters to work as archive
+bootnode_archive: "off"
+#Specifies whether or not parity-orchestrator should be installed on this node and parity configured to use whisper
+bootnode_orchestrator: "off"
+
+
+##Explorer-related variables
+
+#Specifies whether or not to keep port 22 opened to allow ssh access
+allow_explorer_ssh: true
+#Specifies whether or not to keep port 30303 opened to allow peer discovery
+allow_explorer_p2p: true
+#Specifies whether or not to keep port 8545 opened to allow rpc on this port
+allow_explorer_http: true
+
+#Explicitly specifies the explorer version to use
+explorer_version: "acee07c"
+
+
+##Moc-related variables
+
+#Specifies whether or not this node should be created with additional parameters to work as archive
+moc_archive: "off"
+
+
+##Netstat-related variables
+
+
+##Validator-related variables
+
+#Specifies whether or not to keep port 22 opened to allow ssh access
+allow_validator_ssh: true
+#Specifies whether or not to keep port 30303 opened to allow peer discovery
+allow_validator_p2p: true
+
+#Specifies whether or not this node should be created with additional parameters to work as archive
+validator_archive: "off"
+
+
+##Nginx-related variables (subrole)
+
+#If this variable is set to true script will modify sysctl.conf and configure additional tcp settings.
+configure_extended_tcp_settings: false
+#Setup extended nginx headers. Used in bootnode, explorer and netstat roles.
+nginx_headers: "on"
+#Setup which proxy port should be used in nginx. Used in bootnode, explorer and netstat roles. 
+PROXY_PORT: "8545"
+
+
+##poa-netstats-related variables (subrole)
+
+#Explicitly specified api version to use
+api_version: "9773b5b" 
+
+
+##poa-parity-related variables (subrole)
+
+#This variables are intended to be set up if you want to run sub role explicitly.
+#validator_archive: "off"
+#bootnode_archive: "off"
+#moc_archive: "off"
+#bootnode_orchestrator: "off"
+
+
+
+###Those variables are intended to be specified by users. They don't have any reasonable defaults. Those variables should be specified at group_vars/<role> folder or at <role>/vars/main.yml.
+
+#Specifies the SSH public key file, that will be added to remote 'root' user as an authorized key
+#ssh_root:
+#    - "{{ lookup('file', 'files/admins.pub') }}"
+
+#Validator's mining keyfile content (json string)
+#MINING_KEYFILE: "INSERT HERE"
+
+#Validator's mining key address
+#MINING_ADDRESS: "INSERT HERE"
+
+#Validator's mining key password
+#MINING_KEYPASS: "INSERT HERE"
+
+#Master of Ceremony's account password
+#MOC_KEYPASS: "INSERT HERE"
+
+#Master of Ceremony's account keyfile
+#MOC_KEYFILE: "INSERT HERE"
+
+#Secret code to join netstats.  Important: For netstats role this option sets the password of the netstats. Master of Ceremony later provides it to other nodes.
+#NETSTATS_SECRET: "INSERT HERE"
+
+#URL of netstats server. Should be provided to users by Master of Ceremony
+#NETSTATS_SERVER: "INSERT HERE"
+
+#Node owner's email. Publicly visible in netstats
+#NODE_ADMIN_EMAIL: "INSERT HERE"
+
+#Node's descriptive name. Publicly visible in netstats
+#NODE_FULLNAME: "INSERT HERE"

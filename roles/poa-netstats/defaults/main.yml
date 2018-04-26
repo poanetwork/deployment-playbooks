@@ -1,0 +1,16 @@
+---
+
+MAIN_REPO_FETCH: "poanetwork"
+GENESIS_NETWORK_NAME: "PoA"
+
+api_version: "9773b5b" 
+
+NODE_FULLNAME: ""
+NODE_ADMIN_EMAIL: ""
+NETSTATS_SERVER: ""
+NETSTATS_SECRET: ""
+
+username: "poa"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"

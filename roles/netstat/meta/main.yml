@@ -1,0 +1,6 @@
+dependencies:
+  - { role: usermanager }
+  - { role: preconf }
+  - { role: nodejs }
+  - { role: poa-logrotate }
+  - { role: nginx }

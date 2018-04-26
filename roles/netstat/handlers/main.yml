@@ -1,3 +1,6 @@
 ---
 - name: restart poa-dashboard
   service: name=poa-dashboard state=restarted
+
+- name: restart ufw
+  service: name=ufw state=restarted

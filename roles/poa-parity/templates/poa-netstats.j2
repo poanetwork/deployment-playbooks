@@ -6,7 +6,7 @@ Type=oneshot
 RemainAfterExit=true
 User={{ username }}
 Group={{ username }}
-WorkingDirectory=/home/{{ username }}/eth-net-intelligence-api
+WorkingDirectory={{ home }}/eth-net-intelligence-api
 ExecStart=/usr/bin/pm2 startOrRestart app.json
 [Install]
 WantedBy=multi-user.target

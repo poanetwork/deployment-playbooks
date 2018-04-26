@@ -1,0 +1,8 @@
+dependencies:
+  - { role: usermanager }
+  - { role: preconf }
+  - { role: nodejs }
+  - { role: poa-logrotate }
+  - { role: poa-parity }
+  - { role: poa-pm2 }
+  - { role: poa-netstats }

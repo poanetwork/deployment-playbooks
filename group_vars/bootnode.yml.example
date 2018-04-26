@@ -1,0 +1,19 @@
+NODE_FULLNAME: "INSERT NODENAME"
+NODE_ADMIN_EMAIL: "INSERT@EMAIL"
+
+NETSTATS_SERVER: "INSERT FULL URL"
+NETSTATS_SECRET: "INSERT SECRET"
+
+username: "bootnode"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+nginx_headers: "on"
+PROXY_PORT: "8545"
+configure_extended_tcp_settings: false
+
+bootnode_archive: "off"
+bootnode_orchestrator: "off"
+
+reboot_after_completion: false

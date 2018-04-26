@@ -1,0 +1,10 @@
+username: "explorer"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+nginx_headers: "off"
+PROXY_PORT: "3000"
+configure_extended_tcp_settings: false
+
+reboot_after_completion: false

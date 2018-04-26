@@ -1,0 +1,17 @@
+NODE_FULLNAME: "INSERT NODENAME"
+NODE_ADMIN_EMAIL: "INSERT@EMAIL"
+
+NETSTATS_SERVER: "INSERT FULL URL"
+NETSTATS_SECRET: "INSERT SECRET"
+
+MOC_KEYPASS: "INSERT HERE"
+MOC_KEYFILE: 'INSERT HERE'
+
+username: "moc"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+moc_archive: "off"
+
+reboot_after_completion: false
