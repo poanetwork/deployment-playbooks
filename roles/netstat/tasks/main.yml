@@ -37,7 +37,7 @@
     - restart poa-dashboard
 
 - name: Install poa-dashboard service
-  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner=root group=root mode=0755
+  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner={{ username }} group={{ username }} mode=0755
   notify:
     - restart poa-dashboard
 
