@@ -58,7 +58,8 @@
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_ip }} port=22 delay=90 timeout=320 state=started
       with_items: "{{ ec2.instances }}"
-  tags: explorer
+      when: ec2.changed
+tags: explorer
 
 - name: Installing python
   hosts: launched
