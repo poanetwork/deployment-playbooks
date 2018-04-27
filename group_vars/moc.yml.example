@@ -14,4 +14,5 @@ home: "/home/{{ username }}"
 
 moc_archive: "off"
 
+install_debug_tools: "yes"
 reboot_after_completion: false
