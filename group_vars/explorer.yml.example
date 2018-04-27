@@ -5,5 +5,7 @@ home: "/home/{{ username }}"
 
 nginx_headers: "off"
 PROXY_PORT: "3000"
-explorerS_SERVER: "localhost"
+configure_extended_tcp_settings: false
+
 install_debug_tools: "yes"
+reboot_after_completion: false

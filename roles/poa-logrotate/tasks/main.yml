@@ -1,6 +1,6 @@
 ---
 - name: Install poa-logrotate conf
-  template: src=poa-logrotate.conf.j2 dest={{ home }}/poa-logrotate.conf owner=root group=root mode=0644
+  template: src=poa-logrotate.conf.j2 dest={{ home }}/poa-logrotate.conf owner={{ username }} group={{ username }} mode=0644
 
 - name: Install poa-logrotate cron
   template: src=poa-logrotate.j2 dest=/etc/cron.hourly/poa-logrotate owner=root group=root mode=0755

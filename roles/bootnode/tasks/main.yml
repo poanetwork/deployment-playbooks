@@ -1,12 +1,16 @@
 ---
 
 - name: Create node.toml
-  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
+  template: src={{ item }}.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
   with_items:
    - node.toml
    
 - name: Setup ufw firewall
   import_tasks: ufw.yml
   when: not ansible_bios_version | search("amazon")
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true
 
 #- file: path={{ home }} owner={{ username }} group={{ username }} recurse=yes

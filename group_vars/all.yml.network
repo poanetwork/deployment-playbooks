@@ -1,5 +1,6 @@
 ---
-user: ubuntu
+ansible_user: ubuntu
+
 ansible_python_interpreter: /usr/bin/python3
 
 ssh_root:
@@ -23,4 +24,3 @@ GENESIS_NETWORK_NAME: "PoA"
 
 MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
 BLK_GAS_LIMIT: "6700000"
-

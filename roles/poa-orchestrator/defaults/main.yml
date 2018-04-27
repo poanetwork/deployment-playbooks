@@ -1,0 +1,9 @@
+---
+
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_SHA256: ""
+
+username: "poa"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
