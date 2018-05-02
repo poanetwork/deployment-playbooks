@@ -17,17 +17,13 @@
     - restart ufw
 
 - name: Add ufw ssh access
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  with_items:
-    - { rule: 'allow', port: '22', proto: 'tcp' }
+  ufw: rule='allow' port='22' proto='tcp'
   notify:
     - restart ufw
   when: allow_explorer_ssh == true
 
 - name: Add ufw https access
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  with_items:
-    - { rule: 'allow', port: '443', proto: 'tcp' }
+  ufw: rule='allow' port='443' proto='tcp'
   notify:
     - restart ufw
 
@@ -41,9 +37,7 @@
   when: allow_explorer_p2p == true
 
 - name: Add ufw http-3000 access
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  with_items:
-    - { rule: 'allow', port: '3000', proto: 'tcp' }
+  ufw: rule='allow' port='3000' proto='tcp'
   notify:
     - restart ufw
   when: allow_explorer_http == true
