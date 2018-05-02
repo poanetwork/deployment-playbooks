@@ -17,9 +17,7 @@
     - restart ufw
 
 - name: Add ufw ssh access
-  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
-  with_items:
-    - { rule: 'allow', port: '22', proto: 'tcp' }
+  ufw: rule='allow' port='22' proto='tcp'
   notify:
     - restart ufw
   when: allow_moc_ssh == true
