@@ -1,10 +1,10 @@
 ---
+
+become_method: sudo
+
 ansible_user: ubuntu
 
 ansible_python_interpreter: /usr/bin/python3
-
-ssh_root:
-    - "{{ lookup('file', 'files/admins.pub') }}"
 
 image: "ami-0b383171"
 region: "us-east-1"

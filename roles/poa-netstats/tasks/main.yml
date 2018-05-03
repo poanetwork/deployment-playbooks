@@ -32,7 +32,6 @@
 - name: install npm netstats
   npm:
     path: "{{ home }}/eth-net-intelligence-api"
-  become: true
   become_user: "{{ username }}"
   notify:
     - restart poa-netstats
