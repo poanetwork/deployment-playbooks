@@ -3,5 +3,5 @@
   template: src=poa-logrotate.conf.j2 dest={{ home }}/poa-logrotate.conf owner={{ username }} group={{ username }} mode=0644
 
 - name: Install poa-logrotate cron
-  cron: special_time=hourly job="/usr/sbin/logrotate {{ home }}/poa-logrotate.conf -s /home/bootnode/logrotate.status" user={{ username }} name="logrotate"
+  cron: special_time=hourly job="/usr/sbin/logrotate {{ home }}/poa-logrotate.conf -s {{ home }}/poa-logrotate.status" user={{ username }} name="poa-logrotate"
   #template: src=poa-logrotate.j2 dest=/etc/cron.hourly/poa-logrotate owner=root group=root mode=0755
