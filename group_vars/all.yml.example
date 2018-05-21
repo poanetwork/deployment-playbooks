@@ -42,7 +42,8 @@ PARITY_BIN_SHA256: "3604a030388cd2c22ebe687787413522106c697610426e09b3c5da4fe70b
 SCRIPTS_MOC_BRANCH: "master"
 SCRIPTS_VALIDATOR_BRANCH: "master"
 
-
+#Explicitly specifies method of privilege escalation
+become_method: sudo
 
 ###The following variables are node-specific. They should be kept in group_vars/<node>.yml set of files. Alternatively they can be specifed at <role>/vars/main.yml file.
 
@@ -142,10 +143,6 @@ api_version: "9773b5b"
 
 
 ###Those variables are intended to be specified by users. They don't have any reasonable defaults. Those variables should be specified at group_vars/<role> folder or at <role>/vars/main.yml.
-
-#Specifies the SSH public key file, that will be added to remote 'root' user as an authorized key
-#ssh_root:
-#    - "{{ lookup('file', 'files/admins.pub') }}"
 
 #Validator's mining keyfile content (json string)
 #MINING_KEYFILE: "INSERT HERE"

@@ -1,7 +1,4 @@
 ---
-- name: Add ssh keys for root
-  authorized_key: user=root key={{ item }} state=present exclusive=yes
-  with_items: "{{ ssh_root }}"
 
 - import_tasks: ssh.yml
 - import_tasks: packages.yml
