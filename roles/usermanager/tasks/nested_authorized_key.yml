@@ -3,9 +3,11 @@
   authorized_key: "user={{ outer_item.name }} key='{{ lookup('file', item) }}' state=present exclusive=yes"
   with_first_found:
     - files:
+      - "id_rsa.pub"
       - "ssh_{{ env }}_{{ outer_item.name }}_{{ inventory_hostname }}.pub"
       - "ssh_{{ env }}_{{ outer_item.name }}.pub"
       - "ssh_{{ env }}.pub"
       - "ssh_{{ outer_item.name }}.pub"
     - paths:
        - ../../../files
+       - ../../../../.
