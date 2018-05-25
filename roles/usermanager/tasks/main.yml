@@ -11,3 +11,4 @@
   with_items: "{{ users }}"
   loop_control:
     loop_var: outer_item
+  when: install_keys_to_service_user

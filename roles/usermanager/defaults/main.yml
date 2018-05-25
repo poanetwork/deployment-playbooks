@@ -1,5 +1,8 @@
 ---
 
+install_keys_to_service_user: false
+key_name: "id_rsa.pub"
+
 username: "poa"
 users:
   - name: "{{ username }}"

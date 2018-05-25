@@ -58,6 +58,10 @@ ansible_user: ubuntu
 #  - name: "{{ username }}"
 #home: "/home/{{ username }}"
 
+#Path to the public SSH key that will be installed to the service user
+install_keys_to_service_user: true
+key_name: "id_rsa.pub"
+
 #Node's descriptive name
 #NODE_FULLNAME: "INSERT NODENAME"
 
