@@ -71,6 +71,8 @@ key_name: "id_rsa.pub"
 #If this variable is set to "True" all the VMs will be rebooted after setup.
 reboot_after_completion: false
 
+"Path to spec.json file. If no file provided, spec.json will be downloaded from GitHub
+spec_json: ""
 
 ##Bootnode-related variables.
 
