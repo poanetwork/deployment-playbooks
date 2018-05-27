@@ -19,4 +19,4 @@ SCRIPTS_VALIDATOR_BRANCH: "mainnet"
 MAIN_REPO_FETCH: "poanetwork"
 BLK_GAS_LIMIT: "6700000"
 
-reboot_after_completion: true
+reboot_after_completion: false

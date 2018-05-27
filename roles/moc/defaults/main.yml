@@ -29,5 +29,5 @@ home: "/home/{{ username }}"
 
 moc_archive: "off"
 
-reboot_after_completion: true
+reboot_after_completion: false
 

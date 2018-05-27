@@ -14,4 +14,4 @@ home: "/home/{{ username }}"
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
 
-reboot_after_completion: true
+reboot_after_completion: false

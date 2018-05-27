@@ -22,4 +22,4 @@ home: "/home/{{ username }}"
 nginx_headers: "off"
 PROXY_PORT: "3000"
 
-reboot_after_completion: true
+reboot_after_completion: false
