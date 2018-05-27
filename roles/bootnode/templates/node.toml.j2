@@ -17,7 +17,7 @@ allow_ips = "public"
 
 [rpc]
 #apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
-apis = ["web3","eth","net"{{', "parity"' if (bootnode_orchestrator|default("off") == "on" or parity_api|default("off")) == "on"}}{{', "parity_set", "shh"' if bootnode_orchestrator|default("off") == "on"}}]
+apis = ["web3","eth","net"{{', "parity"' if (bootnode_orchestrator|default("off") == "on" or parity_api|default("off") == "on") else ''}}{{', "parity_set", "shh"' if bootnode_orchestrator|default("off") == "on" else ''}}]
 processing_threads = 4
 cors=["all"]
 
