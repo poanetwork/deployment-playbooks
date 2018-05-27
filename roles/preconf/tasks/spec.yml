@@ -1,8 +1,4 @@
 ---
-- name: Debug spec_json
-  debug:
-    var: spec_json
-
 - name: Copy spec.json to remote machine
   copy: src={{ spec_json }} dest={{ home }}/ mode=0644 group={{ username }} owner={{ username }}
   when: spec_json != ""
