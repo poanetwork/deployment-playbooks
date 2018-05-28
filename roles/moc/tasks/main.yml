@@ -16,31 +16,36 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
     dest: "{{ home }}/poa-scripts-moc"
     version: "{{ SCRIPTS_MOC_BRANCH }}"
+  when: terraform==false
 
 - name: Change owner and group of poa-scripts-moc file
   file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
-
+  when: terraform==false
+  
 - name: install npm initial_keys_script
   npm:
     path: "{{ home }}/poa-scripts-moc"
   become: true
   become_user: "{{ username }}"
+  when: terraform==false
 
 - name: install npm generateInitialKey
   npm:
     path: "{{ home }}/poa-scripts-moc/generateInitialKey"
   become: true
   become_user: "{{ username }}"
+  when: terraform==false
 
 - name: install npm distributeTokens
   npm:
     path: "{{ home }}/poa-scripts-moc/distributeTokens"
   become: true
   become_user: "{{ username }}"
+  when: terraform==false
 
 - name: Setup ufw firewall
   import_tasks: ufw.yml
-  when: not ansible_bios_version is search("amazon")
+  when: install_firewall
   
 - name: restart machine after setup
   shell: shutdown -r 1

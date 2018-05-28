@@ -49,6 +49,9 @@ become_method: sudo
 
 ##These variables are used in each role and usually propagated to the dependent roles. By default they are different for each role and it's highly recommended not to use single for multiple roles, escpecially when they are installed on the same machine. 
 
+#Should playbook install ufw firewall to the nodes or not.
+install_firewall: true
+
 #Which user will be used to connect to VMs
 ansible_user: ubuntu
 
@@ -58,7 +61,7 @@ ansible_user: ubuntu
 #  - name: "{{ username }}"
 #home: "/home/{{ username }}"
 
-#Path to the public SSH key that will be installed to the service user
+#Path to the public SSH key that will be installed to the service user.
 install_keys_to_service_user: true
 key_name: "id_rsa.pub"
 
