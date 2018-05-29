@@ -32,5 +32,3 @@ moc_archive: "off"
 reboot_after_completion: false
 
 install_firewall: true
-
-terraform: false
