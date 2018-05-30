@@ -6,3 +6,4 @@ key_name: "id_rsa.pub"
 username: "poa"
 users:
   - name: "{{ username }}"
+home: "/home/{{ username }}"
