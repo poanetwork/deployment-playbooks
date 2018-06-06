@@ -22,8 +22,8 @@ region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://d1h4xl4cr1h0mo.cloudfront.net/v1.10.0/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "3871bae2760050316c9c1131750a2dc3fd11e1b79cd5f7a1e09015264d4c5ea0"
+PARITY_BIN_LOC: "https://s3.us-east-2.amazonaws.com/poa-builds-parity-published/1.10.6/parity"
+PARITY_BIN_SHA256: "539f4788fbd605a9cd87b5bf747b27ae05b8a4080b26aa3da645b0446fa9f9cc"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
