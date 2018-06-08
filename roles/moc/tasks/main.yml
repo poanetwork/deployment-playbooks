@@ -16,6 +16,7 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
     dest: "{{ home }}/poa-scripts-moc"
     version: "{{ SCRIPTS_MOC_BRANCH }}"
+    force: yes
 
 - name: Change owner and group of poa-scripts-moc file
   file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
