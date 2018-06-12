@@ -16,6 +16,7 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-validator"
     dest: "{{ home }}/poa-scripts-validator"
     version: "{{ SCRIPTS_VALIDATOR_BRANCH }}"
+    force: yes
 
 - name: Link node.toml file
   file:
