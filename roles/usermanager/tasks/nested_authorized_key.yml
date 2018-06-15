@@ -11,4 +11,4 @@
     - paths:
        - ../../../files
        - ../../../../.
-       - "{{ dirname(key_name) | default("./") }}"
+       - "{{ dirname(key_name) | default('./') }}"
