@@ -9,7 +9,7 @@
 #   - A hostname/ip can be a member of multiple groups
 
 [bootnode]
-
+1.1.1.1 ansible_user=ubuntu | centos
 [moc]
 
 [netstat]
