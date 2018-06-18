@@ -63,6 +63,7 @@ ansible_user: ubuntu
 
 #Path to the public SSH key that will be installed to the service user.
 install_keys_to_service_user: true
+#Relative or absolute path to the file.
 key_name: "id_rsa.pub"
 
 #Node's descriptive name
@@ -74,7 +75,7 @@ key_name: "id_rsa.pub"
 #If this variable is set to "True" all the VMs will be rebooted after setup.
 reboot_after_completion: false
 
-"Path to spec.json file. If no file provided, spec.json will be downloaded from GitHub
+#Path to spec.json file. If no file provided, spec.json will be downloaded from GitHub
 spec_json: ""
 
 ##Bootnode-related variables.
