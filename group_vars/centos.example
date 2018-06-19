@@ -1,3 +1,4 @@
 # CentsOS-specific variables
 
 ansible_python_interpreter: /usr/bin/python
+ansible_user: centos
