@@ -1,3 +1,17 @@
+---                                                                                                                                     
+- name: Add EPEL repository                                                                                                             
+  yum_repository:                                                                                                                       
+    name: epel                                                                                                                          
+    description: EPEL YUM repo                                                                                                          
+    baseurl: "{{ epel_repo_url }}"                                                                                                      
+  when: ansible_os_family == "RedHat"                                                                                                   
+                                                                                                                                        
+- name: Import EPEL GPG key                                                                                                             
+  rpm_key:                                                                                                                              
+    key: "{{ epel_repo_gpg_key_url }}"                                                                                                  
+    state: present                                                                                                                      
+  when: ansible_os_family == "RedHat" 
+
 - name: Install packages                                                                                                                
   yum: name={{ item }} state=present update_cache=yes                                                                                   
   with_items:                                                                                                                           
