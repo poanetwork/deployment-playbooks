@@ -1,9 +1,6 @@
 ---
-- name: Install packages
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-    - haveged
-    - openssh-client
-    - sudo
-    - git
-    - build-essential
+- import_tasks: packages-ubuntu.yml
+  when: ansible_os_family == "Debian"
+
+- import_tasks: packages-centos.yml
+  when: ansible_os_family == "RedHat"
