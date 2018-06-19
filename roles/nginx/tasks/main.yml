@@ -37,10 +37,18 @@
     - python-devel
   when: ansible_os_family == "RedHat"
   
-- name: Ensure python OpenSSL dependencies are installed.
+- name: Install pyOpenSSL (Ubuntu).
   pip:
+    executable: pip3
     name: pyOpenSSL
     state: present
+  when: ansible_os_family == "Debian"
+ 
+- name: Install pyOpenSSL (Centos).                                                                      
+  pip:                                                                                                                                  
+    name: pyOpenSSL                                                                                                                     
+    state: present 
+  when: ansible_os_family == "RedHat" 
 
 - name: Create directory for nginx SSL certificates
   file: path=/etc/nginx/ssl state=directory mode=0755
