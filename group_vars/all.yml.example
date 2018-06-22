@@ -53,7 +53,10 @@ become_method: sudo
 install_firewall: true
 
 #Which user will be used to connect to VMs
-ansible_user: ubuntu
+#ansible_user: ubuntu
+
+#Choose if to install debug tools 
+install_debug_tools: "no"
 
 #User's name and directory, which will be used to execute role from. 
 #username: "<role>"

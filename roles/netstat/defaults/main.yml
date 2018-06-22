@@ -23,5 +23,5 @@ nginx_headers: "off"
 PROXY_PORT: "3000"
 
 reboot_after_completion: false
-
+install_debug_tools: "no"
 install_firewall: true

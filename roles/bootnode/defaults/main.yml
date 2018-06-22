@@ -16,5 +16,5 @@ bootnode_orchestrator: "off"
 parity_api: "off"
 
 reboot_after_completion: false
-
+install_debug_tools: "no"
 install_firewall: true

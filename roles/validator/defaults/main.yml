@@ -21,5 +21,5 @@ MAIN_REPO_FETCH: "poanetwork"
 BLK_GAS_LIMIT: "6700000"
 
 reboot_after_completion: false
-
+install_debug_tools: "no"
 install_firewall: true

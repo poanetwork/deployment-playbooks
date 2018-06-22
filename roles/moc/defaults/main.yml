@@ -30,5 +30,5 @@ home: "/home/{{ username }}"
 moc_archive: "off"
 
 reboot_after_completion: false
-
+install_debug_tools: "no"
 install_firewall: true
