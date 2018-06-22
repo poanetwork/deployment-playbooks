@@ -77,6 +77,8 @@ reboot_after_completion: false
 
 #Path to spec.json file. If no file provided, spec.json will be downloaded from GitHub
 spec_json: ""
+#Path to bootnodes.txt. Must be provided if spec_json specified
+bootnodes_txt: ""
 
 ##Bootnode-related variables.
 
