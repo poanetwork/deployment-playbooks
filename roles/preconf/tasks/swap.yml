@@ -20,6 +20,7 @@
   file: path=/swapfile owner=root group=root mode=0600
 
 - name: add swap file to system
+  become: true
   shell: /sbin/swapon /swapfile
   when: not swap_file_check.stat.exists
   tags:
