@@ -13,6 +13,7 @@ home: "/home/{{ username }}"
 
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
+bootnode_dapps: "off"
 parity_api: "off"
 
 reboot_after_completion: false

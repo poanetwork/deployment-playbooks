@@ -24,8 +24,10 @@ cors=["all"]
 [ui]
 disable = true
 
+{% if bootnode_dapps|default("off") == "on" %}
 [dapps]
 disable = true
+{% endif %}
 
 {% if bootnode_archive|default("off") == "on" %}
 [snapshots]

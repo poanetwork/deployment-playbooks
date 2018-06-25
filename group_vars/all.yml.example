@@ -96,6 +96,8 @@ allow_bootnode_rpc: false
 bootnode_archive: "off"
 #Specifies whether or not parity-orchestrator should be installed on this node and parity configured to use whisper
 bootnode_orchestrator: "off"
+#Specifies whether or not dapps should be enabled on bootnode
+bootnode_dapps: "off"
 
 
 ##Explorer-related variables
