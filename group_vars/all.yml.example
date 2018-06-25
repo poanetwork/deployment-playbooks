@@ -49,14 +49,25 @@ become_method: sudo
 
 ##These variables are used in each role and usually propagated to the dependent roles. By default they are different for each role and it's highly recommended not to use single for multiple roles, escpecially when they are installed on the same machine. 
 
+#Should playbook install ufw firewall to the nodes or not.
+install_firewall: true
+
 #Which user will be used to connect to VMs
-ansible_user: ubuntu
+#ansible_user: ubuntu
+
+#Choose if to install debug tools 
+install_debug_tools: "no"
 
 #User's name and directory, which will be used to execute role from. 
 #username: "<role>"
 #users:
 #  - name: "{{ username }}"
 #home: "/home/{{ username }}"
+
+#Path to the public SSH key that will be installed to the service user.
+install_keys_to_service_user: true
+#Relative or absolute path to the file.
+key_name: "id_rsa.pub"
 
 #Node's descriptive name
 #NODE_FULLNAME: "INSERT NODENAME"
@@ -67,6 +78,10 @@ ansible_user: ubuntu
 #If this variable is set to "True" all the VMs will be rebooted after setup.
 reboot_after_completion: false
 
+#Path to spec.json file. If no file provided, spec.json will be downloaded from GitHub
+spec_json: ""
+#Path to bootnodes.txt. Must be provided if spec_json specified
+bootnodes_txt: ""
 
 ##Bootnode-related variables.
 

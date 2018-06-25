@@ -16,10 +16,11 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
     dest: "{{ home }}/poa-scripts-moc"
     version: "{{ SCRIPTS_MOC_BRANCH }}"
+    force: yes
 
 - name: Change owner and group of poa-scripts-moc file
   file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
-
+  
 - name: install npm initial_keys_script
   npm:
     path: "{{ home }}/poa-scripts-moc"
@@ -40,7 +41,7 @@
 
 - name: Setup ufw firewall
   import_tasks: ufw.yml
-  when: not ansible_bios_version | search("amazon")
+  when: install_firewall
   
 - name: restart machine after setup
   shell: shutdown -r 1

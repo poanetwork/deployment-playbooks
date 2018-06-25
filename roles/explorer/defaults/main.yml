@@ -18,3 +18,7 @@ MAIN_REPO_FETCH: "poanetwork"
 MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
 
 explorer_version: "acee07c"
+
+reboot_after_completion: false
+install_debug_tools: "no"
+install_firewall: true

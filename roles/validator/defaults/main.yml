@@ -5,6 +5,7 @@ user: ubuntu
 username: "poa"
 users:
   - name: "{{ username }}"
+home: "/home/{{ username }}"
 
 allow_validator_ssh: true
 allow_validator_p2p: true
@@ -15,6 +16,10 @@ NODE_PWD: "node.pwd" # don't change this one
 MINING_KEYFILE: ""
 MINING_KEYPASS: ""
 MINING_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
-SCRIPTS_VALIDATOR_BRANCH: "mainnet"
+SCRIPTS_VALIDATOR_BRANCH: "master"
 MAIN_REPO_FETCH: "poanetwork"
 BLK_GAS_LIMIT: "6700000"
+
+reboot_after_completion: false
+install_debug_tools: "no"
+install_firewall: true
