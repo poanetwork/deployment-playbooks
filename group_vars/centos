@@ -1,0 +1,11 @@
+# CentsOS-specific variables
+
+## Ansible use this to establish connection
+ansible_python_interpreter: /usr/bin/python
+ansible_user: centos
+
+## Network related variables, that are distro dependent
+PARITY_BIN_LOC: "https://releases.parity.io/v1.10.6/x86_64-unknown-centos-gnu/parity"
+PARITY_BIN_SHA256: "9dd5495cadc39c90b1e40a7b3a449821bab84e55d489a688cf5b1c68c4852254"
+ORCHESTRATOR_BIN_LOC: ""
+ORCHESTRATOR_BIN_SHA256: ""
