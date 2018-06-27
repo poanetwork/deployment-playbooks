@@ -27,17 +27,6 @@ MOC_ADDRESS: "INSERT HERE"
 #name of the file to store password. Should not be changed
 NODE_PWD: "node.pwd"
 
-#url of the nodejs deb package to use, most importantly - version number
-NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-
-#url and sha256 checksum of the parity-orchestrator binary file
-ORCHESTRATOR_BIN_LOC: ""
-ORCHESTRATOR_BIN_SHA256: ""
-
-#url and sha256 checksum of the parity binary file
-PARITY_BIN_LOC: "https://s3.us-east-2.amazonaws.com/poa-builds-parity-published/1.10.6/parity"
-PARITY_BIN_SHA256: "539f4788fbd605a9cd87b5bf747b27ae05b8a4080b26aa3da645b0446fa9f9cc"
-
 #branch of poa-scripts-moc and poa-scripts-validator to use
 SCRIPTS_MOC_BRANCH: "master"
 SCRIPTS_VALIDATOR_BRANCH: "master"
