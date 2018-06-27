@@ -1,4 +1,5 @@
 ---
 epel_key_url: "https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL"
 node_source_deb: "https://deb.nodesource.com/node_8.x"
+node_source_rpm: "https://rpm.nodesource.com/pub_8.x/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
 node_key_id: "68576280"
