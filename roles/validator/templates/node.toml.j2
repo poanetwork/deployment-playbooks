@@ -10,7 +10,6 @@ reserved_peers="{{ home }}/bootnodes.txt"
 nat="extip:{{ ansible_host }}"
 port = 30303
 max_peers = 100
-snapshot_peers = 25
 {% if validator_archive|default("off") == "on" %}
 discovery = false
 {% endif %}
