@@ -5,14 +5,14 @@ server {
 
   ssl_certificate      /etc/nginx/ssl/server.crt;
   ssl_certificate_key  /etc/nginx/ssl/server.key;
-  ssl_dhparam  	       /etc/nginx/ssl/dhparam.pem;
+  ssl_dhparam          /etc/nginx/ssl/dhparam.pem;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
   ssl_prefer_server_ciphers on;
   ssl_ciphers HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4;
 
   server_name _;
+  client_max_body_size 128k;
 
-    
   access_log /dev/null;
 
   location / {
