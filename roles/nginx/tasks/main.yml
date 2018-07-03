@@ -8,7 +8,29 @@
     name: "python3-pip"
     state: present
 
-- name: Ensure python OpenSSL dependencies are installed.
+- name: Ensure OpenSSL dependencies are installed (Ubuntu)
+  package:
+     name: "{{ item }}"
+     state: present
+  with_items: 
+    - build-essential
+    - libssl-dev
+    - libffi-dev
+    - python-dev
+  when: ansible_os_family == "Debian"
+ 
+- name: Ensure OpenSSL dependencies are installed (CentOS)
+  package:
+     name: "{{ item }}"
+     state: present
+  with_items: 
+    - gcc
+    - libffi-devel
+    - openssl-devel
+    - python-devel
+  when: ansible_os_family == "RedHat"
+
+- name: Install OpenSSL module
   pip:
     name: pyOpenSSL
     state: present
@@ -46,16 +68,12 @@
   when: not cert_file_check.stat.exists
 
 - name: Install nginx.conf
-  template: src={{ item }}.j2 dest=/etc/nginx/ssl/{{ item }} owner=root group=root mode=0644
-  with_items:
-   - dhparam.pem
+  template: src=dhparam.pem.j2 dest=/etc/nginx/ssl/dhparam.pem owner=root group=root mode=0644
   notify:
    - reload nginx
 
 - name: Install nginx conf.d files
-  template: src={{ item }}.j2 dest=/etc/nginx/conf.d/{{ item }} owner=root group=root mode=0644
-  with_items:
-   - default.conf
+  template: src=default.conf.j2 dest=/etc/nginx/conf.d/default.conf owner=root group=root mode=0644
   notify:
    - reload nginx
   tags: nginx
@@ -63,3 +81,8 @@
 - name: Ensure nginx is running and enabled to start at boot
   service: name=nginx state=started enabled=yes
   tags: nginx
+  
+- name: executing vars.yml
+  import_tasks: vars.yml
+  when: configure_extended_tcp_settings == true
+  

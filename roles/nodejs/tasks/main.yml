@@ -10,12 +10,8 @@
 
 - name: Add nodejs repository
   apt_repository:
-    repo: 'deb {{ NODE_SOURCE_DEB }} {{ansible_distribution_release}} main'
+    repo: 'deb {{ NODE_SOURCE_DEB }} {{ ansible_distribution_release }} main'
     state: present
 
-- name: Install nodejs packages
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-    - nodejs
-
-
+- name: Install nodejs package
+  apt: name=nodejs state=present update_cache=yes

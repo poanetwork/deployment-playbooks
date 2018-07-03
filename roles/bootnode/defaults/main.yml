@@ -1,14 +1,20 @@
 ---
-username: "bootnode"
-users:
-  - name: "{{ username }}"
-home: "/home/{{ username }}"
-nginx_headers: "on"
-PROXY_PORT: "8545"
+
+user: ubuntu
 
 allow_bootnode_ssh: true
 allow_bootnode_p2p: true
 allow_bootnode_rpc: false
 
+username: "bootnode"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
 bootnode_archive: "off"
 bootnode_orchestrator: "off"
+parity_api: "off"
+
+reboot_after_completion: false
+install_debug_tools: "no"
+install_firewall: true

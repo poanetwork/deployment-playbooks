@@ -1,30 +1,7 @@
 ---
-- name: Create directory parity_data/keys/NetworkName
-  file:
-    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Download spec.json
-  get_url: url={{ item }} dest={{ home }}/ mode=0644
-  with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
 
 - name: Create node.toml
-  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
-  with_items:
-   - node.toml
+  template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
 
 - name: Install {{ NODE_PWD }} file
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
@@ -39,6 +16,7 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-validator"
     dest: "{{ home }}/poa-scripts-validator"
     version: "{{ SCRIPTS_VALIDATOR_BRANCH }}"
+    force: yes
 
 - name: Link node.toml file
   file:
@@ -61,3 +39,11 @@
 
 - name: Install Payout task.
   template: src=transferRewardToPayoutKey.j2 dest=/etc/cron.hourly/transferRewardToPayoutKey owner=root group=root mode=0755
+  
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: install_firewall
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true

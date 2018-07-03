@@ -1,0 +1,17 @@
+NODE_FULLNAME: "INSERT NODENAME"
+NODE_ADMIN_EMAIL: "INSERT@EMAIL"
+
+NETSTATS_SECRET: "INSERT SECRET"
+
+username: "netstat"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+configure_extended_tcp_settings: false
+nginx_headers: "off"
+PROXY_PORT: "3000"
+NETSTATS_SERVER: "http://localhost:3000"
+
+install_debug_tools: "yes"
+reboot_after_completion: false

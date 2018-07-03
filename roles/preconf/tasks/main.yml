@@ -1,7 +1,4 @@
 ---
-- name: Add ssh keys for root
-  authorized_key: user=root key={{ item }} state=present exclusive=yes
-  with_items: "{{ ssh_root }}"
 
 - import_tasks: ssh.yml
 - import_tasks: packages.yml
@@ -9,3 +6,8 @@
 - import_tasks: chrony.yml
 - import_tasks: logrotate.yml
 - import_tasks: swap.yml
+- import_tasks: logs.yml
+- import_tasks: keys.yml
+  when: "'netstat' not in ansible_hostname"
+- import_tasks: spec.yml
+  when: "'netstat' not in ansible_hostname"

@@ -1,12 +1,27 @@
 ---
+
+user: ubuntu
+
+allow_netstat_ssh: true
+allow_netstat_http: true
+
+netstat_version: "cb431d6"
+
+NETSTATS_SERVER: "http://localhost:3000"
+NETSTATS_SECRET: ""
+MAIN_REPO_FETCH: "poanetwork"
+
+NODE_FULLNAME: "netstat"
+NODE_ADMIN_EMAIL: ""
+
 username: "netstat"
 users:
   - name: "{{ username }}"
 home: "/home/{{ username }}"
 
-allow_netstat_ssh: true
-allow_netstat_http: true
-
 nginx_headers: "off"
 PROXY_PORT: "3000"
-NETSTATS_SERVER: "http://localhost:3000"
+
+reboot_after_completion: false
+install_debug_tools: "no"
+install_firewall: true

@@ -1,8 +1,6 @@
 ---
 - name: Install chrony package
-  apt: name={{ item }}
-  with_items:
-    - chrony
+  apt: name=chrony
 
 - name: Select Amazon time server
   lineinfile:
@@ -12,7 +10,6 @@
     state: present
   notify:
     - restart chrony
-
 
 - name: Ensure chrony is running and enabled to start at boot
   service: name=chrony state=started enabled=yes

@@ -6,8 +6,7 @@ Type=oneshot
 RemainAfterExit=true
 User={{ username }}
 Group={{ username }}
-Environment=MYVAR=myval
-WorkingDirectory=/home/{{ username }}/chain-explorer
+WorkingDirectory={{ home }}/chain-explorer
 ExecStart=/usr/bin/pm2 startOrRestart app.json
 [Install]
 WantedBy=multi-user.target

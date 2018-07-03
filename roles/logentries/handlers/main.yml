@@ -1,3 +1,0 @@
----
-- name: restart logentries
-  service: name=logentries state=restarted
