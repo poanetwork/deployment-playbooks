@@ -9,10 +9,10 @@ auto_update = "all"
 reserved_peers="{{ home }}/bootnodes.txt"
 nat="extip:{{ ansible_host }}"
 port = 30303
+max_peers = 100
+snapshot_peers = 25
 {% if bootnode_archive|default("off") == "on" %}
-snapshot_peers = 500
 discovery = false
-allow_ips = "public"
 {% endif %}
 
 [rpc]
