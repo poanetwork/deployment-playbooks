@@ -27,7 +27,7 @@
         line: 'server 169.254.169.123 prefer iburst'
         state: present
       notify:
-        - restart chrony
+        - restart chrony centos
       when: ansible_bios_version is search("amazon")
 
     - name: preconf.chrony - ensure chrony is running and enabled to start at boot
