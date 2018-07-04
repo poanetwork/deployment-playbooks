@@ -2,10 +2,51 @@
 ssh_root:
     - "{{ lookup('file', 'files/admins.pub') }}"
 
-awskeypair_name: "keypairname"
+###############################################################################
+# This are default ubuntu variaibles. Comment them and uncomment necessary vars
+# below. Be aware about ami_id, it's region specific
+###############################################################################
+
+# Ubuntu ami id for us-east-1. Select your one, if region changed.
+
 image: "ami-0b383171"
+
+# Ansible ssh user for Ubuntu
+
+ansible_user: ubuntu
+
+# Python bin location 
+
+ansible_python_interpreter: /usr/bin/python3
+
+##############################################################################
+#  This is Centos specific variables. Please uncomment and use them, if Centos 
+# is the distro of your choice. AMI id in "image" variable is region specific,
+# so please be aware and select right one here
+###############################################################################
+
+# Your Centos image id. us-east-1 Centos 7  image is defaulted
+#image: ami-9887c6e7
+
+# User, used by ansible to ssh to host
+
+#ansible_user: centos
+
+# Python bin location, needed by ansible. Python2 or Python3 may be used in 
+# different distros. Centos 7 uses Python2
+
+#ansible_python_interpreter: /usr/bin/python
+
+################################################################################
+#  This is distro independent AWS related variables. Configure them for your
+# aws infrastructure 
+################################################################################
+
+awskeypair_name: "keypairname"
 region: "us-east-1"
 vpc_subnet_id: "subnet-ID-number"
+
+
 
 MAIN_REPO_FETCH: "poanetwork"
 GENESIS_BRANCH: "master"
