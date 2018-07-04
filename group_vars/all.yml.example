@@ -38,9 +38,6 @@ become_method: sudo
 
 ##These variables are used in each role and usually propagated to the dependent roles. By default they are different for each role and it's highly recommended not to use single for multiple roles, escpecially when they are installed on the same machine. 
 
-#Which user will be used to connect to VMs
-ansible_user: ubuntu
-
 #User's name and directory, which will be used to execute role from. 
 #username: "<role>"
 #users:

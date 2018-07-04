@@ -2,13 +2,6 @@
 
 become_method: sudo
 
-ansible_user: ubuntu
-
-ansible_python_interpreter: /usr/bin/python3
-
-image: "ami-0b383171"
-region: "us-east-1"
-
 NODE_PWD: "node.pwd" # don't change this one
 
 SCRIPTS_MOC_BRANCH: "mainnet"
