@@ -16,6 +16,7 @@
     repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-validator"
     dest: "{{ home }}/poa-scripts-validator"
     version: "{{ SCRIPTS_VALIDATOR_BRANCH }}"
+    force: yes
 
 - name: Link node.toml file
   file:
@@ -41,7 +42,7 @@
   
 - name: Setup ufw firewall
   import_tasks: ufw.yml
-  when: not ansible_bios_version | search("amazon")
+  when: install_firewall
   
 - name: restart machine after setup
   shell: shutdown -r 1
