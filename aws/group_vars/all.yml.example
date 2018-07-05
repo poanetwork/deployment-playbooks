@@ -42,11 +42,14 @@ ansible_python_interpreter: /usr/bin/python3
 # aws infrastructure 
 ################################################################################
 
+# Access and secret keys, to make access to your AWS possible
+ 
+access_key: XXXX
+secret_key: XXXX
+
 awskeypair_name: "keypairname"
 region: "us-east-1"
 vpc_subnet_id: "subnet-ID-number"
-
-
 
 MAIN_REPO_FETCH: "poanetwork"
 GENESIS_BRANCH: "master"
