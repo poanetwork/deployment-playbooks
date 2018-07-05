@@ -1,5 +1,8 @@
 files/*.pub
 *.retry
+
+aws/group_vars/all.yml
+
 group_vars/all.yml
 group_vars/all
 group_vars/bootnode
