@@ -1,0 +1,33 @@
+---
+- name: preconf.chrony - check if NTP is installed
+  become: yes
+  become_user: root
+  command: "systemctl is-active ntp"
+  register: ntp_active
+  failed_when: ntp_active.rc not in [0,3]
+
+- name: chrony
+  become: yes
+  become_user: root
+  when: ntp_active.stdout == "inactive"
+  block:
+    - name: preconf.Chrony - install package
+      apt:
+        name: chrony
+        update_cache: yes
+
+    - name: preconf.chrony - select amazon time server (for AWS)
+      lineinfile:
+        dest: /etc/chrony/chrony.conf
+        insertafter: '^pool'
+        line: 'server 169.254.169.123 prefer iburst'
+        state: present
+      notify:
+        - restart chrony ubuntu
+      when: ansible_bios_version is search("amazon")
+
+    - name: preconf.chrony - ensure chrony is running and enabled to start at boot
+      service:
+        name: chrony
+        state: started
+        enabled: yes

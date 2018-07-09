@@ -1,17 +1,6 @@
 ---
-- name: Ensure apt-transport-https is installed.
-  apt: name=apt-transport-https state=present
+- import_tasks: ubuntu.yml
+  when: ansible_os_family == "Debian"
 
-- name: add nodejs repository key
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 68576280
-    state: present
-
-- name: Add nodejs repository
-  apt_repository:
-    repo: 'deb {{ NODE_SOURCE_DEB }} {{ ansible_distribution_release }} main'
-    state: present
-
-- name: Install nodejs package
-  apt: name=nodejs state=present update_cache=yes
+- import_tasks: centos.yml
+  when: ansible_os_family == "RedHat"

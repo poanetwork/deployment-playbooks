@@ -1,12 +1,19 @@
 ---
 - name: Install nginx
-  apt: name=nginx state=present
+  package: name=nginx state=present
   tags: nginx
 
-- name: Install Pip
-  apt:
+- name: Install Pip (Ubuntu)
+  package:
     name: "python3-pip"
     state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Pip (CentOS)
+  package:
+    name: "python-pip"
+    state: present
+  when: ansible_os_family == "RedHat"
 
 - name: Ensure OpenSSL dependencies are installed (Ubuntu)
   package:
@@ -29,11 +36,19 @@
     - openssl-devel
     - python-devel
   when: ansible_os_family == "RedHat"
-
-- name: Install OpenSSL module
+  
+- name: Install pyOpenSSL (Ubuntu).
   pip:
+    executable: pip3
     name: pyOpenSSL
     state: present
+  when: ansible_os_family == "Debian"
+ 
+- name: Install pyOpenSSL (Centos).                                                                      
+  pip:                                                                                                                                  
+    name: pyOpenSSL                                                                                                                     
+    state: present 
+  when: ansible_os_family == "RedHat" 
 
 - name: Create directory for nginx SSL certificates
   file: path=/etc/nginx/ssl state=directory mode=0755

@@ -3,7 +3,7 @@
 # sudo ufw status verbose
 
 - name: Install ufw
-  apt: package=ufw state=present
+  package: name=ufw state=present
 
 - name: Clean old rules
   ufw: state=reset

@@ -2,8 +2,11 @@
 - name: restart ntpd
   service: name=ntpd state=restarted
 
-- name: restart chrony
-  service: name=chrony state=restarted
-
 - name: restart sshd
   service: name=sshd state=restarted
+
+- name: restart chrony ubuntu
+  service: name=chrony state=restarted
+
+- name: restart chrony centos                                                                                                           
+  service: name=chronyd state=restarted  
