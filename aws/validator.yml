@@ -36,7 +36,7 @@
   tasks:
     - name: Launch instance
       ec2:
-        id: "{{ bootnode_instance_name }}"
+        id: "{{ validator_instance_name }}"
         ec2_access_key: "{{ access_key }}"
         ec2_secret_key: "{{ secret_key }}"
         key_name: "{{ awskeypair_name }}"
