@@ -17,7 +17,7 @@ ntpservers:
   - "server 2.us.pool.ntp.org"
   - "server 3.us.pool.ntp.org"
 
-image: "ami-0b383171"
+image: "ami-5c150e23"
 region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
@@ -37,7 +37,7 @@ MOC_ADDRESS: "0xe8ddc5c7a2d2f0d7a9798459c0104fdf5e987aca"
 BLK_GAS_LIMIT: "8000000"
 
 #bootnode
-bootnode_instance_type: "t2.large"
+bootnode_instance_type: "t2.xlarge"
 bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
 bootnode_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-bootnode-security"
@@ -45,13 +45,13 @@ bootnode_archive: "off"
 bootnode_orchestrator: "off"
 
 #netstat
-netstat_instance_type: "t2.large"
+netstat_instance_type: "t2.xlarge"
 netstat_instance_name: "netstat"
 netstat_count_instances: "1"
 netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-security"
 
 #validator
-validator_instance_type: "t2.large"
+validator_instance_type: "t2.xlarge"
 validator_instance_name: "validator"
 validator_count_instances: "1"
 validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
@@ -65,7 +65,7 @@ moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
 moc_archive: "off"
 
 #explorer
-explorer_instance_type: "t2.large"
+explorer_instance_type: "t2.xlarge"
 explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
