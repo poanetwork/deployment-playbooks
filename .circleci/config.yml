@@ -75,7 +75,8 @@ jobs:
     docker:
       - image: poanetwork/terraform-prep
     working_directory: ~/deployment-terraform/azure
-
+    
+    steps:
       - run:
           command: git clone $terraform_repo ~/deployment-terraform/
           
