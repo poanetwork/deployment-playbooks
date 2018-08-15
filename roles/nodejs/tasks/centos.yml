@@ -1,0 +1,13 @@
+---
+- name: Import Nodesource RPM key
+  rpm_key:
+    key: "{{ epel_key_url }}"
+    state: present
+
+- name: Add Nodesource repositories for Node.js
+  yum:
+    name: "{{ node_source_rpm }}" 
+    state: present
+
+- name: Ensure Node.js and npm are installed.
+  yum: "name=nodejs state=present enablerepo='epel,nodesource'"

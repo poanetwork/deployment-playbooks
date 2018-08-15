@@ -9,12 +9,15 @@
 #   - A hostname/ip can be a member of multiple groups
 
 [bootnode]
+node01.example.com
 
 [moc]
+node02.example.com
 
 [netstat]
 
 [validator]
+node03.example.com
 
 [explorer]
 
@@ -24,3 +27,10 @@ moc
 netstat
 validator
 explorer
+
+[centos]
+node03.example.com
+
+[ubuntu]
+node01.example.com
+node02.example.com

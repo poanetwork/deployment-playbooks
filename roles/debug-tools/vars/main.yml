@@ -1,0 +1,2 @@
+epel_repo_url: "https://download.fedoraproject.org/pub/epel/$releasever/$basearch/"
+epel_repo_gpg_key_url: "https://getfedora.org/static/352C64E5.txt"

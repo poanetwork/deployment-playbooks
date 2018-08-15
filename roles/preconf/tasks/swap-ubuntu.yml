@@ -1,0 +1,30 @@
+---
+- name: Check if swap file exists (Ubuntu)
+  stat:
+    path: /swapfile
+  register: swap_file_check
+
+- name: create file for swap (Ubuntu)
+  shell: /usr/bin/fallocate -l 1G /swapfile
+  when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
+
+- name: format swap file (Ubuntu)
+  shell: /sbin/mkswap /swapfile
+  when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
+
+- name: set permission to swap file (Ubuntu)
+  file: path=/swapfile owner=root group=root mode=0600
+
+- name: add swap file to system (Ubuntu)
+  become: true
+  shell: /sbin/swapon /swapfile
+  when: not swap_file_check.stat.exists
+  tags:
+    - skip_ansible_lint
+
+- name: write changes to fstab (Ubuntu)
+  mount: name=none src=/swapfile fstype=swap opts=sw passno=0 dump=0 state=present
