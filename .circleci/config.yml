@@ -7,10 +7,10 @@ jobs:
 
     steps:      
       - run:
-          command: git clone --force $terraform_repo ~/deployment-terraform/
+          command: rm -R ~/deployment-terraform/ && git clone $terraform_repo ~/deployment-terraform/
           
       - run:
-          command: git checkout $terraform_branch ~/deployment-terraform/
+          command: git checkout $terraform_branch
 
       - run:
           name: adjust configs
@@ -44,10 +44,10 @@ jobs:
 
     steps:      
       - run:
-          command: git clone --force $terraform_repo ~/deployment-terraform/
+          command: rm -R ~/deployment-terraform/ && git clone $terraform_repo ~/deployment-terraform/
           
       - run:
-          command: git checkout $terraform_branch ~/deployment-terraform/
+          command: git checkout $terraform_branch
           
       - attach_workspace:
           at: /tmp/hosts/
@@ -78,10 +78,10 @@ jobs:
     
     steps:
       - run:
-          command: git clone --force $terraform_repo ~/deployment-terraform/
+          command: rm -R ~/deployment-terraform/ && git clone $terraform_repo ~/deployment-terraform/
           
       - run:
-          command: git checkout $terraform_branch ~/deployment-terraform/
+          command: git checkout $terraform_branch
           
       - run:
           name: adjust configs
