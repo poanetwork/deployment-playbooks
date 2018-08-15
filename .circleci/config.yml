@@ -1,0 +1,111 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: poanetwork/terraform-prep
+    working_directory: ~/deployment-terraform/azure
+
+    steps:      
+      - run:
+          command: git clone $terraform_repo ~/deployment-terraform/
+          
+      - run:
+          command: git checkout $terraform_branch ~/deployment-terraform/
+
+      - run:
+          name: adjust configs
+          command: echo $config_file | base64 --decode > ~/deployment-terraform/azure/group_vars/all.yml
+
+      - run:
+          name: set id_rsa.pub
+          command: echo $pub_key > ~/deployment-terraform/azure/id_rsa.pub
+
+      - run:
+          name: deploy infra
+          command: bash -c "ansible-playbook site.yml -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' $build_attr"
+          no_output_timeout: 2000
+      
+      - run:
+          name: Save artifacts
+          command: bash -c "ansible-playbook -i ~/deployment-terraform/azure/outputs/latest_deploy_hosts download_outputs.yml -e 'destination=/tmp/artifacts' -e 'terraform_location=/usr/local/bin/terraform' $build_attr"
+      
+      - store_artifacts:
+          path: /tmp/artifacts
+
+      - persist_to_workspace:
+          root: ~/deployment-terraform/azure/outputs/
+          paths:
+            - latest_deploy_hosts
+  
+  test:
+    docker:
+      - image: poanetwork/terraform-prep
+    working_directory: ~/deployment-terraform/azure
+
+    steps:      
+      - run:
+          command: git clone $terraform_repo ~/deployment-terraform/
+          
+      - run:
+          command: git checkout $terraform_branch ~/deployment-terraform/
+          
+      - attach_workspace:
+          at: /tmp/hosts/
+
+      - run:
+          name: adjust configs
+          command: echo $config_file | base64 --decode > ~/deployment-terraform/azure/group_vars/all.yml
+
+      - run:
+          name: set id_rsa.pub
+          command: echo $pub_key > ~/deployment-terraform/azure/id_rsa.pub
+      
+      - run:
+          name: check network
+          command: bash -c "ansible-playbook tests.yml -i /tmp/hosts/latest_deploy_hosts -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' $tests_attr"
+  
+      - run:
+          name: Save artifacts
+          command: bash -c "ansible-playbook -i /tmp/hosts/latest_deploy_hosts download_outputs.yml -e 'destination=/tmp/artifacts' -e 'terraform_location=/usr/local/bin/terraform' $tests_attr"  
+  
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  destroy:
+    docker:
+      - image: poanetwork/terraform-prep
+    working_directory: ~/deployment-terraform/azure
+
+      - run:
+          command: git clone $terraform_repo ~/deployment-terraform/
+          
+      - run:
+          command: git checkout $terraform_branch ~/deployment-terraform/
+          
+      - run:
+          name: adjust configs
+          command: echo $config_file | base64 --decode > ~/deployment-terraform/azure/group_vars/all.yml
+
+      - run:
+          name: set id_rsa.pub
+          command: echo $pub_key > ~/deployment-terraform/azure/id_rsa.pub
+          
+      - run:
+          name: destroy infra
+          command: bash -c "ansible-playbook destroy.yml -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' $destroy_attr"
+
+workflows:
+  version: 2
+  test_and_destroy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - approve_destroy:
+          type: approval
+          requires:
+            - build
+      - destroy:
+          requires:
+            - approve_destroy
