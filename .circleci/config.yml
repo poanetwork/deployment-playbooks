@@ -7,7 +7,7 @@ jobs:
 
     steps:      
       - run:
-          command: git clone $terraform_repo ~/deployment-terraform/
+          command: git clone --force $terraform_repo ~/deployment-terraform/
           
       - run:
           command: git checkout $terraform_branch ~/deployment-terraform/
@@ -44,7 +44,7 @@ jobs:
 
     steps:      
       - run:
-          command: git clone $terraform_repo ~/deployment-terraform/
+          command: git clone --force $terraform_repo ~/deployment-terraform/
           
       - run:
           command: git checkout $terraform_branch ~/deployment-terraform/
@@ -78,7 +78,7 @@ jobs:
     
     steps:
       - run:
-          command: git clone $terraform_repo ~/deployment-terraform/
+          command: git clone --force $terraform_repo ~/deployment-terraform/
           
       - run:
           command: git checkout $terraform_branch ~/deployment-terraform/
