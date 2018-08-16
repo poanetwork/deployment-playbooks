@@ -105,8 +105,6 @@ workflows:
             - build
       - approve_destroy:
           type: approval
-          requires:
-            - build
       - destroy:
           requires:
             - approve_destroy
