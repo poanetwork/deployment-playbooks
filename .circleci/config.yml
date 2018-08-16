@@ -93,6 +93,7 @@ jobs:
       - run:
           name: destroy infra
           command: bash -c "ansible-playbook destroy.yml -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' $destroy_attr"
+          no_output_timeout: 2000
 
 workflows:
   version: 2
