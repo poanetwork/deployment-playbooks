@@ -26,7 +26,7 @@ jobs:
       
       - run:
           name: Save artifacts
-          command: bash -c "ansible-playbook -i ~/deployment-terraform/azure/outputs/latest_deploy_hosts download_outputs.yml -e 'destination=/tmp/artifacts' -e 'terraform_location=/usr/local/bin/terraform' $build_attr"
+          command: bash -c "ansible-playbook -i ~/deployment-terraform/azure/outputs/latest_deploy_hosts download_outputs.yml -t build -e 'destination=/tmp/artifacts' -e 'terraform_location=/usr/local/bin/terraform' $build_attr"
       
       - store_artifacts:
           path: /tmp/artifacts
