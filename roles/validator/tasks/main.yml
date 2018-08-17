@@ -30,10 +30,11 @@
   file: path={{ home }}/poa-scripts-validator owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm transferRewardToPayoutKey
-  npm:
-    path: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
+  shell: npm install
+  args:
+    chdir: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
+    creates: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey/node_modules"
   become: true
-  become_method: su
   become_user: "{{ username }}"
 
 - name: Install Payout task.
