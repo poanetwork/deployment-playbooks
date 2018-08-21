@@ -6,3 +6,4 @@ This repository contains ansible playbooks used to deploy nodes of the network.
 
 * if you want to get more details about these playbooks or get description of playbook options, please refer to this repository's wiki page at https://github.com/poanetwork/deployment-playbooks/wiki
 .
+.
