@@ -30,12 +30,12 @@
   file: path={{ home }}/poa-scripts-validator owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm transferRewardToPayoutKey
-  npm:
-    path: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
+  shell: npm install
+  args:
+    chdir: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey"
+    creates: "{{ home }}/poa-scripts-validator/transferRewardToPayoutKey/node_modules"
   become: true
   become_user: "{{ username }}"
-  notify:
-    - restart poa-netstats
 
 - name: Install Payout task.
   template: src=transferRewardToPayoutKey.j2 dest=/etc/cron.hourly/transferRewardToPayoutKey owner=root group=root mode=0755
