@@ -44,6 +44,3 @@
   become_user: "{{ username }}"
   notify:
     - restart poa-netstats
-
-- name: Install Payout task.
-  template: src=transferRewardToPayoutKey.j2 dest=/etc/cron.hourly/transferRewardToPayoutKey owner=root group=root mode=0755
