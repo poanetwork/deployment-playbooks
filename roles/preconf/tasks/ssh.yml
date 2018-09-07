@@ -2,7 +2,7 @@
 - name: Fix ssh Ciphers
   blockinfile:
     path: /etc/ssh/sshd_config
-    insertafter: '#ServerKeyBits'
+    insertafter: '^ServerKeyBits'
     content: |
       Ciphers aes256-ctr,aes192-ctr,aes128-ctr
       MACs hmac-sha1,hmac-ripemd160
