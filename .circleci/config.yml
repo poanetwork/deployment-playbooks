@@ -4,7 +4,9 @@ jobs:
     docker:
       - image: poanetwork/terraform-prep
     working_directory: ~/deployment-terraform/azure
-
+    environment:
+          ANSIBLE_AZURE_AUTH_SOURCE: env
+          
     steps:      
       - run:
           command: cd ~ && rm -R ~/deployment-terraform/ && git clone $terraform_repo ~/deployment-terraform/
@@ -74,6 +76,8 @@ jobs:
     docker:
       - image: poanetwork/terraform-prep
     working_directory: ~/deployment-terraform/azure
+    environment:
+          ANSIBLE_AZURE_AUTH_SOURCE: env
     
     steps:
       - run:
