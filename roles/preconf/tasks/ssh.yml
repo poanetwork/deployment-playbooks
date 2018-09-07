@@ -1,38 +1,11 @@
-#---
-#- name: Fix ssh Ciphers
-#  lineinfile:
-#    dest: /etc/ssh/sshd_config
-#    insertafter: '#ServerKeyBits'
-#    line: "{{ item }}"
-##    backrefs: yes
-#  with_items:
-#    - 'Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
-#    - 'MACs hmac-sha1,hmac-ripemd160'
-#  notify:
-#    - restart sshd
-
-#- name: Ensure sshd is running and enabled to start at boot
-#  service: name=sshd state=started enabled=yes
 ---
-- name: Test for an already inserted line
-  shell: grep "^Ciphers aes256-ctr,aes192-ctr,aes128-ctr" "/etc/ssh/sshd_config"
-  register: test_grep
-  ignore_errors: yes
-  changed_when: False
 - name: Fix ssh Ciphers
-  lineinfile:
-    path: "/etc/ssh/sshd_config"
+  blockinfile:
+    path: /etc/ssh/sshd_config
     insertafter: '#ServerKeyBits'
-    line: "{{ item }}"
-  with_items:
-    - 'Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
-    - 'MACs hmac-sha1,hmac-ripemd160'
-  when: test_grep.stdout == ""
-  notify:
-    - restart sshd
-
-- name: Ensure sshd is running and enabled to start at boot
-  service: name=sshd state=started enabled=yes
+    content: |
+      Ciphers aes256-ctr,aes192-ctr,aes128-ctr
+      MACs hmac-sha1,hmac-ripemd160
   notify:
     - restart sshd
 
