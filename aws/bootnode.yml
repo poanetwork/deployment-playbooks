@@ -12,6 +12,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
+      vpc_id: "{{ vpc_id }}"
       rules:
         - proto: tcp
           from_port: 22
