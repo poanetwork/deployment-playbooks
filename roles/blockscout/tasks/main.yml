@@ -1,0 +1,89 @@
+---
+
+- name: Add ubuntu/erlang_solutions signing key
+  apt_key:
+    url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+    state: present
+
+- name: Add erlang-solutions repository into sources list
+  apt_repository:
+    repo: deb https://packages.erlang-solutions.com/ubuntu xenial contrib
+    state: present
+
+- name: Install erlang and elixir
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - esl-erlang
+    - elixir
+
+- name: Add  PostgreSQL signing key
+  become: True
+  shell: wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
+
+- name: Add PostgreSQL into sources list
+  become: True
+  shell: sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+
+- name: Install PostgreSQL
+  become: True
+  shell: apt-get update && apt-get install postgresql postgresql-contrib -y
+
+- name: Install tools
+  apt:
+     pkg: "{{ item }}"
+     state: present
+     update_cache: yes
+     cache_valid_time: 3600
+  with_items:
+    - automake
+    - libtool
+    - libpng-dev
+    - zlib1g-dev
+
+- name: Clone poanetwork/blockscout repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/blockscout"
+    dest: "{{ home }}/blockscout"
+    version: "{{ blockscout_version }}"
+
+- name: Add explorer dev.secret
+  template:
+    src: dev.secret.j2
+    dest: "{{ home }}/blockscout/apps/explorer/config/dev.secret.exs"
+
+- name: Add block_scout_web dev.secret
+  shell: cp {{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs.example {{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs
+
+- name: Install dependencies
+  shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
+
+- name: Change postgres password
+  shell: sudo -u postgres psql -c "alter user postgres with encrypted password '{{ postgres_password }}';"
+
+- name: Create db user
+  shell: sudo -u postgres psql -c "create user  {{ db_user }};"
+
+- name: Make db user a superuser
+  shell: sudo -u postgres psql -c "alter user {{ db_user }} with superuser;"
+
+- name: Set password for db user
+  shell: sudo -u postgres psql -c "alter user {{ db_user }} with encrypted password '{{ db_user_password }}';"
+
+- name: Create db
+  shell: cd {{ home }}/blockscout && mix do ecto.create, ecto.migrate
+
+- name: Install node dependensies in the apps/block_scout_web
+  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install; cd -
+
+- name: Install node-sass
+  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install node-sass --unsafe-perm; cd -
+
+- name: Install node dependensies in the apps/explorer
+  shell: cd {{ home }}/blockscout/apps/explorer && npm install; cd -
+
+- name: Start server
+  shell: cd {{ home }}/blockscout && mix phx.server

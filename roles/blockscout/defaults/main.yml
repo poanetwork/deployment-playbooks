@@ -1,0 +1,27 @@
+---
+
+user: ubuntu
+
+allow_explorer_ssh: true
+allow_explorer_p2p: true
+allow_explorer_http: true
+
+username: "blockscout"
+users:
+- name: "{{ username }}"
+home: "/home/{{ username }}"
+
+nginx_headers: "off"
+PROXY_PORT: "3000"
+
+MAIN_REPO_FETCH: "poanetwork"
+MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
+
+reboot_after_completion: false
+install_debug_tools: "no"
+install_firewall: false
+
+blockscout_version: "master"
+postgres_password: "dhu4Hfdlllf2htHYbjeeuhy34"
+db_user: "blockscout"
+db_user_password: "dvYYTbhdhuuOLMf74ghu"

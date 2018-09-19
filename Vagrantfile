@@ -3,7 +3,7 @@ ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
 
-  servers = [ "validator", "explorer", "moc", "bootnode", "netstat" ]
+  servers = [ "validator", "explorer", "moc", "bootnode", "netstat", "blockscout" ]
 
   platform_os = ENV["poa_platform"]
   if platform_os == "ubuntu"
@@ -19,6 +19,10 @@ Vagrant.configure("2") do |config|
       node.vm.box = platform
       node.vm.hostname = machine
 
+      if machine == "blockscout"
+        node.vm.network "forwarded_port", guest: 4000, host: 4001
+      end
+
       node.vm.provision :ansible do |ansible|
 		ansible.compatibility_mode = "2.0"
         ansible.playbook = "site.yml"
@@ -28,8 +32,9 @@ Vagrant.configure("2") do |config|
           "netstat" => ["netstat"],
           "moc" => ["moc"],
           "bootnode" => ["bootnode"],
+          "blockscout" => ["blockscout"],
         }
-        ansible.groups[platform_os] = [ "validator", "explorer", "netstat", "moc", "bootnode" ]        
+        ansible.groups[platform_os] = [ "validator", "explorer", "netstat", "moc", "bootnode", "blockscout" ]
       end
 
       node.vm.provision :shell do |shell|

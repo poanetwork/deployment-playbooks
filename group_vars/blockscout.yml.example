@@ -1,0 +1,16 @@
+username: "blockscout"
+users:
+- name: "{{ username }}"
+home: "/home/{{ username }}"
+
+nginx_headers: "off"
+PROXY_PORT: "3000"
+configure_extended_tcp_settings: false
+
+install_debug_tools: "yes"
+reboot_after_completion: false
+
+blockscout_version: "master"
+postgres_password: "dhu4Hfdlllf2htHYbjeeuhy34"
+db_user: "blockscout"
+db_user_password: "dvYYTbhdhuuOLMf74ghu"
