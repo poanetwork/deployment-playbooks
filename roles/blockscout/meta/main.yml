@@ -6,4 +6,5 @@ dependencies:
 - { role: poa-parity }
 - { role: poa-pm2 }
 - { role: nginx }
+- { role: elixir }
 - { role: debug-tools, when: "install_debug_tools == 'yes'" }
