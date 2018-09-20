@@ -1,3 +1,7 @@
 ---
 
+ERLANG_SIGNING_KEY_URL: "https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc"
 ERLANG_SOURCE_DEB: "https://packages.erlang-solutions.com/ubuntu"
+POSTGRESQL_SIGNING_KEY_URL: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+POSTGRESQL_SOURCE_DEB: "http://apt.postgresql.org/pub/repos/apt/"
+POSTGRESQL_DISTRIBUTION_RELEASE: "xenial-pgdg"

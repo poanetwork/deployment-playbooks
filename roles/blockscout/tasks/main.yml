@@ -12,7 +12,13 @@
     dest: "{{ home }}/blockscout/apps/explorer/config/dev.secret.exs"
 
 - name: Add block_scout_web dev.secret
-  shell: cp {{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs.example {{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs
+  copy:
+    src: '{{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs.example'
+    remote_src: yes
+    dest: '{{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs'
+    owner: '{{ username }}'
+    group: '{{ username }}'
+    mode: 0644
 
 - name: Install dependencies
   shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
@@ -39,7 +45,10 @@
   shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install node-sass --unsafe-perm; cd -
 
 - name: Install node dependensies in the apps/explorer
-  shell: cd {{ home }}/blockscout/apps/explorer && npm install; cd -
+  npm:
+    path: "{{ home }}/blockscout/apps/explorer"
+    state: present
+  become: true
 
 - name: Start server
   shell: cd {{ home }}/blockscout && mix phx.server

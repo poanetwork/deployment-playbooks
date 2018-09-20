@@ -2,12 +2,12 @@
 
 - name: Add ubuntu/erlang_solutions signing key
   apt_key:
-    url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+    url: '{{ ERLANG_SIGNING_KEY_URL }}'
     state: present
 
 - name: Add erlang-solutions repository into sources list
   apt_repository:
-    repo: deb https://packages.erlang-solutions.com/ubuntu xenial contrib
+    repo: 'deb {{ ERLANG_SOURCE_DEB }} {{ansible_distribution_release}} contrib'
     state: present
 
 - name: Install erlang and elixir
@@ -22,12 +22,12 @@
 
 - name: Add PostgreSQL signing key
   apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    url: '{{ POSTGRESQL_SIGNING_KEY_URL }}'
     state: present
 
 - name: Add PostgreSQL into sources list
   apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+    repo: 'deb {{ POSTGRESQL_SOURCE_DEB }} {{ POSTGRESQL_DISTRIBUTION_RELEASE }} main'
     state: present
 
 - name: Install PostgreSQL and other tools
