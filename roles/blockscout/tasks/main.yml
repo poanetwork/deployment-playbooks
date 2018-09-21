@@ -50,5 +50,10 @@
     state: present
   become: true
 
-- name: Start server
-  shell: cd {{ home }}/blockscout && mix phx.server
+- name: Install poa-blockscout service
+  template: src=poa-blockscout.j2 dest=/etc/systemd/system/poa-blockscout.service owner={{ username }} group={{ username }} mode=0755
+  notify:
+  - restart poa-blockscout
+
+- name: Ensure poa-blockscout is running and enabled to start at boot
+  service: name=poa-blockscout state=started enabled=yes
