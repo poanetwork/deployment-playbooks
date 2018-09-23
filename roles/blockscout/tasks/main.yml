@@ -26,14 +26,12 @@
 - name: Change postgres password
   shell: sudo -u postgres psql -c "alter user postgres with encrypted password '{{ postgres_password }}';"
 
-- name: Create db user
-  shell: sudo -u postgres psql -c "create user  {{ db_user }};"
-
-- name: Make db user a superuser
-  shell: sudo -u postgres psql -c "alter user {{ db_user }} with superuser;"
-
-- name: Set password for db user
-  shell: sudo -u postgres psql -c "alter user {{ db_user }} with encrypted password '{{ db_user_password }}';"
+- name: Create user
+  become_user: postgres
+  postgresql_user:
+    name: '{{ db_user }}'
+    password: '{{ db_user_password }}'
+    role_attr_flags: CREATEDB,SUPERUSER
 
 - name: Create db
   shell: cd {{ home }}/blockscout && mix do ecto.create, ecto.migrate
