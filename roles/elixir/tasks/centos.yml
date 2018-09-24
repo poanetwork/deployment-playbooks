@@ -9,11 +9,11 @@
   - libtool
   - inotify-tools
   - epel-release
-  - http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_21.0.5-1~centos~7_amd64.rpm
+  - '{{ ERLANG_RPM_URL }}'
 
 - name: Download Elixir repo
   git:
-    repo: git://github.com/elixir-lang/elixir.git
+    repo: '{{ ELIXIR_REPO_URL }}'
     dest: /tmp/elixir
     version: v1.7.1
     accept_hostkey: yes
@@ -38,7 +38,8 @@
   when: elixir.changed
 
 - name: Add PostgreSQL Yum Repository
-  yum: name=https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+  yum:
+    name: '{{ POSGRESQL_RPM_URL }}'
   state: present
 
 - name: Install PostgreSQL
@@ -59,7 +60,7 @@
 
 - name: Enable password authentication
   replace:
-    path: /var/lib/pgsql/10/data/pg_hba.conf
+    path: '{{ PG_HBA_PATH }}'
     regexp: 'ident'
     replace: "md5"
 

@@ -11,9 +11,6 @@ users:
 - name: "{{ username }}"
 home: "/home/{{ username }}"
 
-nginx_headers: "off"
-PROXY_PORT: "3000"
-
 MAIN_REPO_FETCH: "poanetwork"
 MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
 

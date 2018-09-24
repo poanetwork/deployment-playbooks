@@ -44,3 +44,8 @@
   - libpng-dev
   - zlib1g-dev
   - inotify-tools
+
+- name: Install python-psycopg2
+  pip:
+    name: psycopg2
+    state: present

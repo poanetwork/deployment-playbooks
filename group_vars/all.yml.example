@@ -174,3 +174,13 @@ api_version: "9773b5b"
 
 #Node's descriptive name. Publicly visible in netstats
 #NODE_FULLNAME: "INSERT HERE"
+
+
+##Blockscout-related variables
+
+#Explicitly specified api version to use
+blockscout_version: "master"
+#Name of database user to create
+db_user: "INSERT HERE"
+#Password for the database user
+db_user_password: "INSERT HERE"

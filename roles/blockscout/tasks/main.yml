@@ -23,9 +23,6 @@
 - name: Install dependencies
   shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
 
-- name: Change postgres password
-  shell: sudo -u postgres psql -c "alter user postgres with encrypted password '{{ postgres_password }}';"
-
 - name: Create user
   become_user: postgres
   postgresql_user:
