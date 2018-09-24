@@ -19,10 +19,6 @@ Vagrant.configure("2") do |config|
       node.vm.box = platform
       node.vm.hostname = machine
 
-      if machine == "blockscout"
-        node.vm.network "forwarded_port", guest: 4000, host: 4001
-      end
-
       node.vm.provision :ansible do |ansible|
 		ansible.compatibility_mode = "2.0"
         ansible.playbook = "site.yml"

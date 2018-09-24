@@ -21,3 +21,4 @@ install_firewall: false
 blockscout_version: "master"
 db_user: "blockscout"
 db_user_password: "dvYYTbhdhuuOLMf74ghu"
+PROXY_PORT: "4000"
