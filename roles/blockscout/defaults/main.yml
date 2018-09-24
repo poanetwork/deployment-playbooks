@@ -2,9 +2,9 @@
 
 user: ubuntu
 
-allow_explorer_ssh: true
-allow_explorer_p2p: true
-allow_explorer_http: true
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: true
 
 username: "blockscout"
 users:
@@ -19,6 +19,5 @@ install_debug_tools: "no"
 install_firewall: false
 
 blockscout_version: "master"
-postgres_password: "dhu4Hfdlllf2htHYbjeeuhy34"
 db_user: "blockscout"
 db_user_password: "dvYYTbhdhuuOLMf74ghu"

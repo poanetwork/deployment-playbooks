@@ -33,17 +33,18 @@
 - name: Create db
   shell: cd {{ home }}/blockscout && mix do ecto.create, ecto.migrate
 
-- name: Install node dependensies in the apps/block_scout_web
-  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install; cd -
-
 - name: Install node-sass
-  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install node-sass --unsafe-perm; cd -
+  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install node-sass --unsafe-perm
+
+- name: Install node dependensies in the apps/block_scout_web
+  npm:
+    path: "{{ home }}/blockscout/apps/block_scout_web/assets"
+    state: present
 
 - name: Install node dependensies in the apps/explorer
   npm:
     path: "{{ home }}/blockscout/apps/explorer"
     state: present
-  become: true
 
 - name: Install poa-blockscout service
   template: src=poa-blockscout.j2 dest=/etc/systemd/system/poa-blockscout.service owner={{ username }} group={{ username }} mode=0755

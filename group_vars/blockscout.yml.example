@@ -3,12 +3,9 @@ users:
 - name: "{{ username }}"
 home: "/home/{{ username }}"
 
-configure_extended_tcp_settings: false
-
-install_debug_tools: "yes"
+install_debug_tools: "no"
 reboot_after_completion: false
 
 blockscout_version: "master"
-postgres_password: "dhu4Hfdlllf2htHYbjeeuhy34"
 db_user: "blockscout"
 db_user_password: "dvYYTbhdhuuOLMf74ghu"
