@@ -21,8 +21,8 @@
     purge_rules: false
     rules_egress:
     - proto: all
-      from_port: all
-      to_port: all
+      from_port: 1
+      to_port: 65535
       cidr_ip: 0.0.0.0/0
 
 - name: Add ssh access
