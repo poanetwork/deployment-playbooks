@@ -49,6 +49,7 @@ secret_key: XXXX
 
 awskeypair_name: "keypairname"
 region: "us-east-1"
+vpc_id: "vpc-ID-number"
 vpc_subnet_id: "subnet-ID-number"
 
 MAIN_REPO_FETCH: "poanetwork"
