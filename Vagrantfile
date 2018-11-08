@@ -14,9 +14,21 @@ Vagrant.configure("2") do |config|
     platform = "ubuntu/xenial64"
   end
 
+  plugin_installed = false
+  unless Vagrant.has_plugin? ("vagrant-disksize")
+    system "vagrant plugin install vagrant-disksize"
+    plugin_installed = true
+  end
+
+  # Restart Vagrant when new plugin is installed
+  if plugin_installed === true
+    exec "vagrant #{ARGV.join' '}"
+  end
+
   servers.each do |machine|
     config.vm.define machine do |node|
       node.vm.box = platform
+      node.disksize.size = '100GB'
       node.vm.hostname = machine
 
       node.vm.provision :ansible do |ansible|

@@ -40,7 +40,7 @@
 - name: Add PostgreSQL Yum Repository
   yum:
     name: '{{ POSGRESQL_RPM_URL }}'
-  state: present
+    state: present
 
 - name: Install PostgreSQL
   yum: name={{ item }} state=installed
