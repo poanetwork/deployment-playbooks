@@ -117,5 +117,5 @@ blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscou
 
 allow_blockscout_ssh: true
 allow_blockscout_p2p: true
-allow_blockscout_http: true
+allow_blockscout_http: false
 

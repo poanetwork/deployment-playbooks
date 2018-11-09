@@ -6,6 +6,10 @@ home: "/home/{{ username }}"
 install_debug_tools: "no"
 reboot_after_completion: false
 
-blockscout_version: "master"
+blockscout_version: "df6ec81b68"
 db_user: "blockscout"
 db_user_password: "dvYYTbhdhuuOLMf74ghu"
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false

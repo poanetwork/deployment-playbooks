@@ -83,7 +83,7 @@
   - "30303"
   when: allow_blockscout_p2p == true
 
-- name: Add http-3000 access
+- name: Add http-4000 access
   delegate_to: localhost
   ec2_group:
     ec2_access_key: "{{ access_key }}"
@@ -99,5 +99,5 @@
       to_port: "{{ item }}"
       cidr_ip: 0.0.0.0/0
   with_items:
-  - "3000"
+  - "4000"
   when: allow_blockscout_http == true

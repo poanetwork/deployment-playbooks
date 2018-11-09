@@ -179,8 +179,14 @@ api_version: "9773b5b"
 ##Blockscout-related variables
 
 #Explicitly specified api version to use
-blockscout_version: "master"
+blockscout_version: "df6ec81b68"
 #Name of database user to create
 db_user: "INSERT HERE"
 #Password for the database user
 db_user_password: "INSERT HERE"
+#Specifies whether or not to keep port 22 opened to allow ssh access
+allow_blockscout_ssh: true
+#Specifies whether or not to keep port 30303 opened to allow peer discovery
+allow_blockscout_p2p: true
+#Specifies whether or not to keep port 4000 opened to allow http access
+allow_blockscout_http: false

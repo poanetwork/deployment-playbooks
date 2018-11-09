@@ -4,7 +4,7 @@ user: ubuntu
 
 allow_blockscout_ssh: true
 allow_blockscout_p2p: true
-allow_blockscout_http: true
+allow_blockscout_http: false
 
 username: "blockscout"
 users:
@@ -18,7 +18,7 @@ reboot_after_completion: false
 install_debug_tools: "no"
 install_firewall: false
 
-blockscout_version: "master"
+blockscout_version: "df6ec81b68"
 db_user: "blockscout"
 db_user_password: "dvYYTbhdhuuOLMf74ghu"
 PROXY_PORT: "4000"

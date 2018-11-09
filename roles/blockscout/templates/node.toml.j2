@@ -10,6 +10,7 @@ cors=["all"]
 reserved_peers="{{ home }}/bootnodes.txt"
 nat="extip:{{ ansible_host }}"
 port = 30303
+max_peers = 100
 
 [websockets]
 disable = false
@@ -18,9 +19,6 @@ interface = "all"
 origins = ["all"]
 apis = ["all"]
 hosts = ["all"]
-
-[ipc]
-disable = true
 
 [ui]
 disable = true
