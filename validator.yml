@@ -17,11 +17,6 @@
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
-      rules_egress:
-        - proto: all
-          from_port: all
-          to_port: all
-          cidr_ip: 0.0.0.0/0
   tags: validator
 
 
