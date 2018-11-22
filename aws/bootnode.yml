@@ -12,7 +12,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
       rules:
         - proto: tcp
           from_port: 22
@@ -44,7 +44,7 @@
         count: "{{ bootnode_count_instances }}"
         wait: yes
         region: "{{ region }}"
-        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        vpc_subnet_id: "{{ vpc_subnet_id | default('') }}"
         volumes: "{{ volumes }}"
         assign_public_ip: yes
       register:   ec2

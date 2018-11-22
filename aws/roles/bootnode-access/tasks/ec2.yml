@@ -8,7 +8,7 @@
       description: "Default security group"
       region: "{{ region }}"
       purge_rules: true
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
 
 - name: Add ssh access
   delegate_to: localhost
@@ -20,7 +20,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
       rules:
         - proto: tcp
           from_port: "{{ item }}"
@@ -40,7 +40,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
       rules:
         - proto: tcp
           from_port: 443
@@ -57,7 +57,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
       rules:
         - proto: tcp
           from_port: "{{ item }}"
@@ -78,7 +78,7 @@
       region: "{{ region }}"
       purge_rules_egress: false
       purge_rules: false
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ vpc_id | default('') }}"
       rules:
         - proto: tcp
           from_port: "{{ item }}"
