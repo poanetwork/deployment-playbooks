@@ -37,16 +37,17 @@
         ec2_secret_key: "{{ secret_key }}"
         key_name: "{{ awskeypair_name }}"
         instance_tags:
-          Name: "{{ bootnode_instance_name }}"
+          Name: "{{ bootnode_instance_name }}-{{ item }}"
         group: "{{ bootnode_security_group }}"
         instance_type: "{{ bootnode_instance_type }}"
         image: "{{ image }}"
-        count: "{{ bootnode_count_instances }}"
         wait: yes
         region: "{{ region }}"
         vpc_subnet_id: "{{ vpc_subnet_id }}"
         volumes: "{{ volumes }}"
         assign_public_ip: yes
+      with_sequence:
+        count: "{{ bootnode_count_instances }}"
       register:   ec2
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=launched
