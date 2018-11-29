@@ -53,7 +53,7 @@ vpc_id: "vpc-ID-number"
 vpc_subnet_id: "subnet-ID-number"
 
 MAIN_REPO_FETCH: "poanetwork"
-GENESIS_BRANCH: "master"
+GENESIS_BRANCH: "dai"
 
 ###Bootnode
 
