@@ -4,8 +4,8 @@ become_method: sudo
 
 NODE_PWD: "node.pwd" # don't change this one
 
-SCRIPTS_MOC_BRANCH: "core"
-SCRIPTS_VALIDATOR_BRANCH: "core"
+SCRIPTS_MOC_BRANCH: "dai"
+SCRIPTS_VALIDATOR_BRANCH: "dai"
 MAIN_REPO_FETCH: "poanetwork"
 GENESIS_BRANCH: "dai"
 GENESIS_NETWORK_NAME: "DaiChain"
