@@ -58,12 +58,12 @@ jobs:
 
       - run:
           name: Deploy infra
-          command: bash -c "ansible-playbook site.yml -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' -e 'tf_prefix=$tf_prefix' $build_attr"
+          command: bash -c "ansible-playbook site.yml -e DEPLOYMENT_PLAYBOOKS_BRANCH=$CIRCLE_BRANCH -e DEPLOYMENT_PLAYBOOKS=$CIRCLE_REPOSITORY_URL -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' -e 'tf_prefix=$tf_prefix' $build_attr"
           no_output_timeout: 2000
       
       - run:
           name: Save artifacts
-          command: bash -c "ansible-playbook -i ~/deployment-terraform/azure/outputs/latest_deploy_hosts download_outputs.yml -t build -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'destination=/tmp/artifacts/' -e 'terraform_location=/usr/local/bin/terraform' $build_attr"
+          command: bash -c "ansible-playbook -i ~/deployment-terraform/azure/outputs/latest_deploy_hosts download_outputs.yml -t build -e DEPLOYMENT_PLAYBOOKS_BRANCH=$CIRCLE_BRANCH -e DEPLOYMENT_PLAYBOOKS=$CIRCLE_REPOSITORY_URL -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'destination=/tmp/artifacts/' -e 'terraform_location=/usr/local/bin/terraform' $build_attr"
           
       - run:
           name: Save latest hosts output && build prefix
@@ -102,11 +102,11 @@ jobs:
       
       - run:
           name: check network
-          command: bash -c "ansible-playbook tests.yml -i /tmp/workspace/hosts -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'terraform_location=/usr/local/bin/terraform' -e 'tf_prefix=$tf_prefix' -e 'backend=true' $tests_attr"
+          command: bash -c "ansible-playbook tests.yml -i /tmp/workspace/hosts -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'terraform_location=/usr/local/bin/terraform' -e DEPLOYMENT_PLAYBOOKS_BRANCH=$CIRCLE_BRANCH -e DEPLOYMENT_PLAYBOOKS=$CIRCLE_REPOSITORY_URL -e 'tf_prefix=$tf_prefix' -e 'backend=true' $tests_attr"
  
       - run:
           name: Save artifacts
-          command: bash -c "ansible-playbook -i /tmp/workspace/hosts download_outputs.yml -t tests -e 'destination=/tmp/artifacts/' -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'tf_prefix=$tf_prefix' -e 'terraform_location=/usr/local/bin/terraform' $tests_attr"
+          command: bash -c "ansible-playbook -i /tmp/workspace/hosts download_outputs.yml -t tests -e 'destination=/tmp/artifacts/' -e DEPLOYMENT_PLAYBOOKS_BRANCH=$CIRCLE_BRANCH -e DEPLOYMENT_PLAYBOOKS=$CIRCLE_REPOSITORY_URL -e  'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'tf_prefix=$tf_prefix' -e 'terraform_location=/usr/local/bin/terraform' $tests_attr"
   
       - store_test_results:
           path: /tmp/artifacts
@@ -141,7 +141,7 @@ jobs:
 
       - run:
           name: destroy infra
-          command: bash -c "ansible-playbook destroy.yml -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'tf_prefix='$tf_prefix -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' -e 'tf_prefix=$tf_prefix' $destroy_attr"
+          command: bash -c "ansible-playbook destroy.yml -e DEPLOYMENT_PLAYBOOKS_BRANCH=$CIRCLE_BRANCH -e DEPLOYMENT_PLAYBOOKS=$CIRCLE_REPOSITORY_URL -e 'PUB_KEY_STORE=/tmp/workspace/id_rsa.pub' -e 'tf_prefix='$tf_prefix -e 'terraform_location=/usr/local/bin/terraform' -e 'backend=true' -e 'tf_prefix=$tf_prefix' $destroy_attr"
           no_output_timeout: 2000
 
 workflows:
