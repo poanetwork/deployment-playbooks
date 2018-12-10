@@ -13,6 +13,8 @@ port = 30303
 snapshot_peers = 500
 discovery = false
 allow_ips = "public"
+min_peers = 5
+max_peers = 10
 {% endif %}
 
 [rpc]
@@ -46,8 +48,6 @@ pruning = "archive"
 pruning_history = 1200
 fat_db = "on"
 cache_size_db = 12000
-min_peers = 5
-max_peers = 10
 {% endif %}
 
 [misc]
