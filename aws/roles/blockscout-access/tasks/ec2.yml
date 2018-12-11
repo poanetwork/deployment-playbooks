@@ -8,22 +8,7 @@
     description: "Default security group"
     region: "{{ region }}"
     purge_rules: true
-
-- name: Allow outbound traffic
-  delegate_to: localhost
-  ec2_group:
-    ec2_access_key: "{{ access_key }}"
-    ec2_secret_key: "{{ secret_key }}"
-    name: "{{ blockscout_security_group }}"
-    description: "Default security group"
-    region: "{{ region }}"
-    purge_rules_egress: false
-    purge_rules: false
-    rules_egress:
-    - proto: all
-      from_port: 1
-      to_port: 65535
-      cidr_ip: 0.0.0.0/0
+    vpc_id: "{{ vpc_id | default('') }}"
 
 - name: Add ssh access
   delegate_to: localhost
@@ -35,6 +20,7 @@
     region: "{{ region }}"
     purge_rules_egress: false
     purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
     rules:
     - proto: tcp
       from_port: "{{ item }}"
@@ -54,6 +40,7 @@
     region: "{{ region }}"
     purge_rules_egress: false
     purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
     rules:
     - proto: tcp
       from_port: 443
@@ -70,6 +57,7 @@
     region: "{{ region }}"
     purge_rules_egress: false
     purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
     rules:
     - proto: tcp
       from_port: "{{ item }}"
@@ -93,6 +81,7 @@
     region: "{{ region }}"
     purge_rules_egress: false
     purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
     rules:
     - proto: tcp
       from_port: "{{ item }}"
