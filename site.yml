@@ -107,3 +107,22 @@
     - moc-access
   tags:
     - moc
+
+- hosts: blockscout
+  vars:
+    username: "blockscout"
+    users:
+    - name: "blockscout"
+    home: "/home/blockscout"
+    nginx_headers: "off"
+    PROXY_PORT: "4000"
+  roles:
+  - usermanager
+  - nodejs
+  - poa-parity
+  - nginx
+  - elixir
+  - blockscout
+  - blockscout-access
+  tags:
+  - blockscout

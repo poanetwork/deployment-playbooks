@@ -52,8 +52,8 @@ BLK_GAS_LIMIT: "6700000"
 NODE_PWD: "node.pwd"
 
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://releases.parity.io/v1.11.8/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "fbb349dc45e5de1b337880622be88c375998bf2ce69bb402eb9fe60f63b361f9"
+PARITY_BIN_LOC: "https://s3.us-east-2.amazonaws.com/poa-builds-parity-published/1.10.6/parity"
+PARITY_BIN_SHA256: "539f4788fbd605a9cd87b5bf747b27ae05b8a4080b26aa3da645b0446fa9f9cc"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
@@ -91,6 +91,13 @@ explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
 
+#Blockscout
+blockscout_instance_type: "t2.large"
+blockscout_instance_name: "blockscout"
+blockscout_count_instances: "1"
+blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
+reboot_after_completion: false
+
 #restrict network access to instances
 allow_bootnode_ssh: true
 allow_bootnode_p2p: true
@@ -110,3 +117,7 @@ allow_netstat_http: true
 allow_validator_ssh: true
 allow_validator_p2p: true
 associate_validator_elastic_ip: false
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false
