@@ -23,21 +23,20 @@
     group: '{{ username }}'
     mode: 0644
 
-- name: Replace Parity url
+- name: Update JSON RPC Variant
   replace:
-    path: "{{ item.path }}"
-    regexp: "{{ item.regexp1 }}"
-    replace: "{{ item.replace }}"
+    path: '{{ item }}'
+    regexp: 'ganache'
+    replace: "parity"
   with_items:
-  - { path: '{{ home }}/blockscout/apps/explorer/config/dev/parity.exs', regexp1: 'https.*network', replace: 'http://localhost:8545'}
-  - { path: '{{ home }}/blockscout/apps/explorer/config/dev/parity.exs', regexp1: 'wss.*ws', replace: 'ws://localhost:8546'}
-  - { path: '{{ home }}/blockscout/apps/indexer/config/dev/parity.exs', regexp1: 'https.*network', replace: 'http://localhost:8545'}
-  - { path: '{{ home }}/blockscout/apps/indexer/config/dev/parity.exs', regexp1: 'wss.*ws', replace: 'ws://localhost:8546'}
+  - "{{ home }}/blockscout/apps/explorer/config/dev.exs"
+  - "{{ home }}/blockscout/apps/indexer/config/dev.exs"
 
 - name: Install dependencies
   shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
 
 - name: Create user
+  become: true
   become_user: postgres
   postgresql_user:
     name: '{{ db_user }}'

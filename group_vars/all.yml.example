@@ -126,7 +126,7 @@ validator_archive: "off"
 configure_extended_tcp_settings: false
 #Setup extended nginx headers. Used in bootnode, explorer and netstat roles.
 nginx_headers: "on"
-#Setup which proxy port should be used in nginx. Used in bootnode, explorer and netstat roles. 
+#Setup which proxy port should be used in nginx. Used in bootnode, explorer, blockscout and netstat roles.
 PROXY_PORT: "8545"
 
 
@@ -179,7 +179,7 @@ api_version: "9773b5b"
 ##Blockscout-related variables
 
 #Explicitly specified api version to use
-blockscout_version: "df6ec81b68"
+blockscout_version: "44e4f17d14"
 #Name of database user to create
 db_user: "INSERT HERE"
 #Password for the database user
