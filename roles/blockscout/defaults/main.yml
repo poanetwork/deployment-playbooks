@@ -18,7 +18,6 @@ reboot_after_completion: false
 install_debug_tools: "no"
 install_firewall: false
 
-blockscout_version: "df6ec81b68"
+blockscout_version: "44e4f17d14"
 db_user: "blockscout"
-db_user_password: "dvYYTbhdhuuOLMf74ghu"
 PROXY_PORT: "4000"
