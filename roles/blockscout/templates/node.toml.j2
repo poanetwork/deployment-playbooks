@@ -3,7 +3,7 @@ chain = "spec.json"
 base_path = "parity_data"
 
 [rpc]
-apis = ["all"]
+apis = ["web3","eth","net", "parity",  "traces"]
 cors=["all"]
 
 [network]
@@ -17,7 +17,7 @@ disable = false
 port = 8546
 interface = "all"
 origins = ["all"]
-apis = ["all"]
+apis = ["web3","eth","net","parity", "pubsub", "traces"]
 hosts = ["all"]
 
 [ui]
@@ -29,3 +29,7 @@ disable_periodic = true
 [footprint]
 tracing = "on"
 pruning = "archive"
+fat_db = "on"
+
+[misc]
+log_file = "{{ home }}/parity.log"
