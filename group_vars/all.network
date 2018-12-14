@@ -70,6 +70,13 @@ explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
 
+#Blockscout
+blockscout_instance_type: "t2.large"
+blockscout_instance_name: "blockscout"
+blockscout_count_instances: "1"
+blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
+reboot_after_completion: false
+
 #restrict network access to instances
 allow_bootnode_ssh: true
 allow_bootnode_p2p: true
