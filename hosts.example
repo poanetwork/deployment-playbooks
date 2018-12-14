@@ -21,12 +21,15 @@ node03.example.com
 
 [explorer]
 
+[blockscout]
+
 [poa:children]
 bootnode
 moc
 netstat
 validator
 explorer
+blockscout
 
 [centos]
 node03.example.com
