@@ -38,6 +38,13 @@
   - "{{ home }}/blockscout/apps/explorer/config/dev.exs"
   - "{{ home }}/blockscout/apps/indexer/config/dev.exs"
 
+- name: Update default network name
+  lineinfile:
+    dest: '{{ home }}/blockscout/apps/block_scout_web/config/config.exs'
+    state: present
+    regexp: "^.*SUBNETWORK"
+    line: '  subnetwork: "POA Core",'
+
 - name: Install dependencies
   shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
 

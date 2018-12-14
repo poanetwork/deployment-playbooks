@@ -4,7 +4,7 @@ awskeypair_name: "keypairname"
 
 vpc_subnet_id: "subnet-ID-number"
 
-blockscout_version: "44e4f17d14"
+blockscout_version: "a8c4c72c54"
 db_user: "INSERT HERE"
 db_user_password: ""
 

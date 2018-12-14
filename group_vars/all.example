@@ -96,8 +96,8 @@ blockscout_instance_type: "t2.large"
 blockscout_instance_name: "blockscout"
 blockscout_count_instances: "1"
 blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
-reboot_after_completion: false
-blockscout_version: "44e4f17d14"
+reboot_after_completion: true
+blockscout_version: "a8c4c72c54"
 db_user: "INSERT HERE"
 db_user_password: "INSERT HERE"
 
