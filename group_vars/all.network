@@ -22,8 +22,8 @@ region: "us-east-1"
 
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
-PARITY_BIN_LOC: "https://releases.parity.io/v1.11.8/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "fbb349dc45e5de1b337880622be88c375998bf2ce69bb402eb9fe60f63b361f9"
+PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.2.1/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "dfdb0ba6d8847a164600baad7008c1a8715126aca21bb0909e7184f2b3bf2d21"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
@@ -89,5 +89,9 @@ allow_netstat_http: true
 allow_validator_ssh: true
 allow_validator_p2p: true
 associate_validator_elastic_ip: false
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false
 
 ################################################################

@@ -18,9 +18,12 @@
 
 [explorer]
 
+[blockscout]
+
 [poa:children]
 bootnode
 moc
 netstat
 validator
 explorer
+blockscout
