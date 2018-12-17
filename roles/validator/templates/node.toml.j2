@@ -9,9 +9,12 @@ auto_update = "all"
 reserved_peers="{{ home }}/bootnodes.txt"
 nat="extip:{{ ansible_host }}"
 port = 30303
-max_peers = 100
 {% if validator_archive|default("off") == "on" %}
 discovery = false
+min_peers = 5
+max_peers = 10
+{% else %}
+max_peers = 100
 {% endif %}
 
 [rpc]
@@ -45,8 +48,6 @@ pruning = "archive"
 pruning_history = 1200
 fat_db = "on"
 cache_size_db = 12000
-min_peers = 5
-max_peers = 10
 {% endif %}
 
 [misc]
