@@ -1,0 +1,3 @@
+---
+- name: restart poa-blockscout
+  service: name=poa-blockscout state=restarted

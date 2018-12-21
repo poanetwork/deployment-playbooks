@@ -70,6 +70,13 @@ explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
 
+#Blockscout
+blockscout_instance_type: "t2.large"
+blockscout_instance_name: "blockscout"
+blockscout_count_instances: "1"
+blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
+reboot_after_completion: true
+
 #restrict network access to instances
 allow_bootnode_ssh: true
 allow_bootnode_p2p: true
@@ -89,5 +96,9 @@ allow_netstat_http: true
 allow_validator_ssh: true
 allow_validator_p2p: true
 associate_validator_elastic_ip: false
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false
 
 ################################################################
