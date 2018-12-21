@@ -1,0 +1,4 @@
+- hosts: blockscout
+  become: True
+  roles:
+  - blockscout

@@ -1,0 +1,8 @@
+dependencies:
+- { role: usermanager }
+- { role: preconf }
+- { role: nodejs }
+- { role: poa-parity }
+- { role: nginx }
+- { role: elixir }
+- { role: debug-tools, when: "install_debug_tools == 'yes'" }

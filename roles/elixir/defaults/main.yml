@@ -1,0 +1,11 @@
+---
+
+ERLANG_SIGNING_KEY_URL: "https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc"
+ERLANG_SOURCE_DEB: "https://packages.erlang-solutions.com/ubuntu"
+POSTGRESQL_SIGNING_KEY_URL: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+POSTGRESQL_SOURCE_DEB: "http://apt.postgresql.org/pub/repos/apt/"
+POSTGRESQL_DISTRIBUTION_RELEASE: "xenial-pgdg"
+ERLANG_RPM_URL: "http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_21.0.5-1~centos~7_amd64.rpm"
+ELIXIR_REPO_URL: "git://github.com/elixir-lang/elixir.git"
+POSGRESQL_RPM_URL: "https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm"
+PG_HBA_PATH: "/var/lib/pgsql/10/data/pg_hba.conf"

@@ -17,3 +17,7 @@
 - name: Validator deployment
   import_playbook: validator.yml
   tags: validator
+
+- name: Blockscout deployment
+  import_playbook: blockscout.yml
+  tags: blockscout

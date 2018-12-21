@@ -1,0 +1,51 @@
+---
+
+- name: Add ubuntu/erlang_solutions signing key
+  apt_key:
+    url: '{{ ERLANG_SIGNING_KEY_URL }}'
+    state: present
+
+- name: Add erlang-solutions repository into sources list
+  apt_repository:
+    repo: 'deb {{ ERLANG_SOURCE_DEB }} {{ansible_distribution_release}} contrib'
+    state: present
+
+- name: Install erlang and elixir
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+  - esl-erlang
+  - elixir
+
+- name: Add PostgreSQL signing key
+  apt_key:
+    url: '{{ POSTGRESQL_SIGNING_KEY_URL }}'
+    state: present
+
+- name: Add PostgreSQL into sources list
+  apt_repository:
+    repo: 'deb {{ POSTGRESQL_SOURCE_DEB }} {{ POSTGRESQL_DISTRIBUTION_RELEASE }} main'
+    state: present
+
+- name: Install PostgreSQL and other tools
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+  - postgresql
+  - postgresql-contrib
+  - automake
+  - libtool
+  - libpng-dev
+  - zlib1g-dev
+  - inotify-tools
+
+- name: Install python-psycopg2
+  pip:
+    name: psycopg2
+    state: present

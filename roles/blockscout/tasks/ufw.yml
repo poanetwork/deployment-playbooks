@@ -1,0 +1,51 @@
+---
+# to verify ufw configuration run:
+# sudo ufw status verbose
+
+- name: Install ufw
+  package: name=ufw state=present
+
+- name: Clean old rules
+  ufw: state=reset
+
+- name: Configure ufw defaults
+  ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+  - { direction: 'incoming', policy: 'deny' }
+  - { direction: 'outgoing', policy: 'allow' }
+  notify:
+  - restart ufw
+
+- name: Add ufw ssh access
+  ufw: rule='allow' port='22' proto='tcp'
+  notify:
+  - restart ufw
+  when: allow_blockscout_ssh == true
+
+- name: Add ufw https access
+  ufw: rule='allow' port='443' proto='tcp'
+  notify:
+  - restart ufw
+
+- name: Add ufw p2p access
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+  - { rule: 'allow', port: '30303', proto: 'tcp' }
+  - { rule: 'allow', port: '30303', proto: 'udp' }
+  notify:
+  - restart ufw
+  when: allow_explorer_p2p == true
+
+- name: Add ufw http-4000 access
+  ufw: rule='allow' port='4000' proto='tcp'
+  notify:
+  - restart ufw
+  when: allow_blockscout_http == true
+
+- name: Enable ufw logging
+  ufw: logging=off
+  notify:
+  - restart ufw
+
+- name: Enable ufw
+  ufw: state=enabled
