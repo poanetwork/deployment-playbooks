@@ -1,0 +1,35 @@
+[parity]
+chain = "spec.json"
+base_path = "parity_data"
+
+[rpc]
+apis = ["web3","eth","net", "parity",  "traces"]
+cors=["all"]
+
+[network]
+reserved_peers="{{ home }}/bootnodes.txt"
+nat="extip:{{ ansible_host }}"
+port = 30303
+max_peers = 100
+
+[websockets]
+disable = false
+port = 8546
+interface = "all"
+origins = ["all"]
+apis = ["web3","eth","net","parity", "pubsub", "traces"]
+hosts = ["all"]
+
+[ui]
+disable = true
+
+[snapshots]
+disable_periodic = true
+
+[footprint]
+tracing = "on"
+pruning = "archive"
+fat_db = "on"
+
+[misc]
+log_file = "{{ home }}/parity.log"
