@@ -1,0 +1,14 @@
+---
+
+become_method: sudo
+
+NODE_PWD: "node.pwd" # don't change this one
+
+SCRIPTS_MOC_BRANCH: "mainnet"
+SCRIPTS_VALIDATOR_BRANCH: "mainnet"
+MAIN_REPO_FETCH: "poanetwork"
+GENESIS_BRANCH: "master"
+GENESIS_NETWORK_NAME: "PoA"
+
+MOC_ADDRESS: "0xdd0bb0e2a1594240fed0c2f2c17c1e9ab4f87126"
+BLK_GAS_LIMIT: "6700000"

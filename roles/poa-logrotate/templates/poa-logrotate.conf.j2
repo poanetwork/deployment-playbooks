@@ -1,4 +1,4 @@
-/home/{{ username }}/logs/*.log {
+{{ home }}/logs/*.log {
     rotate 10
     size 200M
     missingok
@@ -9,7 +9,7 @@
     olddir old
 }
 
-/home/{{ username }}/logs/*.err {
+{{ home }}/logs/*.err {
     rotate 10
     size 200M
     missingok
@@ -20,7 +20,7 @@
     olddir old
 }
 
-/home/{{ username }}/logs/*.out {
+{{ home }}/logs/*.out {
     rotate 10
     size 200M
     missingok
@@ -31,7 +31,7 @@
     olddir old
 }
 
-/home/{{ username }}/.pm2/pm2.log {
+{{ home }}/.pm2/pm2.log {
     su {{ username }} {{ username }}
     rotate 10
     size 200M

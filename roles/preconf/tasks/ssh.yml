@@ -1,13 +1,11 @@
 ---
 - name: Fix ssh Ciphers
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    insertafter: '#ServerKeyBits'
-    line: "{{ item }}"
-#    backrefs: yes
-  with_items:
-    - 'Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
-    - 'MACs hmac-sha1,hmac-ripemd160'
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    insertafter: '^ServerKeyBits'
+    content: |
+      Ciphers aes256-ctr,aes192-ctr,aes128-ctr
+      MACs hmac-sha1,hmac-ripemd160
   notify:
     - restart sshd
 

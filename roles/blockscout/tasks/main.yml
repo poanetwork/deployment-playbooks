@@ -1,0 +1,84 @@
+---
+
+- name: Create node.toml
+  template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
+
+- name: Clone poanetwork/blockscout repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/blockscout"
+    dest: "{{ home }}/blockscout"
+    version: "{{ blockscout_version }}"
+
+- name: Add explorer dev.secret
+  template:
+    src: dev.secret.j2
+    dest: "{{ home }}/blockscout/apps/explorer/config/dev.secret.exs"
+
+- name: Add block_scout_web dev.secret
+  copy:
+    src: '{{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs.example'
+    remote_src: yes
+    dest: '{{ home }}/blockscout/apps/block_scout_web/config/dev.secret.exs'
+    owner: '{{ username }}'
+    group: '{{ username }}'
+    mode: 0644
+
+- name: Update JSON RPC Variant
+  replace:
+    path: '{{ item }}'
+    regexp: 'ganache'
+    replace: "parity"
+  with_items:
+  - "{{ home }}/blockscout/apps/explorer/config/dev.exs"
+  - "{{ home }}/blockscout/apps/indexer/config/dev.exs"
+
+- name: Update default network name (for Core network)
+  lineinfile:
+    dest: '{{ home }}/blockscout/apps/block_scout_web/config/config.exs'
+    state: present
+    regexp: "^.*SUBNETWORK"
+    line: '  subnetwork: "POA Core",'
+  when: GENESIS_BRANCH == "core"
+
+- name: Install dependencies
+  shell: cd {{ home }}/blockscout && mix local.hex --force && mix do deps.get, local.rebar --force, deps.compile, compile
+
+- name: Create user
+  become: true
+  become_user: postgres
+  postgresql_user:
+    name: '{{ db_user }}'
+    password: '{{ db_user_password }}'
+    role_attr_flags: CREATEDB,SUPERUSER
+
+- name: Create db
+  shell: cd {{ home }}/blockscout && mix do ecto.create, ecto.migrate
+
+- name: Install node-sass
+  shell: cd {{ home }}/blockscout/apps/block_scout_web/assets && npm install node-sass --unsafe-perm
+
+- name: Install node dependensies in the apps/block_scout_web
+  npm:
+    path: "{{ home }}/blockscout/apps/block_scout_web/assets"
+    state: present
+
+- name: Install node dependensies in the apps/explorer
+  npm:
+    path: "{{ home }}/blockscout/apps/explorer"
+    state: present
+
+- name: Install poa-blockscout service
+  template: src=poa-blockscout.j2 dest=/etc/systemd/system/poa-blockscout.service owner={{ username }} group={{ username }} mode=0755
+  notify:
+  - restart poa-blockscout
+
+- name: Ensure poa-blockscout is running and enabled to start at boot
+  service: name=poa-blockscout state=started enabled=yes
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: install_firewall
+
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true

@@ -1,8 +1,0 @@
----
-- name: Setup ufw firewall
-  include: ufw.yml
-  when: not ansible_bios_version | search("amazon")
-
-- name: Setup EC2 firewall
-  include: ec2.yml
-  when: ansible_bios_version | search("amazon")

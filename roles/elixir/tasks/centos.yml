@@ -1,0 +1,68 @@
+---
+
+- name: Install epel-release, Erlang and other tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - automake
+  - libtool
+  - inotify-tools
+  - epel-release
+  - '{{ ERLANG_RPM_URL }}'
+
+- name: Download Elixir repo
+  git:
+    repo: '{{ ELIXIR_REPO_URL }}'
+    dest: /tmp/elixir
+    version: v1.7.1
+    accept_hostkey: yes
+    force: yes
+  register: elixir
+
+- name: Compile Elixir
+  shell:
+    make clean install chdir=/tmp/elixir
+  when: elixir.changed
+
+- name: Add symlinks
+  file:
+    src: '/usr/local/bin/{{ item.name }}'
+    dest: '/usr/bin/{{ item.name }}'
+    state: link
+  with_items:
+  - { name: 'mix' }
+  - { name: 'iex' }
+  - { name: 'elixir' }
+  - { name: 'elixirc' }
+  when: elixir.changed
+
+- name: Add PostgreSQL Yum Repository
+  yum:
+    name: '{{ POSGRESQL_RPM_URL }}'
+    state: present
+
+- name: Install PostgreSQL
+  yum: name={{ item }} state=installed
+  with_items:
+  - postgresql10
+  - postgresql10-contrib
+  - postgresql10-server
+  - postgresql10-libs
+
+- name: Install PostgreSQL Python libraries
+  package:
+    name: python-psycopg2
+    state: present
+
+- name: Initialize a database
+  shell: /usr/pgsql-10/bin/postgresql-10-setup initdb
+
+- name: Enable password authentication
+  replace:
+    path: '{{ PG_HBA_PATH }}'
+    regexp: 'ident'
+    replace: "md5"
+
+- name: Start and enable PostgreSQL server
+  service: name=postgresql-10 state=started enabled=yes

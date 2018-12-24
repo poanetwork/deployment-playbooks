@@ -1,52 +1,48 @@
 ---
-- name: Create directory parity_data/keys/NetworkName
-  file:
-    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Download spec.json
-  get_url: url={{ item }} dest={{ home }}/ mode=0644
-  with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
 
 - name: Create node.toml
-  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
-  with_items:
-   - node.toml
+  template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
 
 - name: Install {{ NODE_PWD }} file
   template: src=node_pwd.j2 dest={{ home }}/{{ NODE_PWD }} owner={{ username }} group={{ username }} mode=0600
 
 - name: Config MOC_KEYFILE file
-  shell: "echo '{{ MOC_KEYFILE }}' > {{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
+  copy:
+    content: "{{ MOC_KEYFILE }}"
+    dest: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}/{{ username }}.key"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc dest={{ home }}/poa-scripts-moc version={{ SCRIPTS_MOC_BRANCH }}
+- name: Clone poanetworks/poa-scripts-moc repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/poa-scripts-moc"
+    dest: "{{ home }}/poa-scripts-moc"
+    version: "{{ SCRIPTS_MOC_BRANCH }}"
+    force: yes
 
-- file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
-
+- name: Change owner and group of poa-scripts-moc file
+  file: path={{ home }}/poa-scripts-moc owner={{ username }} group={{ username }} recurse=yes
+  
 - name: install npm initial_keys_script
-  shell: "cd {{ home }}/poa-scripts-moc; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm generateInitialKey
-  shell: "cd {{ home }}/poa-scripts-moc/generateInitialKey; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/generateInitialKey"
   become: true
   become_user: "{{ username }}"
 
 - name: install npm distributeTokens
-  shell: "cd {{ home }}/poa-scripts-moc/distributeTokens; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/poa-scripts-moc/distributeTokens"
   become: true
   become_user: "{{ username }}"
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: install_firewall
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true

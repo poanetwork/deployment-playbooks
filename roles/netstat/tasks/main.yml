@@ -1,40 +1,53 @@
 ---
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats dest={{ home }}/eth-netstats
+- name: Clone poanetworks/eth-netstats repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats"
+    dest: "{{ home }}/eth-netstats"
+    version: "{{ netstat_version }}"
 
-- file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
+- name: Set owner and group on eth-netstats files
+  file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm netstats
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/eth-netstats"
   become: true
   become_user: "{{ username }}"
   notify:
     - restart poa-dashboard
 
 - name: install npm grunt-cli
-  shell: "cd /home/{{ username }}/eth-netstats; /usr/bin/npm install -g grunt-cli"
+  npm:
+    name: grunt-cli
+    global: yes
 
 - name: run grunt process
-  shell: "cd /home/{{ username }}/eth-netstats; grunt"
+  shell: "cd {{ home }}/eth-netstats; grunt"
   become: true
   become_user: "{{ username }}"
+  args:
+    creates: "{{ home }}/dist"
 
 - name: Config ws_secret.json file
-  shell: "echo '[\"{{ NETSTATS_SECRET }}\"]' > /home/{{ username }}/eth-netstats/ws_secret.json"
+  copy:
+    content: '["{{ NETSTATS_SECRET }}"]'
+    dest: "{{ home }}/eth-netstats/ws_secret.json"
   notify:
     - restart poa-dashboard
 
 - name: Install poa-dashboard service
-  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner=root group=root mode=0755
+  template: src=poa-dashboard.j2 dest=/etc/systemd/system/poa-dashboard.service owner={{ username }} group={{ username }} mode=0755
   notify:
     - restart poa-dashboard
 
 - name: Ensure poa-dashboard is running and enabled to start at boot
   service: name=poa-dashboard state=started enabled=yes
+
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: install_firewall
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true

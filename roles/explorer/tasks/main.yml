@@ -1,42 +1,25 @@
 ---
-- name: Create directory parity_data/keys/NetworkName
-  file:
-    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Download spec.json
-  get_url: url={{ item }} dest={{ home }}/ mode=0644
-  with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
 
 - name: Create node.toml
-  template: src={{ item }}.j2 dest={{ home }}/node.toml owner=root group=root mode=0644
-  with_items:
-   - node.toml
+  template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
 
-- git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer dest={{ home }}/chain-explorer
+- name: Clone poanetworks/chain-explorer repo from GitHub
+  git:
+    repo: "https://github.com/{{ MAIN_REPO_FETCH }}/chain-explorer"
+    dest: "{{ home }}/chain-explorer"
+    version: "{{ explorer_version }}"
 
 - name: Install chain_explorer app.json
   template: src=app.json.j2 dest={{ home }}/chain-explorer/app.json owner={{ username }} group={{ username }} mode=0644
   notify:
     - restart poa-chain-explorer
 
-- file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
+- name: Set group and owner on the chain-explorer directory
+  file: path={{ home }}/chain-explorer owner={{ username }} group={{ username }} recurse=yes
 
 - name: install npm chain_explorer
-  shell: "cd /home/{{ username }}/chain-explorer; /usr/bin/npm install"
+  npm:
+    path: "{{ home }}/chain-explorer"
   become: true
   become_user: "{{ username }}"
   notify:
@@ -54,3 +37,12 @@
 
 - name: Ensure poa-chain-explorer is running and enabled to start at boot
   service: name=poa-chain-explorer state=started enabled=yes
+  
+- name: Setup ufw firewall
+  import_tasks: ufw.yml
+  when: install_firewall
+  
+- name: restart machine after setup
+  shell: shutdown -r 1
+  when: reboot_after_completion == true
+

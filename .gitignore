@@ -1,5 +1,9 @@
 files/*.pub
 *.retry
+
+aws/group_vars/all.yml
+
+group_vars/all.yml
 group_vars/all
 group_vars/bootnode
 group_vars/explorer
@@ -7,4 +11,13 @@ group_vars/validator
 group_vars/netstat
 group_vars/moc
 
+roles/bootnode/vars/main.yml
+roles/explorer/vars/main.yml
+roles/validator/vars/main.yml
+roles/netstat/vars/main.yml
+roles/moc/vars/main.yml
+
 hosts
+
+.vagrant/*
+ubuntu-xenial-16.04-cloudimg-console.log

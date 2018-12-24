@@ -1,0 +1,92 @@
+---
+- name: Create blockscout security group
+  delegate_to: localhost
+  ec2_group:
+    ec2_access_key: "{{ access_key }}"
+    ec2_secret_key: "{{ secret_key }}"
+    name: "{{ blockscout_security_group }}"
+    description: "Default security group"
+    region: "{{ region }}"
+    purge_rules: true
+    vpc_id: "{{ vpc_id | default('') }}"
+
+- name: Add ssh access
+  delegate_to: localhost
+  ec2_group:
+    ec2_access_key: "{{ access_key }}"
+    ec2_secret_key: "{{ secret_key }}"
+    name: "{{ blockscout_security_group }}"
+    description: "Default security group"
+    region: "{{ region }}"
+    purge_rules_egress: false
+    purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
+    rules:
+    - proto: tcp
+      from_port: "{{ item }}"
+      to_port: "{{ item }}"
+      cidr_ip: 0.0.0.0/0
+  with_items:
+  - "22"
+  when: allow_blockscout_ssh == true
+
+- name: Add https access
+  delegate_to: localhost
+  ec2_group:
+    ec2_access_key: "{{ access_key }}"
+    ec2_secret_key: "{{ secret_key }}"
+    name: "{{ blockscout_security_group }}"
+    description: "Default security group"
+    region: "{{ region }}"
+    purge_rules_egress: false
+    purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
+    rules:
+    - proto: tcp
+      from_port: 443
+      to_port: 443
+      cidr_ip: 0.0.0.0/0
+
+- name: Add p2p access
+  delegate_to: localhost
+  ec2_group:
+    ec2_access_key: "{{ access_key }}"
+    ec2_secret_key: "{{ secret_key }}"
+    name: "{{ blockscout_security_group }}"
+    description: "Default security group"
+    region: "{{ region }}"
+    purge_rules_egress: false
+    purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
+    rules:
+    - proto: tcp
+      from_port: "{{ item }}"
+      to_port: "{{ item }}"
+      cidr_ip: 0.0.0.0/0
+    - proto: udp
+      from_port: "{{ item }}"
+      to_port: "{{ item }}"
+      cidr_ip: 0.0.0.0/0
+  with_items:
+  - "30303"
+  when: allow_blockscout_p2p == true
+
+- name: Add http-4000 access
+  delegate_to: localhost
+  ec2_group:
+    ec2_access_key: "{{ access_key }}"
+    ec2_secret_key: "{{ secret_key }}"
+    name: "{{ blockscout_security_group }}"
+    description: "Default security group"
+    region: "{{ region }}"
+    purge_rules_egress: false
+    purge_rules: false
+    vpc_id: "{{ vpc_id | default('') }}"
+    rules:
+    - proto: tcp
+      from_port: "{{ item }}"
+      to_port: "{{ item }}"
+      cidr_ip: 0.0.0.0/0
+  with_items:
+  - "4000"
+  when: allow_blockscout_http == true

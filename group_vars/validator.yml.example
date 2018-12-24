@@ -1,0 +1,19 @@
+NODE_FULLNAME: "INSERT NODENAME"
+NODE_ADMIN_EMAIL: "INSERT@EMAIL"
+
+NETSTATS_SERVER: "INSERT FULL URL"
+NETSTATS_SECRET: "INSERT SECRET"
+
+MINING_KEYFILE: 'INSERT HERE'
+MINING_ADDRESS: "INSERT HERE"
+MINING_KEYPASS: "INSERT HERE"
+
+username: "validator"
+users:
+  - name: "{{ username }}"
+home: "/home/{{ username }}"
+
+validator_archive: "off"
+
+install_debug_tools: "yes"
+reboot_after_completion: false

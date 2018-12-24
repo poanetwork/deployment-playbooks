@@ -1,0 +1,16 @@
+username: "blockscout"
+users:
+- name: "{{ username }}"
+home: "/home/{{ username }}"
+
+install_debug_tools: "no"
+reboot_after_completion: false
+
+blockscout_version: "44e4f17d14"
+db_user: "blockscout"
+db_user_password: ""
+PROXY_PORT: "4000"
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false

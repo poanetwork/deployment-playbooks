@@ -9,24 +9,22 @@ auto_update = "all"
 reserved_peers="{{ home }}/bootnodes.txt"
 nat="extip:{{ ansible_host }}"
 port = 30303
+max_peers = 100
+snapshot_peers = 25
 {% if bootnode_archive|default("off") == "on" %}
-snapshot_peers = 500
 discovery = false
-allow_ips = "public"
 {% endif %}
 
 [rpc]
 #apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
-apis = ["web3","eth","net" {{ ', "parity", "parity_set", "shh"' if bootnode_orchestrator|default("off") == "on" else '' }}]
-threads = 4
+apis = ["web3","eth","net"{{', "parity"' if (bootnode_orchestrator|default("off") == "on" or parity_api|default("off") == "on") else ''}}{{', "parity_set", "shh"' if bootnode_orchestrator|default("off") == "on" else ''}}]
+processing_threads = 4
+cors=["all"]
 
-{% if bootnode_archive|default("off") == "on" %}
 [ui]
 disable = true
 
-[dapps]
-disable = true
-
+{% if bootnode_archive|default("off") == "on" %}
 [snapshots]
 disable_periodic = false
 
@@ -36,8 +34,6 @@ pruning = "archive"
 pruning_history = 1200
 fat_db = "on"
 cache_size_db = 12000
-min_peers = 5
-max_peers = 10
 {% endif %}
 
 [misc]

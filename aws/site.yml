@@ -1,0 +1,19 @@
+- name: Bootnode deployment
+  import_playbook: bootnode.yml
+  tags: bootnode
+
+- name: Explorer deployment
+  import_playbook: explorer.yml
+  tags: explorer
+  
+- name: Moc deployment
+  import_playbook: moc.yml
+  tags: moc
+  
+- name: Netstat deployment
+  import_playbook: netstat.yml
+  tags: netstat
+  
+- name: Validator deployment
+  import_playbook: validator.yml
+  tags: validator
