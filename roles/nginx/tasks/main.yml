@@ -59,7 +59,7 @@
   openssl_csr:
     path: /etc/nginx/ssl/server.csr
     privatekey_path: /etc/nginx/ssl/server.key
-    common_name: "{{ public_ip }}"
+    common_name: "{{ public_ip.ansible_facts.ipify_public_ip }}"
   when: not cert_file_check.stat.exists
 
 - name: Generate self-signed SSL certificate
