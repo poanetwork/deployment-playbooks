@@ -106,3 +106,16 @@ validator_count_instances: "1"
 
 validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
 associate_validator_elastic_ip: false
+
+###Blockscout
+
+blockscout_instance_type: "t2.large"
+blockscout_instance_name: "blockscout"
+blockscout_count_instances: "1"
+
+blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
+
+allow_blockscout_ssh: true
+allow_blockscout_p2p: true
+allow_blockscout_http: false
+

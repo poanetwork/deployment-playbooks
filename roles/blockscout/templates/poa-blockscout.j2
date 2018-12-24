@@ -1,0 +1,14 @@
+[Unit]
+Description=poa blockscout service
+After=network.target
+[Service]
+User=root
+Group=root
+WorkingDirectory={{ home }}/blockscout
+Restart=on-failure
+RestartSec=5
+ExecStartPre=/usr/local/bin/mix local.hex --force
+ExecStart=/usr/local/bin/mix phx.server
+Type=simple
+[Install]
+WantedBy=multi-user.target
