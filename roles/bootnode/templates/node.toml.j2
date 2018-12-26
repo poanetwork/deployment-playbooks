@@ -7,7 +7,7 @@ auto_update = "all"
 
 [network]
 reserved_peers="{{ home }}/bootnodes.txt"
-nat="extip:{{ ansible_host }}"
+nat="extip:{{ public_ip.ansible_facts.ipify_public_ip }}"
 port = 30303
 max_peers = 100
 snapshot_peers = 25

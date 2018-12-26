@@ -1,5 +1,9 @@
 ---
 
+- name: Get public IP
+  ipify_facts:
+  register: public_ip
+
 - name: Create node.toml
   template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
 
