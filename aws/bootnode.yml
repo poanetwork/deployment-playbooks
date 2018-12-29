@@ -4,10 +4,17 @@
   gather_facts: False
   tasks:
     - ec2_vpc_subnet_facts:
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
         region: "{{ region }}"
         filters:
-          default-for-az: true
+          default-for-az: "true"
       register: default_subnets
+      when: vpc_subnet_id is undefined
+    - name: Check if subnet is specified
+      fail:
+        msg: "You did not specify the vpc_subnet_id variable and your account does not contain any default subnets. Please, either specify the variable or mark one of your subnets as a default."
+      when: default_subnets.subnets|length == 0 and vpc_subnet_id is undefined
   tags: bootnode
 
 - name: Create bootnode security group
