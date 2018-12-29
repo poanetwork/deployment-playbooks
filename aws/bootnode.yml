@@ -61,9 +61,13 @@
         count: "{{ bootnode_count_instances }}"
         wait: yes
         region: "{{ region }}"
-        vpc_subnet_id: "{{ vpc_subnet_id | default(default_subnets.subnets.0.subnet_id) }}"
+        vpc_subnet_id: "{{ vpc_subnet_id | default(subnet_id) }}"
         volumes: "{{ volumes }}"
         assign_public_ip: yes
+      vars:
+        subnets: "default_subnets.subnets|default('')"
+        subnet: "subnets.0|default('')"
+        subnet_id: "{{ subnet.subnet_id|default('') }}"
       register:   ec2
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=launched
