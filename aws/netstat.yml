@@ -20,6 +20,12 @@
           cidr_ip: 0.0.0.0/0
   tags: netstat
 
+- name: Get default subnets IDs
+  ec2_vpc_subnet_facts:
+    region: "{{ region }}"
+    filters:
+      default-for-az: true
+  register: default_subnets
 
 - name: Create netstat
   hosts: localhost
@@ -44,7 +50,7 @@
         count: "{{ netstat_count_instances }}"
         wait: yes
         region: "{{ region }}"
-        vpc_subnet_id: "{{ vpc_subnet_id | default('') }}"
+        vpc_subnet_id: "{{ vpc_subnet_id | default(default_subnets.subnets.0.subnet_id) }}"
         volumes: "{{ volumes }}"
         assign_public_ip: yes
       register:   ec2
