@@ -1,4 +1,15 @@
 ---
+- name: Get default subnets IDs
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - ec2_vpc_subnet_facts:
+        region: "{{ region }}"
+        filters:
+          default-for-az: true
+      register: default_subnets
+  tags: bootnode
+
 - name: Create bootnode security group
   hosts: localhost
   gather_facts: False
@@ -19,13 +30,6 @@
           to_port: 22
           cidr_ip: 0.0.0.0/0
   tags: bootnode
-
-- name: Get default subnets IDs
-  ec2_vpc_subnet_facts:
-    region: "{{ region }}"
-    filters:
-      default-for-az: true
-  register: default_subnets
 
 - name: Create bootnode
   hosts: localhost
