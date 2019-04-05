@@ -3,7 +3,7 @@
 MAIN_REPO_FETCH: "poanetwork"
 GENESIS_NETWORK_NAME: "PoA"
 
-api_version: "9773b5b" 
+api_version: "master" 
 
 NODE_FULLNAME: ""
 NODE_ADMIN_EMAIL: ""
