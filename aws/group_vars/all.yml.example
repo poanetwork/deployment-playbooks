@@ -9,18 +9,18 @@ ssh_root:
 
 # Ubuntu ami id for us-east-1. Select your one, if region changed.
 
-image: "ami-0b383171"
+image: "ami-020a9a7369c26052b"
 
 # Ansible ssh user for Ubuntu
 
 ansible_user: ubuntu
 
-# Python bin location 
+# Python bin location
 
 ansible_python_interpreter: /usr/bin/python3
 
 ##############################################################################
-#  This is Centos specific variables. Please uncomment and use them, if Centos 
+#  This is Centos specific variables. Please uncomment and use them, if Centos
 # is the distro of your choice. AMI id in "image" variable is region specific,
 # so please be aware and select right one here
 ###############################################################################
@@ -32,18 +32,18 @@ ansible_python_interpreter: /usr/bin/python3
 
 #ansible_user: centos
 
-# Python bin location, needed by ansible. Python2 or Python3 may be used in 
+# Python bin location, needed by ansible. Python2 or Python3 may be used in
 # different distros. Centos 7 uses Python2
 
 #ansible_python_interpreter: /usr/bin/python
 
 ################################################################################
 #  This is distro independent AWS related variables. Configure them for your
-# aws infrastructure 
+# aws infrastructure
 ################################################################################
 
 # Access and secret keys, to make access to your AWS possible
- 
+
 access_key: XXXX
 secret_key: XXXX
 
@@ -53,11 +53,11 @@ vpc_id: "vpc-ID-number"
 vpc_subnet_id: "subnet-ID-number"
 
 MAIN_REPO_FETCH: "poanetwork"
-GENESIS_BRANCH: "master"
+GENESIS_BRANCH: "kovan"
 
 ###Bootnode
 
-bootnode_instance_type: "t2.large"
+bootnode_instance_type: "t3.large"
 bootnode_instance_name: "bootnode"
 bootnode_count_instances: "1"
 
@@ -71,7 +71,7 @@ allow_bootnode_rpc: false
 
 ###Explorer
 
-explorer_instance_type: "t2.large" 
+explorer_instance_type: "t3.large"
 explorer_instance_name: "explorer"
 explorer_count_instances: "1"
 
@@ -84,7 +84,7 @@ allow_explorer_http: true
 
 ###Moc
 
-moc_instance_type: "t2.large"
+moc_instance_type: "t3.large"
 moc_instance_name: "moc"
 moc_count_instances: "1"
 
@@ -92,7 +92,7 @@ moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
 
 ###Netstat
 
-netstat_instance_type: "t2.large"
+netstat_instance_type: "t3.large"
 netstat_instance_name: "netstat"
 netstat_count_instances: "1"
 
@@ -100,7 +100,7 @@ netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-secu
 
 ###Validator
 
-validator_instance_type: "t2.large"
+validator_instance_type: "t3.large"
 validator_instance_name: "validator"
 validator_count_instances: "1"
 
@@ -109,7 +109,7 @@ associate_validator_elastic_ip: false
 
 ###Blockscout
 
-blockscout_instance_type: "t2.large"
+blockscout_instance_type: "t3.large"
 blockscout_instance_name: "blockscout"
 blockscout_count_instances: "1"
 
