@@ -12,29 +12,38 @@
   package:
      name: "{{ item }}"
      state: present
-  with_items: 
+  with_items:
     - build-essential
     - libssl-dev
     - libffi-dev
     - python-dev
   when: ansible_os_family == "Debian"
- 
+
 - name: Ensure OpenSSL dependencies are installed (CentOS)
   package:
      name: "{{ item }}"
      state: present
-  with_items: 
+  with_items:
     - gcc
     - libffi-devel
     - openssl-devel
     - python-devel
   when: ansible_os_family == "RedHat"
-  
+
 - name: Install pyOpenSSL
   pip:
-    executable: "{{ ansible_pip | default('pip') }}"
+    executable: "pip3"
     name: pyOpenSSL
     state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install pyOpenSSL
+  pip:
+    executable: "pip"
+    name: pyOpenSSL
+    state: present
+  when: ansible_os_family == "RedHat"
+
 
 - name: Create directory for nginx SSL certificates
   file: path=/etc/nginx/ssl state=directory mode=0755
@@ -86,8 +95,8 @@
 - name: Ensure nginx is running and enabled to start at boot
   service: name=nginx state=started enabled=yes
   tags: nginx
-  
+
 - name: executing vars.yml
   import_tasks: vars.yml
   when: configure_extended_tcp_settings == true
-  
+

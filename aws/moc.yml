@@ -18,6 +18,10 @@
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 30303
+          to_port: 30303
+          cidr_ip: 0.0.0.0/0
   tags: moc
 
 
@@ -67,9 +71,3 @@
   tasks:
     - name: Install python
       raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal)
-
-- name: EC2 access setup
-  hosts: moc
-  become: True
-  roles:
-    - moc-access

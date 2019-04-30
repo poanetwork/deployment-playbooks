@@ -18,6 +18,10 @@
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 30303
+          to_port: 30303
+          cidr_ip: 0.0.0.0/0
   tags: validator
 
 
@@ -86,9 +90,3 @@
 
     - debug: var=instance_elastic_ip.public_ip
       when: associate_validator_elastic_ip == true
-
-- name: EC2 access setup
-  hosts: validator
-  become: True
-  roles:
-    - validator-access

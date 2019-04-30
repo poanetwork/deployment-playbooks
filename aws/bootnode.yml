@@ -18,6 +18,14 @@
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 30303
+          to_port: 30303
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 443
+          to_port: 443
+          cidr_ip: 0.0.0.0/0
   tags: bootnode
 
 
@@ -86,9 +94,3 @@
 
     - debug: var=instance_elastic_ip.public_ip
       when: associate_bootnode_elastic_ip == true
-
-- name: EC2 access setup
-  hosts: bootnode
-  become: True
-  roles:
-    - bootnode-access

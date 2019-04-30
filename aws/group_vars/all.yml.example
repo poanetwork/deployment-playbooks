@@ -9,7 +9,7 @@ ssh_root:
 
 # Ubuntu ami id for us-east-1. Select your one, if region changed.
 
-image: "ami-020a9a7369c26052b"
+image: "ami-028d6461780695a43"
 
 # Ansible ssh user for Ubuntu
 
