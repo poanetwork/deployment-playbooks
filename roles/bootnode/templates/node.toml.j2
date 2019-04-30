@@ -14,6 +14,7 @@ snapshot_peers = 25
 {% if bootnode_archive|default("off") == "on" %}
 discovery = false
 {% endif %}
+warp = false
 
 [rpc]
 #apis = ["web3", "eth", "parity", "parity_set", "net", "traces", "rpc"]
