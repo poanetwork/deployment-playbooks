@@ -3,6 +3,12 @@ set -e
 set -u
 set -o pipefail
 
+if [ $# -eq 0 ]; then
+    echo "Usage: bash download-kovan.sh <role>"
+    echo "   where <role> is 'bootnode' or 'validator'"
+    exit 1
+fi
+
 cd "/home/$1/parity_data"
 
 echo "$(date) Stopping parity"

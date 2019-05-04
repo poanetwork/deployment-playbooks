@@ -1,8 +1,8 @@
 ---
 - name: Download chain script
   get_url:
-    url: "https://s3.amazonaws.com/misc-temp-files/download-kovan.sh"
-    checksum: "sha256:489930b5f8e3ab92cf4bb8d00fb8f1c17b340a490b6a5265e2ca2d4592f7a918"
+    url: "https://raw.githubusercontent.com/poanetwork/deployment-playbooks/kovan/download-kovan.sh"
+    checksum: "sha256:2930a268cb7af433f64e6de0824a40489929ee7946c15f41745f270bea894e39"
     dest: "/home/{{ ansible_user }}/download-kovan.sh"
 
 - name: Run chain script
