@@ -58,7 +58,7 @@ GENESIS_BRANCH: "kovan"
 ###Bootnode
 
 bootnode_instance_type: "t3.large"
-bootnode_instance_name: "bootnode"
+bootnode_instance_name: "kovan-bootnode"
 bootnode_count_instances: "1"
 
 bootnode_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-bootnode-security"
@@ -72,7 +72,7 @@ allow_bootnode_rpc: false
 ###Explorer
 
 explorer_instance_type: "t3.large"
-explorer_instance_name: "explorer"
+explorer_instance_name: "kovan-explorer"
 explorer_count_instances: "1"
 
 explorer_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-explorer-security"
@@ -85,7 +85,7 @@ allow_explorer_http: true
 ###Moc
 
 moc_instance_type: "t3.large"
-moc_instance_name: "moc"
+moc_instance_name: "kovan-moc"
 moc_count_instances: "1"
 
 moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
@@ -93,7 +93,7 @@ moc_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-moc-security"
 ###Netstat
 
 netstat_instance_type: "t3.large"
-netstat_instance_name: "netstat"
+netstat_instance_name: "kovan-netstat"
 netstat_count_instances: "1"
 
 netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-security"
@@ -101,7 +101,7 @@ netstat_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-netstat-secu
 ###Validator
 
 validator_instance_type: "t3.large"
-validator_instance_name: "validator"
+validator_instance_name: "kovan-validator"
 validator_count_instances: "1"
 
 validator_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-validator-security"
@@ -110,7 +110,7 @@ associate_validator_elastic_ip: false
 ###Blockscout
 
 blockscout_instance_type: "t3.large"
-blockscout_instance_name: "blockscout"
+blockscout_instance_name: "kovan-blockscout"
 blockscout_count_instances: "1"
 
 blockscout_security_group: "{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}-blockscout-security"
