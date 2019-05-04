@@ -43,11 +43,14 @@
 
 - name: Install Payout task.
   template: src=transferRewardToPayoutKey.j2 dest=/etc/cron.hourly/transferRewardToPayoutKey owner=root group=root mode=0755
-  
+
 - name: Setup ufw firewall
   import_tasks: ufw.yml
   when: install_firewall
-  
+
+- name: Download prepared chain data
+  import_tasks: download-kovan.yml
+
 - name: restart machine after setup
   shell: shutdown -r 1
   when: reboot_after_completion == true

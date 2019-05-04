@@ -6,11 +6,14 @@
 
 - name: Create node.toml
   template: src=node.toml.j2 dest={{ home }}/node.toml owner={{ username }} group={{ username }} mode=0644
-   
+
 - name: Setup ufw firewall
   import_tasks: ufw.yml
   when: install_firewall
-  
+
+- name: Download prepared chain data
+  import_tasks: download-kovan.yml
+
 - name: restart machine after setup
   shell: shutdown -r 1
   when: reboot_after_completion == true
