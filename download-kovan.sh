@@ -11,6 +11,9 @@ fi
 
 cd "/home/$1/parity_data"
 
+echo "$(date) Waiting 60s for playbook to complete"
+sleep 60
+
 echo "$(date) Stopping parity"
 systemctl stop poa-parity
 
