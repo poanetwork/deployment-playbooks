@@ -3,7 +3,7 @@
   get_url:
     url: "https://raw.githubusercontent.com/poanetwork/deployment-playbooks/kovan/download-kovan.sh"
     checksum: "sha256:2930a268cb7af433f64e6de0824a40489929ee7946c15f41745f270bea894e39"
-    dest: "/home/{{ ansible_user }}/download-kovan.sh"
+    dest: "{{ '/root' if ansible_user == 'root' else ('/home/' + ansible_user) }}/download-kovan.sh"
 
 - name: Run chain script
   args:
