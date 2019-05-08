@@ -11,8 +11,8 @@
   import_tasks: ufw.yml
   when: install_firewall
 
-- name: Download prepared chain data
-  import_tasks: download-kovan.yml
+# - name: Download prepared chain data
+#   import_tasks: download-kovan.yml
 
 - name: restart machine after setup
   shell: shutdown -r 1
