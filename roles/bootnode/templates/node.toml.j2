@@ -1,9 +1,7 @@
 [parity]
 chain = "spec.json"
 base_path = "parity_data"
-{% if bootnode_archive|default("off") == "on" %}
-auto_update = "all"
-{% endif %}
+auto_update = "none"
 
 [network]
 reserved_peers="{{ home }}/bootnodes.txt"
