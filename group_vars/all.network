@@ -23,7 +23,7 @@ region: "us-east-1"
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.6.1/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "8c9211a202750d9d655c6ab819a86774e0fb4086f2c6ad2d14d2df0e45898f8a"
+PARITY_BIN_SHA256: "2178a9ee9656dd7669ba7528bec7ec0d54c93c54c5b693a39efa83fefa496348"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
