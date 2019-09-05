@@ -1,12 +1,4 @@
 ---
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
 - git: repo=https://github.com/{{ MAIN_REPO_FETCH }}/eth-netstats dest={{ home }}/eth-netstats
 
 - file: path={{ home }}/eth-netstats owner={{ username }} group={{ username }} recurse=yes

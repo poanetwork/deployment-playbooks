@@ -21,9 +21,11 @@
     - usermanager
 #    - logentries
     - nodejs
-    - bootnode
+    - { role: bootnode-parity, when: "BC_CLIENT == 'parity'" }
+    - { role: bootnode-nethermind, when: "BC_CLIENT == 'nethermind'" }
     - poa-logrotate
-    - poa-parity
+    - { role: poa-parity, when: "BC_CLIENT == 'parity'" }
+    - { role: poa-nethermind, when: "BC_CLIENT == 'nethermind'" }
     - poa-pm2
     - poa-netstats
     - { role: poa-orchestrator, when: "(bootnode_orchestrator or 'off') == 'on'" }

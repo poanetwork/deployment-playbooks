@@ -1,0 +1,14 @@
+[Unit]
+Description=poa nethermind service
+After=network.target
+
+[Service]
+User={{ username }}
+Group={{ username }}
+WorkingDirectory=/home/{{ username }}
+ExecStart={{ home }}/Nethermind.Runner --config node.cfg
+Restart=always
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=default.target

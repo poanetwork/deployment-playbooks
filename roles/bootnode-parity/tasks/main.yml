@@ -1,21 +1,5 @@
 ---
-- name: Create directory parity_data/keys/NetworkName
-  file:
-    path: "{{ home }}/parity_data/keys/{{ GENESIS_NETWORK_NAME }}"
-    state: directory
-    mode: 0700
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Create logs directories
-  file:
-    path: "/{{ home }}/logs/old"
-    state: directory
-    mode: 0755
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
-- name: Download spec.json
+- name: Download spec.json and bootnodes.txt
   get_url: url={{ item }} dest={{ home }}/ mode=0644
   with_items:
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
