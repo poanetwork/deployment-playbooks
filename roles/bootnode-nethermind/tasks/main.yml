@@ -4,3 +4,43 @@
   with_items:
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
     - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
+
+- name: Copy original chainspec before update
+  copy:
+    remote_src: yes
+    src: "{{ home }}/spec.json"
+    dest: "{{ home }}/spec-nethermind.json"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Update chainspec for nethermind
+  lineinfile:
+    path: "{{ home }}/spec-nethermind.json"
+    insertbefore: "eip140Transition"
+    line: "{{ item }}"
+  with_items:
+    - '"eip152Transition": "0xFFFFFFFF"'
+    - '"eip1108Transition": "0xFFFFFFFF"'
+    - '"eip1344Transition": "0xFFFFFFFF"'
+    - '"eip1884Transition": "0xFFFFFFFF"'
+    - '"eip2028Transition": "0xFFFFFFFF"'
+    - '"eip2200Transition": "0xFFFFFFFF"'
+
+- name: Copy original config before update
+  copy:
+    remote_src: yes
+    src: "{{ home }}/configs/{{ NETHERMIND_NETWORK_NAME }}.cfg"
+    dest: "{{ home }}/node.cfg"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Update config values
+  lineinfile:
+    path: "{{ home }}/node.cfg"
+    regexp: "{{ item.key }}"
+    line: '"{{ item.key }}": {{ item.rawvalue }}'
+  with_items:
+    - { name: 'JsonRpcEnabled', rawvalue: "true," },
+    - { name: 'ChainSpecPath', rawvalue: '"{{ home }}/spec-nethermind.json",' }
+    - { name: 'BaseDbPath', rawvalue: '"{{ home }}/nethermind_data/{{ NETHERMIND_NETWORK_NAME }}",' }
+    - { name: 'LogFileName', rawvalue: '"{{ home }}/logs/nethermind.log"' }
