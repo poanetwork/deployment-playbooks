@@ -1,4 +1,14 @@
 ---
+- name: Install nethermind-specific packages
+  apt:
+    name: "{{ item }}"
+    state: "latest"
+  with_items:
+    - libsnappy-dev
+    - libc6-dev
+    - libc6
+    - unzip
+
 - name: Create directory nethermind_data/
   file:
     path: "{{ home }}/nethermind_data/"
@@ -8,18 +18,42 @@
     group: "{{ username }}"
 
 - name: Download nethermind zip
-  get_url: url="{{ NETHERMIND_ZIP_LOC }}" dest={{ home }}/{{ NETHERMIND_ZIP_LOC | basename }} mode=0755 checksum="sha256:{{ NETHERMIND_ZIP_SHA256 }}"
-  owner: "{{ username }}"
-  group: "{{ username }}"
+  get_url:
+    url: "{{ NETHERMIND_ZIP_LOC }}"
+    dest: "{{ home }}/{{ NETHERMIND_ZIP_LOC | basename }}"
+    mode: 0755
+    checksum: "sha256:{{ NETHERMIND_ZIP_SHA256 }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  notify:
+    - restart poa-nethermind
 
 - name: Unzip nethermind zip
   unarchive:
-    copy: no
     remote_src: yes
     src: "{{ home }}/{{ NETHERMIND_ZIP_LOC | basename }}"
     dest: "{{ home }}/"
     owner: "{{ username }}"
     group: "{{ username }}"
+
+- name: Copy original config before update
+  copy:
+    remote_src: yes
+    src: "{{ home }}/configs/{{ NETHERMIND_NETWORK_NAME }}.cfg"
+    dest: "{{ home }}/node.cfg"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Update config values
+  lineinfile:
+    path: "{{ home }}/node.cfg"
+    regexp: "{{ item.key }}"
+    line: '"{{ item.key }}": {{ item.rawvalue }}'
+  with_items:
+    - { key: 'JsonRpcEnabled', rawvalue: "true," }
+    - { key: 'ChainSpecPath', rawvalue: '"{{ home }}/spec-nethermind.json",' }
+    - { key: 'BaseDbPath', rawvalue: '"{{ home }}/nethermind_data/{{ NETHERMIND_NETWORK_NAME }}",' }
+    - { key: 'LogFileName', rawvalue: '"{{ home }}/logs/nethermind.log"' }
 
 - name: Install poa-nethermind service
   template: src=poa-nethermind.j2 dest=/etc/systemd/system/poa-nethermind.service owner=root group=root mode=0755
