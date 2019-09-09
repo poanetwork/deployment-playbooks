@@ -24,6 +24,9 @@ NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.6.2/x86_64-unknown-linux-gnu/parity"
 PARITY_BIN_SHA256: "593c2f622fbb04a4baccd3388b66d2d1b1a5bd207201335ab5b26a3ed95d182f"
+NETHERMIND_ZIP_LOC: "https://github.com/NethermindEth/nethermind/releases/download/1.0.3/nethermind-linux-amd64-1.0.3-712d3ed-20190905.zip"
+NETHERMIND_ZIP_SHA256: "ba4213943e2e7da0d49a4b446114cd971c139cc9b0e04d403f5b4a9e8a31c97f"
+BC_CLIENT: "parity"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
 
@@ -32,6 +35,7 @@ SCRIPTS_VALIDATOR_BRANCH: "core"
 MAIN_REPO_FETCH: "poanetwork"
 GENESIS_BRANCH: "core"
 GENESIS_NETWORK_NAME: "Core"
+NETHERMIND_NETWORK_NAME: "poacore"
 
 MOC_ADDRESS: "0xcf260ea317555637c55f70e55dba8d5ad8414cb0"
 BLK_GAS_LIMIT: "8000000"
