@@ -1,4 +1,12 @@
 ---
+- name: Create logs directories
+  file:
+    path: "/{{ home }}/logs/old"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
 - name: Install poa-logrotate conf
   template: src=poa-logrotate.conf.j2 dest={{ home }}/poa-logrotate.conf owner=root group=root mode=0644
 
