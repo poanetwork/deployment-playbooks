@@ -88,7 +88,6 @@
       when: associate_bootnode_elastic_ip == true
 
 - name: EC2 access setup
-  hosts: bootnode
-  become: True
+  hosts: localhost
   roles:
     - bootnode-access

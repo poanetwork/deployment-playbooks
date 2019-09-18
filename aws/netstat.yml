@@ -20,7 +20,6 @@
           cidr_ip: 0.0.0.0/0
   tags: netstat
 
-
 - name: Create netstat
   hosts: localhost
   gather_facts: False
@@ -69,7 +68,6 @@
       raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal)
 
 - name: EC2 access setup
-  hosts: netstat
-  become: True
+  hosts: localhost
   roles:
     - netstat-access

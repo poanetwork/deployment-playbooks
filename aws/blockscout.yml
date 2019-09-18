@@ -68,7 +68,6 @@
     raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal)
 
 - name: EC2 access setup
-  hosts: launched
-  become: False
+  hosts: localhost
   roles:
   - blockscout-access

@@ -1,6 +1,5 @@
 ---
 - name: Create blockscout security group
-  delegate_to: localhost
   ec2_group:
     ec2_access_key: "{{ access_key }}"
     ec2_secret_key: "{{ secret_key }}"
@@ -11,7 +10,6 @@
     vpc_id: "{{ vpc_id | default('') }}"
 
 - name: Add ssh access
-  delegate_to: localhost
   ec2_group:
     ec2_access_key: "{{ access_key }}"
     ec2_secret_key: "{{ secret_key }}"
@@ -72,7 +70,6 @@
   when: allow_blockscout_p2p == true
 
 - name: Add http-4000 access
-  delegate_to: localhost
   ec2_group:
     ec2_access_key: "{{ access_key }}"
     ec2_secret_key: "{{ secret_key }}"

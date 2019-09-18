@@ -1,6 +1,5 @@
 ---
 - name: Create netstat security group
-  delegate_to: localhost
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
@@ -11,7 +10,6 @@
       vpc_id: "{{ vpc_id | default('') }}"
 
 - name: Add ssh access
-  delegate_to: localhost
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
@@ -31,7 +29,6 @@
   when: allow_netstat_ssh == true
 
 - name: Add https access
-  delegate_to: localhost
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
@@ -48,7 +45,6 @@
           cidr_ip: 0.0.0.0/0
 
 - name: Add http-3000 access
-  delegate_to: localhost
   ec2_group:
       ec2_access_key: "{{ access_key }}"
       ec2_secret_key: "{{ secret_key }}"
