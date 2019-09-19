@@ -2,6 +2,7 @@ files/*.pub
 *.retry
 
 aws/group_vars/all.yml
+*id_rsa*
 
 group_vars/all.yml
 group_vars/all
