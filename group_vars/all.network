@@ -39,7 +39,7 @@ GENESIS_NETWORK_NAME: "Sokol"
 NETHERMIND_NETWORK_NAME: "sokol"
 
 MOC_ADDRESS: "0xe8ddc5c7a2d2f0d7a9798459c0104fdf5e987aca"
-BLK_GAS_LIMIT: "8000000"
+BLK_GAS_LIMIT: "10000000"
 
 #bootnode
 bootnode_instance_type: "t2.large"
