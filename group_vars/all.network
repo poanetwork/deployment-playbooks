@@ -23,8 +23,8 @@ region: "us-east-1"
 NODE_PWD: "node.pwd" # don't change this one
 NODE_SOURCE_DEB: "https://deb.nodesource.com/node_8.x"
 
-PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.6.2/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "593c2f622fbb04a4baccd3388b66d2d1b1a5bd207201335ab5b26a3ed95d182f"
+PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.6.4/x86_64-unknown-linux-gnu/parity"
+PARITY_BIN_SHA256: "1b5fb1a33eba1f4549d7b33a1e8eba049c98fd1f45b901573ed72623cede05ea"
 NETHERMIND_ZIP_LOC: "https://github.com/NethermindEth/nethermind/releases/download/1.0.3/nethermind-linux-amd64-1.0.3-712d3ed-20190905.zip"
 NETHERMIND_ZIP_SHA256: "ba4213943e2e7da0d49a4b446114cd971c139cc9b0e04d403f5b4a9e8a31c97f"
 BC_CLIENT: "parity"
