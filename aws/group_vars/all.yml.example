@@ -57,7 +57,7 @@ GENESIS_BRANCH: "dai-test"
 
 ###Bootnode
 
-bootnode_instance_type: "t2.micro"
+bootnode_instance_type: "t2.large"
 bootnode_instance_name: "bootnode-{{ MAIN_REPO_FETCH }}-{{ GENESIS_BRANCH }}"
 bootnode_count_instances: "1"
 
