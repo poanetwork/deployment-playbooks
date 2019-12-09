@@ -32,9 +32,17 @@
   
 - name: Install pyOpenSSL
   pip:
-    executable: "{{ ansible_pip | default('pip') }}"
+    executable: "pip3"
     name: pyOpenSSL
     state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install pyOpenSSL
+  pip:
+    executable: "pip"
+    name: pyOpenSSL
+    state: present
+  when: ansible_os_family == "RedHat"
 
 - name: Create directory for nginx SSL certificates
   file: path=/etc/nginx/ssl state=directory mode=0755
