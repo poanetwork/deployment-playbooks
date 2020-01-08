@@ -9,6 +9,6 @@
 - name: Download spec.json and bootnodes.txt
   get_url: url={{ item }} dest={{ home }}/ mode=0644 group={{ username }} owner={{ username }}
   with_items:
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/spec.json"
-    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/{{ GENESIS_BRANCH }}/bootnodes.txt"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/dai-deployment/spec.json"
+    - "https://raw.githubusercontent.com/{{ MAIN_REPO_FETCH }}/poa-chain-spec/dai-deployment/bootnodes.txt"
   when: spec_json == ""
