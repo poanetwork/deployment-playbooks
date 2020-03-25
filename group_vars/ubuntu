@@ -5,7 +5,7 @@ ansible_python_interpreter: /usr/bin/python3
 ansible_user: ubuntu
 
 ## Network related variables, that are distro dependent
-PARITY_BIN_LOC: "https://releases.parity.io/ethereum/v2.6.8/x86_64-unknown-linux-gnu/parity"
-PARITY_BIN_SHA256: "299f928503cb3b8d44d95a0f592e32358542ec854842c277e3eeaee2a3478a28"
+PARITY_BIN_LOC: "https://github.com/poanetwork/open-ethereum/releases/download/v2.7.2-posdao-stable/parity"
+PARITY_BIN_SHA256: "b8c5822c9e7c70fa553a8fd00dde07f4fd026b7116098c7e565779d56febd05a"
 ORCHESTRATOR_BIN_LOC: ""
 ORCHESTRATOR_BIN_SHA256: ""
