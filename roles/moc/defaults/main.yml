@@ -20,7 +20,7 @@ SCRIPTS_MOC_BRANCH: "master"
 GENESIS_NETWORK_NAME: "PoA"
 MAIN_REPO_FETCH: "poanetwork"
 
-BLK_GAS_LIMIT: "6700000"
+BLK_GAS_LIMIT: "10000000"
 
 username: "moc"
 users:
