@@ -34,7 +34,7 @@ GENESIS_BRANCH: "core"
 GENESIS_NETWORK_NAME: "Core"
 
 MOC_ADDRESS: "0xcf260ea317555637c55f70e55dba8d5ad8414cb0"
-BLK_GAS_LIMIT: "10000000"
+BLK_GAS_LIMIT: "12500000"
 
 #bootnode
 bootnode_instance_type: "t2.large"
